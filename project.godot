@@ -33,6 +33,10 @@ window/stretch/mode="canvas_items"
 
 movie_writer/movie_file="C:/Users/Aki/Desktop/biscuiteer/biscuit.avi"
 
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/import_scml/plugin.cfg")
+
 [global_group]
 
 map_start=""

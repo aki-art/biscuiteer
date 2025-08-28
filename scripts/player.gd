@@ -83,7 +83,7 @@ func _physics_process(delta: float) -> void:
 	
 	if Global.game._mode != "platforming":
 		return;
-		
+	
 	if(previous_velocity.y > 0):
 		for index in range(get_slide_collision_count()):
 			var collision = get_slide_collision(index)
@@ -132,12 +132,20 @@ func _physics_process(delta: float) -> void:
 	velocity += force;
 	force *= force_damping;
 	
+	update_animation();
 	move_and_slide()
 
 func _on_coyote_timer_timeout() -> void:
 	can_jump = false;
 
-
+func update_animation():
+	var on_floor := is_on_floor();
+	
+	if on_floor && previous_velocity.x == 0 && velocity.x != 0:
+		$entity_000/Skeleton/AnimationPlayer.play("scml/run");
+	elif previous_velocity.x != 0 && velocity.x == 0:
+		$entity_000/Skeleton/AnimationPlayer.play("scml/idle");
+		
 func _on_zone_checker_area_entered(area: Area2D) -> void:
 	if(area.is_in_group("build_allowed_area")):
 		pass
