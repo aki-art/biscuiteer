@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bx5eyd27e7l03"]
+
+[ext_resource type="Script" uid="uid://cxd23uksfpyde" path="res://scripts/build_mode_area.gd" id="1_mayhm"]
+
+[node name="BuildModeArea" type="Area2D" groups=["build_allowed_area"]]
+collision_layer = 32
+collision_mask = 2
+script = ExtResource("1_mayhm")

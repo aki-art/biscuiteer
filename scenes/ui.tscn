@@ -1,0 +1,500 @@
+[gd_scene load_steps=47 format=3 uid="uid://dkgjh0su8kto5"]
+
+[ext_resource type="Theme" uid="uid://bjbx742eqigem" path="res://assets/ui_theme/cookie_theme.tres" id="1_41akx"]
+[ext_resource type="PackedScene" uid="uid://d1jgcouix3q5x" path="res://scenes/tool_button.tscn" id="1_nt7q6"]
+[ext_resource type="Texture2D" uid="uid://nd1hyqppqevx" path="res://assets/biscuit.png" id="2_gdt2y"]
+[ext_resource type="PackedScene" uid="uid://depfltsstpn1g" path="res://scenes/platform.tscn" id="2_yev5y"]
+[ext_resource type="Script" uid="uid://c34y7immsx7l4" path="res://scripts/resource_defs/spawn_config.gd" id="3_gdt2y"]
+[ext_resource type="Texture2D" uid="uid://bojdaimxhndun" path="res://assets/tool_button_bg_c.png" id="5_7dvkv"]
+[ext_resource type="Script" uid="uid://b1404v11r8lvd" path="res://scripts/hearts.gd" id="5_8dubc"]
+[ext_resource type="Texture2D" uid="uid://cixuj1uiwix3" path="res://assets/health_bg.png" id="5_ktti3"]
+[ext_resource type="Texture2D" uid="uid://b8cenxs6py166" path="res://assets/heart.png" id="5_wm3ai"]
+[ext_resource type="Script" uid="uid://cjtg2datmv8m3" path="res://scripts/tool_button.gd" id="6_vdcm2"]
+[ext_resource type="Script" uid="uid://2xwxcq5qpj6k" path="res://scripts/platform.gd" id="7_catpy"]
+[ext_resource type="Texture2D" uid="uid://dg7xafwc4j0y5" path="res://assets/biscuit_middle.png" id="8_41akx"]
+[ext_resource type="Texture2D" uid="uid://2x4vhu27r0yd" path="res://assets/temp/reference.png" id="8_cgfq5"]
+[ext_resource type="Texture2D" uid="uid://bp2f13hvaoshu" path="res://assets/crumb_small.png" id="8_gglip"]
+[ext_resource type="Texture2D" uid="uid://bl8jmvw2wyrm0" path="res://assets/biscuit_left.png" id="9_sesyt"]
+[ext_resource type="Texture2D" uid="uid://comx06162feiq" path="res://assets/biscuit_right.png" id="10_gglip"]
+[ext_resource type="Texture2D" uid="uid://cbijdm22o5j7a" path="res://assets/smoke_particle.png" id="11_0tsab"]
+[ext_resource type="AudioStream" uid="uid://bo8axmwlkf0ah" path="res://assets/audio/486379__an_na_ba_na_na__goldfish-crackers.wav" id="12_i5tog"]
+[ext_resource type="Script" uid="uid://dyjrqrt2jmfnx" path="res://scripts/varied_audio_stream_player_2d.gd" id="13_rleeb"]
+[ext_resource type="AudioStream" uid="uid://hcd4wdi2pr4o" path="res://assets/audio/812353__beyercreative__medium-cardboard-impacts.wav" id="14_wu1et"]
+[ext_resource type="AudioStream" uid="uid://bwn606gyy7n5" path="res://assets/audio/cardboard_impact_2.wav" id="15_wquew"]
+[ext_resource type="AudioStream" uid="uid://cxfvxcqtd62l8" path="res://assets/audio/cardboard_impact_3.wav" id="16_pawqx"]
+[ext_resource type="Texture2D" uid="uid://dhtsef33s6u6f" path="res://assets/gumdrop.png" id="17_3vrs6"]
+[ext_resource type="Texture2D" uid="uid://cw6pm4553fr61" path="res://assets/tool_button_bg_b.png" id="18_ukrhx"]
+[ext_resource type="Texture2D" uid="uid://n3ta0wmes538" path="res://assets/crumbling_biscuit.png" id="19_5ls34"]
+[ext_resource type="Texture2D" uid="uid://bwdymw0lcc8a1" path="res://assets/crumb.png" id="21_sesyt"]
+[ext_resource type="Texture2D" uid="uid://bcnnx26qy0m1x" path="res://assets/remove.png" id="22_0tsab"]
+[ext_resource type="Script" uid="uid://bppkekfnsss6s" path="res://scripts/crumb_counter.gd" id="24_i5tog"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_gdt2y"]
+action = &"action_build_biscuit"
+
+[sub_resource type="Shortcut" id="Shortcut_wm3ai"]
+events = [SubResource("InputEventAction_gdt2y")]
+
+[sub_resource type="Resource" id="Resource_wm3ai"]
+script = ExtResource("3_gdt2y")
+scene = ExtResource("2_yev5y")
+metadata/_custom_type_script = "uid://c34y7immsx7l4"
+
+[sub_resource type="InputEventAction" id="InputEventAction_7dvkv"]
+action = &"action_build_biscuit"
+
+[sub_resource type="Shortcut" id="Shortcut_vdcm2"]
+events = [SubResource("InputEventAction_7dvkv")]
+
+[sub_resource type="Resource" id="Resource_6rmj2"]
+script = ExtResource("3_gdt2y")
+scene = ExtResource("2_yev5y")
+metadata/_custom_type_script = "uid://c34y7immsx7l4"
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7qrw"]
+resource_local_to_scene = true
+size = Vector2(65, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6f2a1"]
+resource_local_to_scene = true
+size = Vector2(60, 11)
+
+[sub_resource type="Gradient" id="Gradient_u5530"]
+colors = PackedColorArray(0.74978, 0.74978, 0.74978, 1, 0.462745, 0.462745, 0.462745, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_507ja"]
+gradient = SubResource("Gradient_u5530")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u7qrw"]
+resource_local_to_scene = true
+lifetime_randomness = 0.7
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 28.74
+initial_velocity_max = 28.74
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_507ja")
+
+[sub_resource type="Animation" id="Animation_507ja"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visualizer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visualizer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nlgqw"]
+resource_name = "jumped_on"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visualizer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.366667, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, -2.5), Vector2(0, 1.5), Vector2(0, -0.5), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visualizer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0174533, -0.0174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1ckp"]
+_data = {
+&"RESET": SubResource("Animation_507ja"),
+&"jumped_on": SubResource("Animation_nlgqw")
+}
+
+[sub_resource type="PackedScene" id="PackedScene_fsl8s"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(6, 0, 45, 44, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Platform", "collision_layer", "collision_mask", "script", "snap_length", "min_length", "StaticBody2D", "Visualizer", "Node2D", "Line2D", "texture_repeat", "points", "width", "texture", "texture_mode", "LeftCapSprite", "scale", "Sprite2D", "RightCapSprite", "position", "CollisionShape2D", "process_mode", "shape", "JumpCollisionArea", "Area2D", "ImpactDustParticles", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "process_material", "GPUParticles2D", "AnimationPlayer", "libraries", "BiscuitClickAudio", "stream", "AudioStreamPlayer2D", "AudioCooldownTimer", "wait_time", "Timer", "VariedAudioStreamPlayer2D", "streams", "metadata/_custom_type_script", "_on_jump_collision_area_body_entered", "body_entered"),
+"node_count": 13,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 6, 0, -1, 5, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 0, 0, 0, 8, 7, -1, 0, 0, 1, 0, 9, 9, -1, 5, 10, 5, 11, 6, 12, 7, 13, 8, 14, 9, 0, 2, 0, 17, 15, -1, 2, 16, 10, 13, 11, 0, 2, 0, 17, 18, -1, 3, 19, 12, 16, 10, 13, 13, 0, 0, 0, 20, 20, -1, 3, 21, 0, 19, 14, 22, 15, 0, 0, 0, 24, 23, -1, 3, 19, 16, 1, 0, 2, 5, 0, 6, 0, 20, 20, -1, 3, 21, 0, 19, 17, 22, 18, 0, 0, 0, 32, 25, -1, 8, 19, 19, 26, 20, 27, 21, 13, 22, 28, 23, 29, 24, 30, 25, 31, 26, 0, 0, 0, 33, 33, -1, 1, 34, 27, 0, 0, 0, 37, 35, -1, 1, 36, 28, 0, 0, 0, 40, 38, -1, 2, 39, 29, 29, 24, 0, 0, 0, 37, 41, -1, 3, 3, 30, 42, 31, 43, 32, 0),
+"variants": [4, 0, ExtResource("7_catpy"), 16.0, 48.0, 2, PackedVector2Array(0, 0, 64, 0), 32.0, ExtResource("8_41akx"), 1, Vector2(0.5, 0.5), ExtResource("9_sesyt"), Vector2(64, 0), ExtResource("10_gglip"), Vector2(32.5, 0), SubResource("RectangleShape2D_u7qrw"), Vector2(0, 2), Vector2(33, -13.5), SubResource("RectangleShape2D_6f2a1"), Vector2(0, -8), false, 32, ExtResource("11_0tsab"), 0.66, true, 0.7, SubResource("ParticleProcessMaterial_u7qrw"), {
+&"": SubResource("AnimationLibrary_n1ckp")
+}, ExtResource("12_i5tog"), 0.02, ExtResource("13_rleeb"), Array[AudioStream]([ExtResource("14_wu1et"), ExtResource("15_wquew"), ExtResource("16_pawqx")]), "uid://dyjrqrt2jmfnx"],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_x4rqp"]
+script = ExtResource("3_gdt2y")
+scene = SubResource("PackedScene_fsl8s")
+metadata/_custom_type_script = "uid://c34y7immsx7l4"
+
+[sub_resource type="PackedScene" id="PackedScene_6bb67"]
+_bundled = {
+"conn_count": 1,
+"conns": PackedInt32Array(6, 0, 45, 44, 2, 0, 0),
+"editable_instances": [],
+"names": PackedStringArray("Platform", "collision_layer", "collision_mask", "script", "snap_length", "min_length", "StaticBody2D", "Visualizer", "Node2D", "Line2D", "texture_repeat", "points", "width", "texture", "texture_mode", "LeftCapSprite", "scale", "Sprite2D", "RightCapSprite", "position", "CollisionShape2D", "process_mode", "shape", "JumpCollisionArea", "Area2D", "ImpactDustParticles", "emitting", "amount", "lifetime", "one_shot", "explosiveness", "process_material", "GPUParticles2D", "AnimationPlayer", "libraries", "BiscuitClickAudio", "stream", "AudioStreamPlayer2D", "AudioCooldownTimer", "wait_time", "Timer", "VariedAudioStreamPlayer2D", "streams", "metadata/_custom_type_script", "_on_jump_collision_area_body_entered", "body_entered"),
+"node_count": 13,
+"node_paths": [],
+"nodes": PackedInt32Array(-1, -1, 6, 0, -1, 5, 1, 0, 2, 1, 3, 2, 4, 3, 5, 4, 0, 0, 0, 8, 7, -1, 0, 0, 1, 0, 9, 9, -1, 5, 10, 5, 11, 6, 12, 7, 13, 8, 14, 9, 0, 2, 0, 17, 15, -1, 2, 16, 10, 13, 11, 0, 2, 0, 17, 18, -1, 3, 19, 12, 16, 10, 13, 13, 0, 0, 0, 20, 20, -1, 3, 21, 0, 19, 14, 22, 15, 0, 0, 0, 24, 23, -1, 3, 19, 16, 1, 0, 2, 5, 0, 6, 0, 20, 20, -1, 3, 21, 0, 19, 17, 22, 18, 0, 0, 0, 32, 25, -1, 8, 19, 19, 26, 20, 27, 21, 13, 22, 28, 23, 29, 24, 30, 25, 31, 26, 0, 0, 0, 33, 33, -1, 1, 34, 27, 0, 0, 0, 37, 35, -1, 1, 36, 28, 0, 0, 0, 40, 38, -1, 2, 39, 29, 29, 24, 0, 0, 0, 37, 41, -1, 3, 3, 30, 42, 31, 43, 32, 0),
+"variants": [4, 0, ExtResource("7_catpy"), 16.0, 48.0, 2, PackedVector2Array(0, 0, 64, 0), 32.0, ExtResource("8_41akx"), 1, Vector2(0.5, 0.5), ExtResource("9_sesyt"), Vector2(64, 0), ExtResource("10_gglip"), Vector2(32.5, 0), SubResource("RectangleShape2D_u7qrw"), Vector2(0, 2), Vector2(33, -13.5), SubResource("RectangleShape2D_6f2a1"), Vector2(0, -8), false, 32, ExtResource("11_0tsab"), 0.66, true, 0.7, SubResource("ParticleProcessMaterial_u7qrw"), {
+&"": SubResource("AnimationLibrary_n1ckp")
+}, ExtResource("12_i5tog"), 0.02, ExtResource("13_rleeb"), Array[AudioStream]([ExtResource("14_wu1et"), ExtResource("15_wquew"), ExtResource("16_pawqx")]), "uid://dyjrqrt2jmfnx"],
+"version": 3
+}
+
+[sub_resource type="Resource" id="Resource_mgb8n"]
+script = ExtResource("3_gdt2y")
+scene = SubResource("PackedScene_6bb67")
+metadata/_custom_type_script = "uid://c34y7immsx7l4"
+
+[node name="UI" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_41akx")
+
+[node name="ToolButtons" type="HBoxContainer" parent="."]
+custom_minimum_size = Vector2(700, 70)
+layout_mode = 0
+offset_left = 273.0
+offset_top = 509.0
+offset_right = 973.0
+offset_bottom = 637.0
+
+[node name="ToolButton" parent="ToolButtons" instance=ExtResource("1_nt7q6")]
+visible = false
+layout_mode = 2
+focus_mode = 0
+shortcut = SubResource("Shortcut_wm3ai")
+icon = ExtResource("2_gdt2y")
+tool = "PlatformSpawnerTool"
+data = SubResource("Resource_wm3ai")
+
+[node name="BottomLeftHUD" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ToolButtons" type="Control" parent="BottomLeftHUD"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BiscuitButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 26.0
+offset_top = 479.0
+offset_right = 122.0
+offset_bottom = 575.0
+tooltip_text = "Build a basic platform.
+Costs 1 crumb per segment."
+focus_mode = 0
+shortcut = SubResource("Shortcut_vdcm2")
+icon = ExtResource("5_7dvkv")
+flat = true
+expand_icon = true
+script = ExtResource("6_vdcm2")
+tool = "PlatformSpawnerTool"
+data = SubResource("Resource_6rmj2")
+metadata/_custom_type_script = "uid://cjtg2datmv8m3"
+
+[node name="TextureRect" type="TextureRect" parent="BottomLeftHUD/ToolButtons/BiscuitButton"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 88.0
+offset_bottom = 82.0
+texture = ExtResource("2_gdt2y")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="BottomLeftHUD/ToolButtons/BiscuitButton"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 87.0
+offset_right = 70.0
+offset_bottom = 122.0
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("8_gglip")
+
+[node name="TextureRect3" type="TextureRect" parent="BottomLeftHUD/ToolButtons/BiscuitButton"]
+layout_mode = 0
+offset_left = 39.0
+offset_top = 84.0
+offset_right = 82.0
+offset_bottom = 119.0
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("8_gglip")
+
+[node name="GumDropButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 185.0
+offset_top = 522.0
+offset_right = 281.0
+offset_bottom = 618.0
+tooltip_text = "Build a basic platform.
+Costs 1 crumb per segment."
+focus_mode = 0
+icon = ExtResource("5_7dvkv")
+flat = true
+expand_icon = true
+script = ExtResource("6_vdcm2")
+tool = "SpawnerTool"
+data = SubResource("Resource_x4rqp")
+metadata/_custom_type_script = "uid://cjtg2datmv8m3"
+
+[node name="TextureRect" type="TextureRect" parent="BottomLeftHUD/ToolButtons/GumDropButton"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 88.0
+offset_bottom = 82.0
+texture = ExtResource("17_3vrs6")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="BottomLeftHUD/ToolButtons/GumDropButton"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 84.0
+offset_right = 67.0
+offset_bottom = 119.0
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("8_gglip")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="BottomLeftHUD/ToolButtons/GumDropButton"]
+layout_mode = 0
+offset_left = 52.0
+offset_top = 84.0
+offset_right = 92.0
+offset_bottom = 124.0
+theme_override_font_sizes/normal_font_size = 14
+text = "x 12"
+
+[node name="CrumblyButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 103.0
+offset_top = 501.0
+offset_right = 199.0
+offset_bottom = 597.0
+tooltip_text = "Build a basic platform.
+Costs 1 crumb per segment."
+focus_mode = 0
+icon = ExtResource("18_ukrhx")
+flat = true
+expand_icon = true
+script = ExtResource("6_vdcm2")
+tool = "SpawnerTool"
+data = SubResource("Resource_mgb8n")
+metadata/_custom_type_script = "uid://cjtg2datmv8m3"
+
+[node name="TextureRect" type="TextureRect" parent="BottomLeftHUD/ToolButtons/CrumblyButton"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 88.0
+offset_bottom = 82.0
+texture = ExtResource("19_5ls34")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="BottomLeftHUD/ToolButtons/CrumblyButton"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 84.0
+offset_right = 75.0
+offset_bottom = 119.0
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("8_gglip")
+
+[node name="CrumblyButton2" type="Button" parent="BottomLeftHUD/ToolButtons"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 268.0
+offset_top = 571.0
+offset_right = 364.0
+offset_bottom = 667.0
+scale = Vector2(0.66, 0.66)
+tooltip_text = "Build a basic platform.
+Costs 1 crumb per segment."
+focus_mode = 0
+icon = ExtResource("18_ukrhx")
+flat = true
+expand_icon = true
+script = ExtResource("6_vdcm2")
+tool = "SpawnerTool"
+data = SubResource("Resource_mgb8n")
+metadata/_custom_type_script = "uid://cjtg2datmv8m3"
+
+[node name="TextureRect" type="TextureRect" parent="BottomLeftHUD/ToolButtons/CrumblyButton2"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 6.0
+offset_right = 88.0
+offset_bottom = 82.0
+texture = ExtResource("22_0tsab")
+expand_mode = 1
+
+[node name="TextureRect2" type="TextureRect" parent="BottomLeftHUD/ToolButtons/CrumblyButton2"]
+visible = false
+layout_mode = 0
+offset_left = 32.0
+offset_top = 84.0
+offset_right = 75.0
+offset_bottom = 119.0
+scale = Vector2(0.66, 0.66)
+texture = ExtResource("8_gglip")
+
+[node name="Panel" type="Panel" parent="BottomLeftHUD"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 608.0
+offset_right = 129.0
+offset_bottom = 632.0
+
+[node name="CrumbIcon" type="TextureRect" parent="BottomLeftHUD/Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -11.0
+offset_right = 53.697
+offset_bottom = 29.0
+texture = ExtResource("21_sesyt")
+expand_mode = 3
+
+[node name="CrumbCounter" type="RichTextLabel" parent="BottomLeftHUD/Panel"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 59.0
+offset_top = -7.0
+offset_right = 99.0
+offset_bottom = 33.0
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "[b]455[/b]"
+fit_content = true
+script = ExtResource("24_i5tog")
+
+[node name="TopLeftHUD" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="TopLeftHUD"]
+layout_mode = 0
+offset_left = -26.0
+offset_top = -49.0
+offset_right = 339.0
+offset_bottom = 100.0
+texture = ExtResource("5_ktti3")
+expand_mode = 1
+
+[node name="Hearts" type="HBoxContainer" parent="TopLeftHUD"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 14.0
+offset_right = 424.0
+offset_bottom = 78.0
+script = ExtResource("5_8dubc")
+
+[node name="Control" type="Control" parent="TopLeftHUD/Hearts"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control"]
+clip_contents = true
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_wm3ai")
+
+[node name="Control2" type="Control" parent="TopLeftHUD/Hearts"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control2"]
+clip_contents = true
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_wm3ai")
+
+[node name="Control3" type="Control" parent="TopLeftHUD/Hearts"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control3"]
+clip_contents = true
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_wm3ai")
+
+[node name="Control4" type="Control" parent="TopLeftHUD/Hearts"]
+custom_minimum_size = Vector2(52, 0)
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control4"]
+clip_contents = true
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("5_wm3ai")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+visible = false
+modulate = Color(1, 1, 1, 0.247059)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("8_cgfq5")
+expand_mode = 2
+metadata/_edit_lock_ = true
+
+[connection signal="pressed" from="BottomLeftHUD/ToolButtons/BiscuitButton" to="BottomLeftHUD/ToolButtons/BiscuitButton" method="_on_pressed"]

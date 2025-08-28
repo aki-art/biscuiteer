@@ -1,0 +1,21 @@
+[gd_resource type="Theme" load_steps=4 format=3 uid="uid://bjbx742eqigem"]
+
+[ext_resource type="FontFile" uid="uid://bbatod8667hla" path="res://assets/fonts/Atma-Bold.ttf" id="1_44wra"]
+[ext_resource type="FontFile" uid="uid://c2cpwj4wdu5bc" path="res://assets/fonts/Atma-Medium.ttf" id="1_mg81s"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_racrn"]
+bg_color = Color(0.15, 0.09195, 0.069, 0.627451)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 4.0
+expand_margin_top = 4.0
+expand_margin_right = 4.0
+expand_margin_bottom = 4.0
+
+[resource]
+default_font = ExtResource("1_mg81s")
+default_font_size = 19
+Panel/styles/panel = SubResource("StyleBoxFlat_racrn")
+RichTextLabel/fonts/bold_font = ExtResource("1_44wra")

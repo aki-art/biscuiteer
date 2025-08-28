@@ -1,0 +1,162 @@
+[gd_scene load_steps=12 format=3 uid="uid://ce6p4ia7b1o2r"]
+
+[ext_resource type="PackedScene" uid="uid://depfltsstpn1g" path="res://scenes/platform.tscn" id="1_cd2fi"]
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_ig882"]
+[ext_resource type="PackedScene" uid="uid://bkd6kvsr43i6h" path="res://scenes/spikes.tscn" id="2_cd2fi"]
+[ext_resource type="Texture2D" uid="uid://dnehtecbluuil" path="res://assets/cotton_candy_tiled.png" id="2_nvlab"]
+[ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="3_5pu65"]
+[ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="5_ux3ov"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="10_r1nav"]
+[ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="12_cogub"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="12_nvlab"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="15_yyu08"]
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_ux3ov"]
+normal = Vector2(-0.999901, -0.0140831)
+distance = -10.506
+
+[node name="0" type="Node" groups=["level"]]
+script = ExtResource("1_ig882")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -5
+follow_viewport_enabled = true
+follow_viewport_scale = 0.7
+
+[node name="BG" type="Polygon2D" parent="CanvasLayer"]
+z_index = -300
+texture_repeat = 2
+color = Color(0.49, 0.3822, 0.383997, 1)
+texture = ExtResource("2_nvlab")
+polygon = PackedVector2Array(-2069, -1452, 4719, -1477, 4768, 1434, -2143, 1361)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 5
+collision_mask = 17
+
+[node name="Floor" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(2, 97)
+color = Color(0.47, 0.37835, 0.2867, 1)
+polygon = PackedVector2Array(-960, 0, 1454, 0, 1478, 678, -962, 643, -1949, 669, -1858, -143, -1679, -145, -1604, 380, -958, 158)
+
+[node name="Floor2" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(2, 97)
+color = Color(0.47, 0.37835, 0.2867, 1)
+polygon = PackedVector2Array(1858, 602, 1867, -10, 2287.65, -10, 2292, 543, 2749, 549, 2737, -9, 3423, -10, 3560, 856, 1909, 820)
+
+[node name="Floor3" type="Polygon2D" parent="StaticBody2D"]
+position = Vector2(3, -71)
+color = Color(0.47, 0.37835, 0.2867, 1)
+polygon = PackedVector2Array(1388, 385, 1940, 387, 1979, 825, 1290, 776)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+position = Vector2(2, 97)
+polygon = PackedVector2Array(-961, 1, 1450, 0, 1468, 493, 1857, 493, 1865, -13, 2286, -11, 2292, 553, 2752, 545, 2736, -9, 3427, -7, 3505, 910, -423, 843, -1951, 675, -1865, -144, -1678, -145, -1608, 387, -958, 156)
+
+[node name="HeartPickup" parent="." instance=ExtResource("3_5pu65")]
+position = Vector2(-1768, -64)
+
+[node name="Spikes" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(1485, 322)
+
+[node name="Spikes2" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(1578, 318)
+
+[node name="Spikes3" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(1674, 319)
+
+[node name="Spikes4" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(1751, 318)
+
+[node name="Spikes5" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(1834, 317)
+
+[node name="Polygon2D2" type="Polygon2D" parent="."]
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(645, -2, 864, -7, 870, 101, 639, 98)
+
+[node name="FitCollider" parent="Polygon2D2" instance=ExtResource("5_ux3ov")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D2/StaticBody2D"]
+polygon = PackedVector2Array(645, -2, 864, -7, 870, 101, 639, 98)
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+position = Vector2(421, 5)
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(643, 100, 649, -98, 868, -113, 880, 94)
+
+[node name="Obstacle1" type="StaticBody2D" parent="Polygon2D"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D/Obstacle1"]
+polygon = PackedVector2Array(643, 100, 649, -98, 868, -113, 880, 94)
+
+[node name="Platform4" parent="." instance=ExtResource("1_cd2fi")]
+position = Vector2(1629, 60)
+is_active = true
+
+[node name="CrumbsBag" parent="." instance=ExtResource("12_cogub")]
+position = Vector2(2083, 62)
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("12_nvlab")]
+position = Vector2(278, 27)
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(3010, 0)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-2193, 0)
+
+[node name="Spikes6" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-1550, 480)
+rotation = -0.199961
+scale = Vector2(1, 0.748887)
+
+[node name="Spikes7" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-1453, 453)
+rotation = -0.199961
+scale = Vector2(-1.09418, 0.788093)
+
+[node name="Spikes8" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-1361, 419)
+rotation = -0.199961
+
+[node name="Spikes9" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-1268, 391)
+rotation = -0.199961
+scale = Vector2(-1.15721, 1)
+
+[node name="Spikes10" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-1174, 358)
+rotation = -0.199961
+
+[node name="Spikes11" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-1081, 335)
+rotation = -0.199961
+
+[node name="Spikes12" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-999, 307)
+rotation = -0.459357
+
+[node name="Spikes13" parent="." instance=ExtResource("2_cd2fi")]
+position = Vector2(-942, 252)
+rotation = -0.828044
+
+[node name="Warper" parent="." instance=ExtResource("15_yyu08")]
+position = Vector2(2834, -5)
+collision_layer = 0
+collision_mask = 2
+destination = "res://scenes/levels/0/1.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+shape = SubResource("WorldBoundaryShape2D_ux3ov")
+
+[node name="Void" parent="." instance=ExtResource("10_r1nav")]
+position = Vector2(2397, 623)

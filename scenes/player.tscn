@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://cstxbo85ymbf4"]
+
+[ext_resource type="Script" uid="uid://c02377ero2ku7" path="res://scripts/player.gd" id="1_g2els"]
+[ext_resource type="Texture2D" uid="uid://b3r6myaip0d0a" path="res://assets/player_placeholder.png" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://bex2gjmkty1q1" path="res://scripts/health.gd" id="3_qhqgy"]
+[ext_resource type="Script" uid="uid://bi8lip4dwtn1q" path="res://scripts/crumb_wallet.gd" id="4_dqkch"]
+[ext_resource type="Script" uid="uid://dyjrqrt2jmfnx" path="res://scripts/varied_audio_stream_player_2d.gd" id="5_tuyoq"]
+[ext_resource type="AudioStream" uid="uid://cj7teuyfr2ohg" path="res://assets/audio/player_hurt.wav" id="6_fjrip"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
+radius = 35.0
+height = 90.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
+radius = 52.0096
+
+[node name="Player" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 5
+floor_snap_length = 5.0
+script = ExtResource("1_g2els")
+force_damping = 0.05
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-24, -67)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("2_qhqgy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -48)
+shape = SubResource("CapsuleShape2D_3vyb7")
+
+[node name="CoyoteTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="Health" type="Node" parent="."]
+script = ExtResource("3_qhqgy")
+max_hp = 6
+current_hp = 6
+metadata/_custom_type_script = "uid://bex2gjmkty1q1"
+
+[node name="CrumbWallet" type="Node" parent="."]
+script = ExtResource("4_dqkch")
+metadata/_custom_type_script = "uid://bi8lip4dwtn1q"
+
+[node name="ZoneChecker" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneChecker"]
+position = Vector2(0, -60)
+shape = SubResource("CircleShape2D_dqkch")
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("5_tuyoq")
+streams = Array[AudioStream]([ExtResource("6_fjrip")])
+metadata/_custom_type_script = "uid://dyjrqrt2jmfnx"
+
+[connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
+[connection signal="area_entered" from="ZoneChecker" to="." method="_on_zone_checker_area_entered"]

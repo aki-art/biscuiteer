@@ -1,0 +1,25 @@
+[gd_scene load_steps=5 format=3 uid="uid://cwqlys1qg1mrs"]
+
+[ext_resource type="Script" uid="uid://dyefsxwlgsngk" path="res://scripts/gum_drop.gd" id="1_nm4iq"]
+[ext_resource type="Texture2D" uid="uid://dhtsef33s6u6f" path="res://assets/gumdrop.png" id="1_tuk3p"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_nm4iq"]
+friction = 0.1
+bounce = 10.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nm4iq"]
+size = Vector2(102, 64)
+
+[node name="GumDrop" type="StaticBody2D" groups=["platform"]]
+physics_material_override = SubResource("PhysicsMaterial_nm4iq")
+script = ExtResource("1_nm4iq")
+
+[node name="Visualizer" type="Node2D" parent="."]
+position = Vector2(0, 26)
+
+[node name="Gumdrop" type="Sprite2D" parent="Visualizer"]
+position = Vector2(1, -27)
+texture = ExtResource("1_tuk3p")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_nm4iq")

@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://be4noytnjou3c"]
+
+[ext_resource type="Texture2D" uid="uid://b8cenxs6py166" path="res://assets/heart.png" id="1_4dc3y"]
+[ext_resource type="Script" uid="uid://cu68r0flpvsvs" path="res://scenes/heart_pickup.gd" id="1_m16xc"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m16xc"]
+size = Vector2(68, 56)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_yk5un"]
+radius = 44.0114
+
+[node name="HeartPickup" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 6
+script = ExtResource("1_m16xc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -28)
+shape = SubResource("RectangleShape2D_m16xc")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -37)
+texture = ExtResource("1_4dc3y")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(0, -46)
+shape = SubResource("CircleShape2D_yk5un")
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]

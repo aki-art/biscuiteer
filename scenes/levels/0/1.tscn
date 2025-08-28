@@ -1,0 +1,88 @@
+[gd_scene load_steps=7 format=3 uid="uid://bb81fuibrkwkw"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_7v5hc"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_7v5hc"]
+[ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="2_cdcqb"]
+[ext_resource type="Script" uid="uid://fwjpl32k4dgr" path="res://scripts/hazard.gd" id="3_ngo8k"]
+[ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="4_2xj00"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="5_6g54b"]
+
+[node name="1" type="Node" groups=["level"]]
+script = ExtResource("1_7v5hc")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(224, 224)
+collision_layer = 4
+collision_mask = 18
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+scale = Vector2(2.21949, 2.42257)
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(-382.07, -165.114, -209.057, -244.369, 36.0443, -270.787, 938, -271, 938, -304, 670.424, -303.81, 670.424, -376.46, 901.108, -449.11, 958.779, -495.342, 1059.7, -548.178, 1059.7, -858.592, -317, -860)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+polygon = PackedVector2Array(-832, -656, 2080, -656, 2080, -736, 1488, -752, 1488, -912, 2000, -1088, 2128, -1200, 2400, -1360, 2416, -2080, -704, -2080)
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 18
+
+[node name="Polygon2D2" type="Polygon2D" parent="StaticBody2D2"]
+position = Vector2(-8, 48)
+scale = Vector2(2.21949, 2.42257)
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(-439, 3, -39, 2, -43, 934, -453, 907)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="StaticBody2D2"]
+polygon = PackedVector2Array(-992, 48, -96, 48, -96, 2320, -1024, 2240)
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 18
+
+[node name="Polygon2D3" type="Polygon2D" parent="RigidBody2D"]
+scale = Vector2(2.21949, 2.42257)
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(245.101, -59.441, 617.768, -59.441, 634.38, -26.4182, 684.842, 26.4182, 1016.45, 26.4182, 1095.75, -13.2091, 1131.79, -59.441, 1131.79, -865.197, 1720, -864, 1720, 800, 245.101, 799.151, 245.101, 151.905, 374.861, 151.905, 374.861, 79.2547, 245.101, 79.2547)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+polygon = PackedVector2Array(544, 1952, 544, 368, 832, 368, 832, 192, 544, 192, 544, -144, 1376, -144, 1408, -64, 1520, 64, 2256, 64, 2432, -32, 2512, -144, 2512, -2096, 3824, -2080, 3808, 1936)
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_7v5hc")]
+position = Vector2(-384, 48)
+
+[node name="Liquid" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(1856, -32)
+polygon = PackedVector2Array(-480, -80, 672, -80, 672, 112, -480, 112)
+
+[node name="Hazard" type="Node2D" parent="Liquid"]
+script = ExtResource("3_ngo8k")
+metadata/_custom_type_script = "uid://fwjpl32k4dgr"
+
+[node name="FitCollider" parent="Liquid" instance=ExtResource("4_2xj00")]
+
+[node name="Area2D" type="Area2D" parent="Liquid"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Liquid/Area2D"]
+polygon = PackedVector2Array(-480, -80, 672, -80, 672, 112, -480, 112)
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(3072, 848)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-848, -640)
+
+[node name="CrumbsBag" parent="." instance=ExtResource("2_cdcqb")]
+position = Vector2(688, 352)
+
+[node name="Void" parent="." instance=ExtResource("5_6g54b")]
+position = Vector2(320, 720)
+
+[connection signal="body_entered" from="Liquid/Area2D" to="Liquid/Hazard" method="_on_touched"]

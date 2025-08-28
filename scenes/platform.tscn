@@ -1,0 +1,154 @@
+[gd_scene load_steps=18 format=3 uid="uid://depfltsstpn1g"]
+
+[ext_resource type="Script" uid="uid://2xwxcq5qpj6k" path="res://scripts/platform.gd" id="1_ba0x2"]
+[ext_resource type="Texture2D" uid="uid://dg7xafwc4j0y5" path="res://assets/biscuit_middle.png" id="2_507ja"]
+[ext_resource type="Texture2D" uid="uid://cbijdm22o5j7a" path="res://assets/smoke_particle.png" id="2_nlgqw"]
+[ext_resource type="Texture2D" uid="uid://bl8jmvw2wyrm0" path="res://assets/biscuit_left.png" id="3_u7qrw"]
+[ext_resource type="Texture2D" uid="uid://comx06162feiq" path="res://assets/biscuit_right.png" id="4_6f2a1"]
+[ext_resource type="AudioStream" uid="uid://bo8axmwlkf0ah" path="res://assets/audio/486379__an_na_ba_na_na__goldfish-crackers.wav" id="6_6f2a1"]
+[ext_resource type="AudioStream" uid="uid://hcd4wdi2pr4o" path="res://assets/audio/812353__beyercreative__medium-cardboard-impacts.wav" id="7_r8v6l"]
+[ext_resource type="Script" uid="uid://dyjrqrt2jmfnx" path="res://scripts/varied_audio_stream_player_2d.gd" id="7_u5530"]
+[ext_resource type="AudioStream" uid="uid://bwn606gyy7n5" path="res://assets/audio/cardboard_impact_2.wav" id="9_apxtv"]
+[ext_resource type="AudioStream" uid="uid://cxfvxcqtd62l8" path="res://assets/audio/cardboard_impact_3.wav" id="10_ba144"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u7qrw"]
+resource_local_to_scene = true
+size = Vector2(65, 26)
+
+[sub_resource type="Gradient" id="Gradient_u5530"]
+colors = PackedColorArray(0.74978, 0.74978, 0.74978, 1, 0.462745, 0.462745, 0.462745, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_507ja"]
+gradient = SubResource("Gradient_u5530")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_u7qrw"]
+resource_local_to_scene = true
+lifetime_randomness = 0.7
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 28.74
+initial_velocity_max = 28.74
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_507ja")
+
+[sub_resource type="Animation" id="Animation_507ja"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visualizer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visualizer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_nlgqw"]
+resource_name = "jumped_on"
+length = 0.45
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visualizer:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.366667, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, 3), Vector2(0, -2.5), Vector2(0, 1.5), Vector2(0, -0.5), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visualizer:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.266667, 0.433333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0174533, -0.0174533, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_n1ckp"]
+_data = {
+&"RESET": SubResource("Animation_507ja"),
+&"jumped_on": SubResource("Animation_nlgqw")
+}
+
+[node name="Platform" type="StaticBody2D" groups=["platform"]]
+collision_layer = 4
+collision_mask = 0
+script = ExtResource("1_ba0x2")
+snap_length = 16.0
+min_length = 48.0
+
+[node name="Visualizer" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="Visualizer"]
+texture_repeat = 2
+points = PackedVector2Array(0, 0, 64, 0)
+width = 32.0
+texture = ExtResource("2_507ja")
+texture_mode = 1
+
+[node name="LeftCapSprite" type="Sprite2D" parent="Visualizer/Line2D"]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("3_u7qrw")
+
+[node name="RightCapSprite" type="Sprite2D" parent="Visualizer/Line2D"]
+position = Vector2(64, 0)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_6f2a1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(32.5, 0)
+shape = SubResource("RectangleShape2D_u7qrw")
+disabled = true
+
+[node name="ImpactDustParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, -8)
+emitting = false
+amount = 32
+texture = ExtResource("2_nlgqw")
+lifetime = 0.66
+one_shot = true
+explosiveness = 0.7
+process_material = SubResource("ParticleProcessMaterial_u7qrw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_n1ckp")
+}
+
+[node name="BiscuitClickAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_6f2a1")
+
+[node name="AudioCooldownTimer" type="Timer" parent="."]
+wait_time = 0.02
+one_shot = true
+
+[node name="VariedAudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+script = ExtResource("7_u5530")
+streams = Array[AudioStream]([ExtResource("7_r8v6l"), ExtResource("9_apxtv"), ExtResource("10_ba144")])
+metadata/_custom_type_script = "uid://dyjrqrt2jmfnx"

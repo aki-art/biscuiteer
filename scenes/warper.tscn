@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dmperxwoth085"]
+
+[ext_resource type="Script" uid="uid://b77msmc2rtl1a" path="res://warper.gd" id="1_46hcy"]
+
+[node name="Warper" type="Area2D"]
+script = ExtResource("1_46hcy")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

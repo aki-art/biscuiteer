@@ -1,0 +1,77 @@
+[gd_scene load_steps=14 format=3 uid="uid://bau36gloc10pm"]
+
+[ext_resource type="Script" uid="uid://cdw2ulhvdaem4" path="res://scripts/game.gd" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://depfltsstpn1g" path="res://scenes/platform.tscn" id="2_kvpfn"]
+[ext_resource type="Script" uid="uid://c34y7immsx7l4" path="res://scripts/resource_defs/spawn_config.gd" id="3_dinhu"]
+[ext_resource type="Script" uid="uid://3k1vhgr7sv5j" path="res://scripts/target_follower_camera.gd" id="3_iywne"]
+[ext_resource type="Script" uid="uid://dtpul5yyc1bom" path="res://scripts/tools/spawner_tool.gd" id="3_lnu2h"]
+[ext_resource type="PackedScene" uid="uid://dkgjh0su8kto5" path="res://scenes/ui.tscn" id="4_lbhrr"]
+[ext_resource type="Script" uid="uid://cug0lmk5q4aqg" path="res://scripts/tools/platform_spawner_tool.gd" id="5_u5sy4"]
+[ext_resource type="Texture2D" uid="uid://8i1wtw1ooo5o" path="res://assets/vignette_overlay.png" id="6_gee14"]
+[ext_resource type="PackedScene" uid="uid://cstxbo85ymbf4" path="res://scenes/player.tscn" id="6_p57ef"]
+[ext_resource type="Script" uid="uid://0ucu2mlol1fl" path="res://scenes/build_camera_tracker.gd" id="8_gee14"]
+[ext_resource type="Texture2D" uid="uid://bef7knpo1n4qi" path="res://icon.svg" id="9_0tnpc"]
+
+[sub_resource type="Resource" id="Resource_kvuet"]
+script = ExtResource("3_dinhu")
+scene = ExtResource("2_kvpfn")
+metadata/_custom_type_script = "uid://c34y7immsx7l4"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gee14"]
+blend_mode = 3
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_yqjtg")
+start_level = "res://scenes/levels/0/0.tscn"
+last_building_tool = &"PlatformSpawnerTool"
+last_tool_data = SubResource("Resource_kvuet")
+
+[node name="PlayerFollowCamera" type="Camera2D" parent="." node_paths=PackedStringArray("target")]
+zoom = Vector2(0.85, 0.85)
+script = ExtResource("3_iywne")
+target = NodePath("../Player")
+speed = 0.14
+
+[node name="Tools" type="Node" parent="."]
+
+[node name="SpawnerTool" type="Node2D" parent="Tools"]
+script = ExtResource("3_lnu2h")
+metadata/_custom_type_script = "uid://dtpul5yyc1bom"
+
+[node name="PlatformSpawnerTool" type="Node2D" parent="Tools"]
+script = ExtResource("5_u5sy4")
+metadata/_custom_type_script = "uid://cug0lmk5q4aqg"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Vignette" type="TextureRect" parent="CanvasLayer"]
+material = SubResource("CanvasItemMaterial_gee14")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_gee14")
+expand_mode = 2
+
+[node name="UI" parent="CanvasLayer" instance=ExtResource("4_lbhrr")]
+offset_right = -1152.0
+offset_bottom = -648.0
+
+[node name="Player" parent="." instance=ExtResource("6_p57ef")]
+position = Vector2(1, -40)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(1, 0.931, 0.82, 1)
+
+[node name="BuildCameraTracker" type="Marker2D" parent="." node_paths=PackedStringArray("anchor")]
+position = Vector2(-300, 200)
+script = ExtResource("8_gee14")
+speed = 500.0
+anchor = NodePath("../Player")
+leash_length = 800.0
+
+[node name="Icon" type="Sprite2D" parent="BuildCameraTracker"]
+visible = false
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("9_0tnpc")

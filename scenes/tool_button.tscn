@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://d1jgcouix3q5x"]
+
+[ext_resource type="Script" uid="uid://cjtg2datmv8m3" path="res://scripts/tool_button.gd" id="1_b4wr0"]
+
+[node name="ToolButton" type="Button"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_b4wr0")
+metadata/_custom_type_script = "uid://cjtg2datmv8m3"
+
+[connection signal="pressed" from="." to="." method="_on_pressed"]

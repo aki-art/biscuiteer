@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://umvwac0bhqde"]
+
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="1_1keqc"]
+
+[node name="FitCollider" type="Node"]
+script = ExtResource("1_1keqc")

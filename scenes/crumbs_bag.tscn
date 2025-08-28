@@ -1,0 +1,37 @@
+[gd_scene load_steps=6 format=3 uid="uid://bolndxsgq846l"]
+
+[ext_resource type="Script" uid="uid://bbpmgqiljtblb" path="res://scripts/crumbs_bag.gd" id="1_2qgm5"]
+[ext_resource type="Texture2D" uid="uid://badvguyp8lqdv" path="res://assets/crumb_bag.png" id="1_d4syx"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_d4syx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_d4syx"]
+size = Vector2(50, 33)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_de4xn"]
+radius = 38.0
+
+[node name="CrumbsBag" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 4
+physics_material_override = SubResource("PhysicsMaterial_d4syx")
+script = ExtResource("1_2qgm5")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, -28)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_d4syx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-2, -17)
+shape = SubResource("RectangleShape2D_d4syx")
+
+[node name="PickupArea" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PickupArea"]
+position = Vector2(-1, -30)
+shape = SubResource("CircleShape2D_de4xn")
+
+[connection signal="body_entered" from="PickupArea" to="." method="_on_pickup_area_body_entered"]
