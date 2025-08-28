@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bb81fuibrkwkw"]
+[gd_scene load_steps=9 format=3 uid="uid://bb81fuibrkwkw"]
 
 [ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_7v5hc"]
 [ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_7v5hc"]
@@ -6,6 +6,10 @@
 [ext_resource type="Script" uid="uid://fwjpl32k4dgr" path="res://scripts/hazard.gd" id="3_ngo8k"]
 [ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="4_2xj00"]
 [ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="5_6g54b"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="7_2xj00"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtljo"]
+size = Vector2(176, 256)
 
 [node name="1" type="Node" groups=["level"]]
 script = ExtResource("1_7v5hc")
@@ -84,5 +88,13 @@ position = Vector2(688, 352)
 
 [node name="Void" parent="." instance=ExtResource("5_6g54b")]
 position = Vector2(320, 720)
+
+[node name="Warper" parent="." instance=ExtResource("7_2xj00")]
+position = Vector2(1816, -584)
+destination = "res://scenes/levels/0/2.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+position = Vector2(8, -40)
+shape = SubResource("RectangleShape2D_wtljo")
 
 [connection signal="body_entered" from="Liquid/Area2D" to="Liquid/Hazard" method="_on_touched"]

@@ -22,7 +22,7 @@ blend_mode = 3
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_yqjtg")
-start_level = "res://scenes/levels/0/0.tscn"
+start_level = "res://scenes/levels/0/2.tscn"
 last_building_tool = &"PlatformSpawnerTool"
 last_tool_data = SubResource("Resource_kvuet")
 

@@ -3,6 +3,8 @@
 [ext_resource type="Script" uid="uid://b77msmc2rtl1a" path="res://warper.gd" id="1_46hcy"]
 
 [node name="Warper" type="Area2D"]
+collision_layer = 0
+collision_mask = 2
 script = ExtResource("1_46hcy")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

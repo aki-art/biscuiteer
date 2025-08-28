@@ -1,3 +1,13 @@
-[gd_scene format=3 uid="uid://b15jmf2bic5md"]
+[gd_scene load_steps=3 format=3 uid="uid://b15jmf2bic5md"]
+
+[ext_resource type="Script" uid="uid://bp7sw6h724gp4" path="res://scenes/player_start_marker.gd" id="1_fg2x3"]
+[ext_resource type="Texture2D" uid="uid://b3r6myaip0d0a" path="res://assets/player_placeholder.png" id="1_mscdj"]
 
 [node name="PlayerStartMarker" type="Marker2D" groups=["map_start"]]
+script = ExtResource("1_fg2x3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0.7, 1, 0.415686)
+position = Vector2(-24, -69)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_mscdj")
