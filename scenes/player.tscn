@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cstxbo85ymbf4"]
+[gd_scene load_steps=11 format=3 uid="uid://cstxbo85ymbf4"]
 
 [ext_resource type="Script" uid="uid://c02377ero2ku7" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b3r6myaip0d0a" path="res://assets/player_placeholder.png" id="2_qhqgy"]
@@ -14,6 +14,14 @@ height = 90.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
 radius = 52.0096
 
+[sub_resource type="Animation" id="Animation_tuyoq"]
+resource_name = "idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjrip"]
+_data = {
+&"idle": SubResource("Animation_tuyoq")
+}
+
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
 collision_mask = 5
@@ -22,11 +30,14 @@ script = ExtResource("1_g2els")
 force_damping = 0.05
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+self_modulate = Color(0, 1, 0.966667, 0.419608)
+z_index = 4
 position = Vector2(-24, -67)
 scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, -48)
 shape = SubResource("CapsuleShape2D_3vyb7")
 
@@ -49,6 +60,7 @@ collision_layer = 0
 collision_mask = 32
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZoneChecker"]
+visible = false
 position = Vector2(0, -60)
 shape = SubResource("CircleShape2D_dqkch")
 
@@ -56,6 +68,11 @@ shape = SubResource("CircleShape2D_dqkch")
 script = ExtResource("5_tuyoq")
 streams = Array[AudioStream]([ExtResource("6_fjrip")])
 metadata/_custom_type_script = "uid://dyjrqrt2jmfnx"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_fjrip")
+}
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="ZoneChecker" to="." method="_on_zone_checker_area_entered"]

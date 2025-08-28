@@ -29,6 +29,10 @@ SceneFlow="*res://scripts/autoload/scene_flow.gd"
 
 window/stretch/mode="canvas_items"
 
+[editor]
+
+movie_writer/movie_file="C:/Users/Aki/Desktop/biscuiteer/biscuit.avi"
+
 [global_group]
 
 map_start=""
