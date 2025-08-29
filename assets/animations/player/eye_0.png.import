@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bp4hoffr01qom"
-path="res://.godot/imported/right_ear.png-7b1368519477b629041f46adbbb18a6a.ctex"
+uid="uid://cag4nrg0dphly"
+path="res://.godot/imported/eye_0.png-2e133a15030edddb11ca3f2bbeb76c41.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/right_ear.png"
-dest_files=["res://.godot/imported/right_ear.png-7b1368519477b629041f46adbbb18a6a.ctex"]
+source_file="res://assets/animations/player/eye_0.png"
+dest_files=["res://.godot/imported/eye_0.png-2e133a15030edddb11ca3f2bbeb76c41.ctex"]
 
 [params]
 

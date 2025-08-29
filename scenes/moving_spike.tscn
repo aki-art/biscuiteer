@@ -490,7 +490,6 @@ libraries = {
 }
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-volume_db = -25.0
 
 [node name="Hazard" type="Node2D" parent="."]
 script = ExtResource("7_bjf12")

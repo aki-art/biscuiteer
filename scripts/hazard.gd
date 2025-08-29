@@ -16,4 +16,4 @@ func get_health_node(node:Node) -> Health:
 func _on_touched(node:Node2D) -> void:
 	var health := get_health_node(node);
 	if(health):
-		health.damage(1, "hazard");
+		health.damage(1, "hazard", global_position);

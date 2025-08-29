@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://da3kg1210gexv"
-path="res://.godot/imported/collar.png-1b97b0bf5068468d02b5577894b24bcf.ctex"
+uid="uid://cg2ooetcnnn15"
+path="res://.godot/imported/left_ear_0.png-30c1a3b8e5ba82a09a434a9b73a21508.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/collar.png"
-dest_files=["res://.godot/imported/collar.png-1b97b0bf5068468d02b5577894b24bcf.ctex"]
+source_file="res://assets/animations/player/left_ear_0.png"
+dest_files=["res://.godot/imported/left_ear_0.png-30c1a3b8e5ba82a09a434a9b73a21508.ctex"]
 
 [params]
 

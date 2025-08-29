@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://3c74ue71qrxt"]
+
+[ext_resource type="Texture2D" uid="uid://dglcladynvvtl" path="res://assets/dead.png" id="1_opuwk"]
+
+[node name="PlayerDeathAnimation" type="Node2D"]
+
+[node name="reference" type="Sprite2D" parent="."]
+position = Vector2(-32, -64)
+texture = ExtResource("1_opuwk")

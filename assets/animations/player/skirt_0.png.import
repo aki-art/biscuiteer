@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ketw0dselbcb"
-path="res://.godot/imported/lower_leg.png-5dba8299b0c3ababa902f05d9060c162.ctex"
+uid="uid://cewvnojdp56wi"
+path="res://.godot/imported/skirt_0.png-9fd0af113b0b867d82963464f034cbbf.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/lower_leg.png"
-dest_files=["res://.godot/imported/lower_leg.png-5dba8299b0c3ababa902f05d9060c162.ctex"]
+source_file="res://assets/animations/player/skirt_0.png"
+dest_files=["res://.godot/imported/skirt_0.png-9fd0af113b0b867d82963464f034cbbf.ctex"]
 
 [params]
 

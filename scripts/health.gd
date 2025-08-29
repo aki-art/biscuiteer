@@ -4,7 +4,7 @@ extends Node
 signal on_health_changed(health_delta: int);
 signal on_shield_changed(shield_delta: int);
 signal on_death();
-signal on_hurt(amount: float, fatal: bool, source: StringName);
+signal on_hurt(amount: float, fatal: bool, source: StringName, position: Vector2);
 
 @export var max_hp: int;
 @export var armor : int;
@@ -34,7 +34,7 @@ func set_hp(hp:int, trigger_event:bool = true) -> int:
 	current_hp = min(current_hp, max_hp);
 
 	if (trigger_event):
-		on_health_changed.emit(current_hp - previpus_hp);
+		on_health_changed.emit(previpus_hp - current_hp);
 
 		if (current_hp <= 0 && current_shield <= 0):
 			is_dead = true;
@@ -43,7 +43,7 @@ func set_hp(hp:int, trigger_event:bool = true) -> int:
 	Events.on_player_hp_changed.emit(total_health())
 	return current_hp - previpus_hp;
 
-func damage(amount: int, source: StringName) -> void:
+func damage(amount: int, source: StringName, position:Vector2) -> void:
 	var damage_reduction = (int)(amount * armor);
 	amount -= damage_reduction;
 
@@ -58,7 +58,7 @@ func damage(amount: int, source: StringName) -> void:
 		on_shield_changed.emit(-shield_damage);
 
 	add_hp(-amount);
-	on_hurt.emit(amount, total_health() <= 0, source);
+	on_hurt.emit(amount, total_health() <= 0, source, position);
 
 func set_max_hp(health: int, trigger_event:bool = true) -> void:
 	max_hp = health;

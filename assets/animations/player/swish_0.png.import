@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cuqnew1karixd"
-path="res://.godot/imported/upper_leg.png-81ad2f7ff27b4bd6204ac495bb4f83a8.ctex"
+uid="uid://bpatghy7r0mpr"
+path="res://.godot/imported/swish_0.png-012f41cd374b3667f053ec2cf416b7bd.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/upper_leg.png"
-dest_files=["res://.godot/imported/upper_leg.png-81ad2f7ff27b4bd6204ac495bb4f83a8.ctex"]
+source_file="res://assets/animations/player/swish_0.png"
+dest_files=["res://.godot/imported/swish_0.png-012f41cd374b3667f053ec2cf416b7bd.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0um8bc8ks548"
-path="res://.godot/imported/left_ear.png-64143625bda80762e9eb0444d9a10053.ctex"
+uid="uid://cpspy2wifjt3g"
+path="res://.godot/imported/skirt_back_0.png-816b24f18632d6e818bc6fd69626fe76.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/left_ear.png"
-dest_files=["res://.godot/imported/left_ear.png-64143625bda80762e9eb0444d9a10053.ctex"]
+source_file="res://assets/animations/player/skirt_back_0.png"
+dest_files=["res://.godot/imported/skirt_back_0.png-816b24f18632d6e818bc6fd69626fe76.ctex"]
 
 [params]
 

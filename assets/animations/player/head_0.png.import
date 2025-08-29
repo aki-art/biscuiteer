@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ds70ftpsmvah7"
-path="res://.godot/imported/skirt.png-856303d5d234719ec0f4af9e163519f3.ctex"
+uid="uid://up6bxwdr8dgx"
+path="res://.godot/imported/head_0.png-29caa16af58cddad97f2e6ccee8a6639.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/skirt.png"
-dest_files=["res://.godot/imported/skirt.png-856303d5d234719ec0f4af9e163519f3.ctex"]
+source_file="res://assets/animations/player/head_0.png"
+dest_files=["res://.godot/imported/head_0.png-29caa16af58cddad97f2e6ccee8a6639.ctex"]
 
 [params]
 

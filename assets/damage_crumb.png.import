@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b5r7y5cyw6sep"
-path="res://.godot/imported/skirt_back.png-0756589e354911731430e989c0ce821e.ctex"
+uid="uid://dc7wfvuo2rpoj"
+path="res://.godot/imported/damage_crumb.png-592a3640c7090ad0fd9848d1b390577d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/skirt_back.png"
-dest_files=["res://.godot/imported/skirt_back.png-0756589e354911731430e989c0ce821e.ctex"]
+source_file="res://assets/damage_crumb.png"
+dest_files=["res://.godot/imported/damage_crumb.png-592a3640c7090ad0fd9848d1b390577d.ctex"]
 
 [params]
 

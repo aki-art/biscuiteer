@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ddxt4olgwq661"
-path="res://.godot/imported/eye_closed.png-eba7c37a81b3843515a45c7c3d2620a9.ctex"
+uid="uid://c55uxke0ryb5x"
+path="res://.godot/imported/collar_0.png-c7f3c1c088b73112ca4293121c1beb8c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/eye_closed.png"
-dest_files=["res://.godot/imported/eye_closed.png-eba7c37a81b3843515a45c7c3d2620a9.ctex"]
+source_file="res://assets/animations/player/collar_0.png"
+dest_files=["res://.godot/imported/collar_0.png-c7f3c1c088b73112ca4293121c1beb8c.ctex"]
 
 [params]
 

@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bdkmao7r2bae2"
-path="res://.godot/imported/neck.png-52bc183bb2817ca124e5ee6c18661970.ctex"
+uid="uid://cqqklg3igq18i"
+path="res://.godot/imported/right_ear_0.png-09f4f2d2ce0bb62cf30bd2b3c194b855.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/animations/player/neck.png"
-dest_files=["res://.godot/imported/neck.png-52bc183bb2817ca124e5ee6c18661970.ctex"]
+source_file="res://assets/animations/player/right_ear_0.png"
+dest_files=["res://.godot/imported/right_ear_0.png-09f4f2d2ce0bb62cf30bd2b3c194b855.ctex"]
 
 [params]
 
