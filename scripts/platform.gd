@@ -23,7 +23,7 @@ var cost: int;
 func _ready() -> void:
 	if is_active:
 		activate(false)
-		set_ends(line_2d.points[0], line_2d.points[1], true, false);
+		set_ends(line_2d.points[0], line_2d.points[1], true, false, false);
 		modulate = Color.WHITE;
 
 func activate(play_animation: bool) -> void:
@@ -49,7 +49,7 @@ func _check_cost(units: float) -> void:
 	modulate = Color.WHITE if can_afford else Color.FIREBRICK;
 	modulate.a = 0.7;
 	
-func set_ends(start:Vector2, end:Vector2, update_colliders:bool, play_audio:bool) -> void:
+func set_ends(start:Vector2, end:Vector2, update_colliders:bool, play_audio:bool, preview:bool) -> void:
 	#position = lerp(start, end, 0.5)
 	# just for testing
 	
@@ -72,7 +72,8 @@ func set_ends(start:Vector2, end:Vector2, update_colliders:bool, play_audio:bool
 	var segment_count : int = len / snap_length;
 	
 	cost = segment_count * cost_per_unit;
-	_check_cost(cost);
+	if preview:
+		_check_cost(cost);
 	
 	if play_audio && snap_length > 0:
 		if(segment_count != previous_segment_count && audio_cooldown_timer.is_stopped()):

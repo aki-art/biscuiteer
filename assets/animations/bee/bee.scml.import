@@ -1,0 +1,23 @@
+[remap]
+
+importer="importer.scml"
+type="PackedScene"
+uid="uid://c672m2ca5lhte"
+path="res://.godot/imported/bee.scml-65cd934c130692060106559e28bddc5f.scn"
+
+[deps]
+
+source_file="res://assets/animations/bee/bee.scml"
+dest_files=["res://.godot/imported/bee.scml-65cd934c130692060106559e28bddc5f.scn"]
+
+[params]
+
+playback_speed=1.0
+z_as_relative=true
+loop_animations=1
+loop_wrap_interpolation=true
+optimize_for_blends=true
+create_events_as_signals=true
+rest_pose_animation=""
+character_map_file=""
+reparenting_solution="instance per parent"

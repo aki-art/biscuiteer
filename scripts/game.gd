@@ -23,6 +23,9 @@ func set_mode(mode: StringName) -> void:
 	_mode = mode;
 	Events.on_game_mode_changed.emit(mode);
 	
+	# TODO:pause
+	# Engine.time_scale = 1.0 if _mode != "building" else 0.03;
+	
 	if mode == "platforming":
 		build_camera_tracker.is_active = false;
 		player_follow_camera.target = player;

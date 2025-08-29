@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ce6p4ia7b1o2r"]
+[gd_scene load_steps=13 format=3 uid="uid://ce6p4ia7b1o2r"]
 
 [ext_resource type="PackedScene" uid="uid://depfltsstpn1g" path="res://scenes/platform.tscn" id="1_cd2fi"]
 [ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_ig882"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="3_5pu65"]
 [ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="5_ux3ov"]
 [ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="10_r1nav"]
+[ext_resource type="PackedScene" uid="uid://dscchu0ycqsd5" path="res://scenes/bee.tscn" id="11_ca50v"]
 [ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="12_cogub"]
 [ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="12_nvlab"]
 [ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="15_yyu08"]
@@ -161,3 +162,6 @@ position = Vector2(2397, 623)
 
 [node name="Spikes14" parent="." instance=ExtResource("2_cd2fi")]
 position = Vector2(426, 100)
+
+[node name="Bee" parent="." instance=ExtResource("11_ca50v")]
+position = Vector2(332, -94)

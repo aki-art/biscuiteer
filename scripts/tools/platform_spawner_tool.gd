@@ -26,7 +26,7 @@ func activate(data: ToolConfig) -> void:
 		target = config.scene.instantiate();
 		Global.game.get_current_level().add_child(target);
 		
-		target.set_ends(get_global_mouse_position(), get_global_mouse_position(), false, false)
+		target.set_ends(get_global_mouse_position(), get_global_mouse_position(), false, false, true)
 		
 		Events.on_toggle_build_mode.emit(true);
 		Global.game.set_mode("building")
@@ -36,9 +36,10 @@ func activate(data: ToolConfig) -> void:
 func deactivate() -> void:
 	super();
 	
-	if(!_target_dropped && was_target_sandbox_spawned):
-		if(target != null):
+	if(target != null):
+		if(!_target_dropped && was_target_sandbox_spawned):
 			target.queue_free();
+		
 	
 	was_target_sandbox_spawned = false;
 	target = null;
@@ -59,10 +60,10 @@ func on_click() -> bool:
 				var wallet := Global.game.player.crumb_wallet;
 				if wallet && wallet.can_afford(target.cost):
 					wallet.remove(target.cost);
-					
-				target.activate(true);
-				target.set_ends(_start_location, get_global_mouse_position(), true, true)
-				finished = true;
+					target.activate(true);
+					target.set_ends(_start_location, get_global_mouse_position(), true, true, false)
+					finished = true;
+					_target_dropped = true;
 			else:
 				_start_location = get_global_mouse_position();
 				_has_start_location = true
@@ -70,7 +71,6 @@ func on_click() -> bool:
 			# TODO: feedback
 			deactivate();
 			
-		_target_dropped = true;
 	
 	if finished:
 			
@@ -85,6 +85,6 @@ func _process(delta: float) -> void:
 	
 	if(target != null):
 		if _has_start_location:
-			target.set_ends(_start_location, get_global_mouse_position(), false, true)
+			target.set_ends(_start_location, get_global_mouse_position(), false, true, true)
 		else:
 			target.global_position = get_global_mouse_position();

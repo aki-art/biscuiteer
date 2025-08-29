@@ -44,6 +44,8 @@ respawn_point=""
 build_allowed_area=""
 platform=""
 level=""
+player=""
+enemy=""
 
 [input]
 
@@ -140,6 +142,7 @@ debug_hurt={
 2d_physics/layer_4="Hazards"
 2d_physics/layer_5="Pickupables"
 2d_physics/layer_6="Zone"
+2d_physics/layer_7="Enemy"
 
 [physics]
 

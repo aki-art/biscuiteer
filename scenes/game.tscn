@@ -21,8 +21,9 @@ metadata/_custom_type_script = "uid://c34y7immsx7l4"
 blend_mode = 3
 
 [node name="Game" type="Node2D"]
+visible = false
 script = ExtResource("1_yqjtg")
-start_level = "res://scenes/levels/0/0.tscn"
+start_level = "res://scenes/levels/0/glass_bowl.tscn"
 last_building_tool = &"PlatformSpawnerTool"
 last_tool_data = SubResource("Resource_kvuet")
 
@@ -30,7 +31,7 @@ last_tool_data = SubResource("Resource_kvuet")
 zoom = Vector2(0.85, 0.85)
 script = ExtResource("3_iywne")
 target = NodePath("../Player")
-speed = 0.14
+speed = 15.0
 
 [node name="Tools" type="Node" parent="."]
 
@@ -59,7 +60,6 @@ offset_right = -1152.0
 offset_bottom = -648.0
 
 [node name="Player" parent="." instance=ExtResource("6_p57ef")]
-position = Vector2(1, -40)
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(1, 0.931, 0.82, 1)

@@ -11,6 +11,7 @@ signal on_hurt(amount: float, fatal: bool, source: StringName, position: Vector2
 @export var current_shield: int;
 @export var current_hp: int;
 @export var is_dead : bool;
+@export var iframes_timer: Timer;
 
 func is_full_health() -> bool: 
 	return current_hp >= max_hp;
@@ -44,6 +45,10 @@ func set_hp(hp:int, trigger_event:bool = true) -> int:
 	return current_hp - previpus_hp;
 
 func damage(amount: int, source: StringName, position:Vector2) -> void:
+	
+	if iframes_timer && !iframes_timer.is_stopped():
+		return;
+		
 	var damage_reduction = (int)(amount * armor);
 	amount -= damage_reduction;
 
@@ -59,6 +64,9 @@ func damage(amount: int, source: StringName, position:Vector2) -> void:
 
 	add_hp(-amount);
 	on_hurt.emit(amount, total_health() <= 0, source, position);
+	
+	if iframes_timer:
+		iframes_timer.start()
 
 func set_max_hp(health: int, trigger_event:bool = true) -> void:
 	max_hp = health;

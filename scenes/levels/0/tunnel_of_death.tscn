@@ -1,0 +1,197 @@
+[gd_scene load_steps=8 format=3 uid="uid://d3rbyun4c77qv"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_5itaw"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_g228y"]
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="3_iuaih"]
+[ext_resource type="PackedScene" uid="uid://bkd6kvsr43i6h" path="res://scenes/spikes.tscn" id="4_vba1e"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="5_crhjq"]
+[ext_resource type="Script" uid="uid://fwjpl32k4dgr" path="res://scripts/hazard.gd" id="6_5grx3"]
+[ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="7_2t44l"]
+
+[node name="3" type="Node" groups=["level"]]
+script = ExtResource("1_5itaw")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_g228y")]
+position = Vector2(-96, -400)
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(480, 3088)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-4272, -1568)
+
+[node name="BasinPolygon" type="Polygon2D" parent="."]
+position = Vector2(120.32, 545.279)
+scale = Vector2(2.28, 2.36)
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(0, -402, -432, -400, -432, 0, -691.369, 202.848, -1238.74, 596.068, -1421.19, 596.068, -1424, -400, -1744, -400, -1751.02, 1097.76, 3.36828, 1097.76)
+
+[node name="FitCollider" type="Node" parent="BasinPolygon"]
+script = ExtResource("3_iuaih")
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BasinPolygon"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BasinPolygon/StaticBody2D"]
+polygon = PackedVector2Array(0, -402, -432, -400, -432, 0, -691.369, 202.848, -1238.74, 596.068, -1421.19, 596.068, -1424, -400, -1744, -400, -1751.02, 1097.76, 3.36828, 1097.76)
+
+[node name="CeilingPolygon" type="Polygon2D" parent="."]
+position = Vector2(96, 592)
+scale = Vector2(2.28, 2.36)
+polygon = PackedVector2Array(-16, -608, -368, -608, -512, -560, -1280, -560, -1360, -512, -1744, -512, -1744, -848, -16, -848)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="CeilingPolygon"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CeilingPolygon/StaticBody2D"]
+polygon = PackedVector2Array(-16, -608, -368, -608, -512, -560, -1280, -560, -1360, -512, -1744, -512, -1744, -848, -16, -848)
+
+[node name="PlatformPolygon" type="Polygon2D" parent="."]
+position = Vector2(120.32, 449.279)
+scale = Vector2(2.28, 2.36)
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(-1232, -336, -592, -336, -592, -128, -720, 0, -1105.4, 196.068, -1231.72, 80.814)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlatformPolygon"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformPolygon/StaticBody2D"]
+polygon = PackedVector2Array(-1232, -336, -592, -336, -592, -128, -720, 0, -1105.4, 196.068, -1231.72, 80.814)
+
+[node name="Spikes" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-1296, -336)
+
+[node name="Spikes2" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-1248, -288)
+rotation = 0.794097
+
+[node name="Spikes3" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-1232, -224)
+rotation = 1.66294
+
+[node name="Spikes4" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-1632, -336)
+
+[node name="Spikes5" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-1728, -320)
+
+[node name="Spikes6" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-1808, -320)
+
+[node name="Spikes7" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-2032, -320)
+
+[node name="Spikes8" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-2128, -320)
+
+[node name="Spikes9" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-2224, -320)
+
+[node name="Spikes10" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-2512, -320)
+
+[node name="Spikes11" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-2608, -320)
+
+[node name="Spikes12" parent="." instance=ExtResource("4_vba1e")]
+position = Vector2(-2656, -288)
+rotation = -1.12088
+
+[node name="CeilingSpikes" type="Node2D" parent="."]
+position = Vector2(0, 144)
+
+[node name="Spikes13" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2432, -880)
+rotation = -3.14159
+
+[node name="Spikes14" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2336, -880)
+rotation = -3.14159
+
+[node name="Spikes15" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2240, -880)
+rotation = -3.14159
+
+[node name="Spikes16" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2144, -880)
+rotation = -3.14159
+
+[node name="Spikes17" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2048, -880)
+rotation = -3.14159
+
+[node name="Spikes18" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1952, -880)
+rotation = -3.14159
+
+[node name="Spikes19" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1856, -880)
+rotation = -3.14159
+
+[node name="Spikes20" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1760, -880)
+rotation = -3.14159
+
+[node name="Spikes21" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1664, -880)
+rotation = -3.14159
+
+[node name="Spikes22" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1568, -880)
+rotation = -3.14159
+
+[node name="Spikes23" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1472, -880)
+rotation = -3.14159
+
+[node name="Spikes24" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1376, -880)
+rotation = -3.14159
+
+[node name="Spikes25" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1280, -880)
+rotation = -3.14159
+
+[node name="Spikes26" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1184, -880)
+rotation = -3.14159
+
+[node name="Spikes27" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-1120, -896)
+rotation = -3.61541
+
+[node name="Spikes28" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2720, -880)
+rotation = -3.14159
+
+[node name="Spikes29" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2624, -880)
+rotation = -3.14159
+
+[node name="Spikes30" parent="CeilingSpikes" instance=ExtResource("4_vba1e")]
+position = Vector2(-2528, -880)
+rotation = -3.14159
+
+[node name="Void" parent="." instance=ExtResource("5_crhjq")]
+position = Vector2(320, 3040)
+
+[node name="Liquid" type="Polygon2D" parent="."]
+position = Vector2(-3072, 1872)
+polygon = PackedVector2Array(-48, 0, 496, 0, 496, 144, -48, 144)
+
+[node name="Hazard" type="Node2D" parent="Liquid"]
+script = ExtResource("6_5grx3")
+metadata/_custom_type_script = "uid://fwjpl32k4dgr"
+
+[node name="Area2D" type="Area2D" parent="Liquid"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Liquid/Area2D"]
+polygon = PackedVector2Array(-48, 0, 496, 0, 496, 144, -48, 144)
+
+[node name="FitCollider" parent="Liquid" instance=ExtResource("7_2t44l")]
+
+[connection signal="body_entered" from="Liquid/Area2D" to="Liquid/Hazard" method="_on_touched"]

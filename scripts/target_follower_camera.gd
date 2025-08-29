@@ -28,7 +28,9 @@ var _zoom_level : float :
 		
 func _process(delta: float) -> void:
 	var target_position = Vector2(target.position.x, target.position.y);
-	position = lerp(position, target_position, speed);
+	var unscaled_delta:= delta * (1.0 / Engine.time_scale);
+	
+	position = lerp(position, target_position, speed* delta); # * unscaled_delta);
 	
 func _unhandled_input(event):
 	if allow_user_zoom:

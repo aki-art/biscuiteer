@@ -30,18 +30,19 @@ func set_active(active:bool) -> void:
 		return;
 		
 func _on_retract_timer_timeout() -> void:
-	animation_player.play("retract")
+	animation_player.play("extend")
 	extend_timer.start()
 
 func _on_spawn_wait_time_timeout() -> void:
 	if is_extended:
-		retract_timer.start();
-	else:
 		extend_timer.start();
+	else:
+		retract_timer.start();
 
 func start_cycle() -> void:
 	animation_player.play("extend")
 	retract_timer.start()
 	
 func _on_extend_timer_timeout() -> void:
-	start_cycle();
+	animation_player.play("retract")
+	retract_timer.start()

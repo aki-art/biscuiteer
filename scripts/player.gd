@@ -24,6 +24,7 @@ var trying_to_move: bool;
 @onready var land_audio: AudioStreamPlayer2D = $LandAudio
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var damage_particles: CPUParticles2D = $DamageParticles
+@onready var debug_label: Label = $DebugLabel
 
 
 static var control_state : Array[StringName] = ["idle", "running", "jumping", "slapping", "falling"];
@@ -44,9 +45,11 @@ func set_state(new_state: StringName) -> void:
 	state = new_state;
 		
 func _ready() -> void:
-	crumb_wallet.set_count(0);
 	health.on_hurt.connect(_on_hurt);
 	
+func _process(d):
+	
+	debug_label.text = str(state);
 	
 func reset_position() -> void:
 	var start := get_tree().get_first_node_in_group("map_start")
@@ -85,8 +88,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		
 func _physics_process(delta: float) -> void:
 	
-	if Global.game._mode != "platforming" || !can_control():
-		return;
+	var restrained := Global.game._mode != "platforming" || !can_control();
 	
 	if(previous_velocity.y > 0):
 		for index in range(get_slide_collision_count()):
@@ -106,26 +108,27 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 
-	var is_input_jump := Input.is_action_pressed("jump");
-	
-	if is_input_jump:
-		if can_jump || (is_jumping && jump_counter < jump_count_max):
-			_jump();
-	elif is_jumping:
-		_stop_jump()
-
-	elif !can_jump and is_on_floor():
-		can_jump = true
+	if !restrained:
+		var is_input_jump := Input.is_action_pressed("jump");
 		
-	if !is_on_floor() and can_jump and coyote_timer.is_stopped():
-		coyote_timer.start()
+		if is_input_jump:
+			if can_jump || (is_jumping && jump_counter < jump_count_max):
+				_jump();
+		elif is_jumping:
+			_stop_jump()
+
+		elif !can_jump and is_on_floor():
+			can_jump = true
+			
+		if !is_on_floor() and can_jump and coyote_timer.is_stopped():
+			coyote_timer.start()
 
 	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
+	if !restrained && direction:
 		velocity.x = direction * SPEED
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
-	
+
 	trying_to_move = velocity.x != 0;
 	if(trying_to_move):
 		if flip_x && velocity.x > 0:
@@ -135,11 +138,9 @@ func _physics_process(delta: float) -> void:
 			flip_x = true;
 			scale.x *= -1;
 	
-	velocity += force;
-	force *= force_damping;
-	
 	if !is_jumping && !is_on_floor():
-		set_state("falling");
+		if control_state.has(state):
+			set_state("falling");
 	elif state == "falling":
 		land_audio.play();
 		set_state("idle");
@@ -185,3 +186,6 @@ func _on_health_on_hurt(amount: float, fatal: bool, source: StringName, pos: Vec
 		
 	damage_particles.direction = aim;
 	damage_particles.restart();
+	
+	if !fatal:
+		force += (global_position - pos).normalized() * 2;
