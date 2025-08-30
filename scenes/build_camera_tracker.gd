@@ -12,7 +12,8 @@ func _physics_process(delta: float) -> void:
 		
 	var direction := Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down");
 	
-	var next_pos := global_position + (direction * speed * delta);
+	var unscaled_delta:= delta * (1.0 / Engine.time_scale);
+	var next_pos := global_position + (direction * speed * unscaled_delta);
 	if anchor.global_position.distance_to(next_pos) < leash_length:
 		position = next_pos;
 	

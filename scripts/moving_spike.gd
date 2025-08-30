@@ -2,6 +2,7 @@ extends Area2D
 
 @onready var extend_timer: Timer = $ExtendTimer
 @onready var retract_timer: Timer = $RetractTimer
+@onready var spawn_wait_timer: Timer = $SpawnWaitTime
 @onready var animation_player: AnimationPlayer = $AnimationPlayer
 
 @export var extended_time: float;
@@ -14,8 +15,8 @@ func _ready() -> void:
 	extend_timer.wait_time = extended_time;
 	retract_timer.wait_time = retracted_time;
 	if timer_offset > 0:
-		$SpawnWaitTime.wait_time = timer_offset;
-		$SpawnWaitTime.start();
+		spawn_wait_timer.wait_time = timer_offset;
+		spawn_wait_timer.start();
 	
 	else:
 		start_cycle();
@@ -23,7 +24,20 @@ func _ready() -> void:
 		
 	if !is_extended:
 		animation_player.play("idle_retracted")
+	
+	Events.on_game_mode_changed.connect(_on_game_mode_changed);
 		
+func _on_game_mode_changed(mode: StringName):
+	var is_paused := mode == "building";
+	extend_timer.paused = is_paused;
+	retract_timer.paused = is_paused;
+	spawn_wait_timer.paused = is_paused;
+	
+	if is_paused:
+		animation_player.pause()
+	else:
+		animation_player.play(animation_player.assigned_animation)
+	
 
 func set_active(active:bool) -> void:
 	if is_active == active:

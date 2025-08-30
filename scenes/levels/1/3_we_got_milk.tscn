@@ -1,0 +1,140 @@
+[gd_scene load_steps=11 format=3 uid="uid://bb81fuibrkwkw"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_33s8n"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_3p6gi"]
+[ext_resource type="Texture2D" uid="uid://l6lt46lorp3" path="res://assets/terrain_sets/candy/fill.png" id="2_7yh5i"]
+[ext_resource type="Script" uid="uid://fwjpl32k4dgr" path="res://scripts/hazard.gd" id="3_7yh5i"]
+[ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="4_ql5g2"]
+[ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="5_usfgk"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="6_4ndid"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="7_b80rr"]
+[ext_resource type="Texture2D" uid="uid://d1d3ufgfltkdu" path="res://assets/terrain_sets/candy/candy_bg_blur.png" id="8_3p6gi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wtljo"]
+size = Vector2(176, 256)
+
+[node name="1" type="Node" groups=["level"]]
+script = ExtResource("1_33s8n")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+position = Vector2(224, 224)
+collision_layer = 4
+collision_mask = 18
+
+[node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+scale = Vector2(2.21949, 2.42257)
+texture = ExtResource("2_7yh5i")
+texture_offset = Vector2(40, 0)
+texture_scale = Vector2(2.21949, 2.21949)
+polygon = PackedVector2Array(-382.07, -165.114, -209.057, -244.369, 36.0443, -270.787, 938, -271, 938, -304, 670.424, -303.81, 670.424, -376.46, 901.108, -449.11, 958.779, -495.342, 1059.7, -548.178, 1059.7, -858.592, -317, -860)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(-832, -656, 2080, -656, 2080, -736, 1488, -752, 1488, -912, 2000, -1088, 2128, -1200, 2400, -1360, 2416, -2080, -704, -2080)
+
+[node name="Left" type="Polygon2D" parent="."]
+texture = ExtResource("2_7yh5i")
+polygon = PackedVector2Array(-1016, 2216, -120, 2312, 672, 2096, 704, 496, 616, 496, 584, 768, 352, 864, 88, 864, -104, 784, -112, 448, -736, 448, -584, -200, -232, -368, 424, -504, -416, -1352, -1136, -1344)
+
+[node name="FitCollider" parent="Left" instance=ExtResource("4_ql5g2")]
+override_existing = null
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Left"]
+visible = false
+collision_layer = 4
+collision_mask = 18
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Left/StaticBody2D"]
+polygon = PackedVector2Array(-1016, 2216, -120, 2312, 672, 2096, 704, 496, 616, 496, 584, 768, 352, 864, 88, 864, -104, 784, -112, 448, -736, 448, -584, -200, -232, -368, 424, -504, -416, -1352, -1136, -1344)
+
+[node name="RigidBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 18
+
+[node name="Polygon2D3" type="Polygon2D" parent="RigidBody2D"]
+scale = Vector2(2.21949, 2.42257)
+texture = ExtResource("2_7yh5i")
+texture_scale = Vector2(2.21949, 2.42257)
+polygon = PackedVector2Array(245.101, -59.441, 617.768, -59.441, 634.38, -26.4182, 684.842, 26.4182, 1016.45, 26.4182, 1095.75, -13.2091, 1131.79, -59.441, 1131.79, -865.197, 1720, -864, 1720, 800, 245.101, 799.151, 245.101, 151.905, 374.861, 151.905, 374.861, 79.2547, 245.101, 79.2547)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RigidBody2D"]
+visible = false
+polygon = PackedVector2Array(544, 1952, 544, 368, 832, 368, 832, 192, 544, 192, 544, -144, 1376, -144, 1408, -64, 1520, 64, 2256, 64, 2432, -32, 2512, -144, 2512, -2096, 3824, -2080, 3808, 1936)
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_3p6gi")]
+position = Vector2(-536, 448)
+
+[node name="Liquid" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(1856, -32)
+polygon = PackedVector2Array(-480, -80, 672, -80, 672, 112, -480, 112)
+
+[node name="Hazard" type="Node2D" parent="Liquid"]
+script = ExtResource("3_7yh5i")
+metadata/_custom_type_script = "uid://fwjpl32k4dgr"
+
+[node name="Area2D" type="Area2D" parent="Liquid"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Liquid/Area2D"]
+polygon = PackedVector2Array(-480, -80, 672, -80, 672, 112, -480, 112)
+
+[node name="Liquid2" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(96, 648)
+polygon = PackedVector2Array(-480, -80, 672, -80, 640, 800, -504, 864)
+
+[node name="Hazard" type="Node2D" parent="Liquid2"]
+script = ExtResource("3_7yh5i")
+metadata/_custom_type_script = "uid://fwjpl32k4dgr"
+
+[node name="FitCollider" parent="Liquid2" instance=ExtResource("4_ql5g2")]
+override_existing = null
+
+[node name="Area2D" type="Area2D" parent="Liquid2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Liquid2/Area2D"]
+polygon = PackedVector2Array(-480, -80, 672, -80, 672, 112, -480, 112)
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(3176, 1464)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-848, -640)
+
+[node name="CrumbsBag" parent="." instance=ExtResource("5_usfgk")]
+position = Vector2(688, 352)
+
+[node name="Void" parent="." instance=ExtResource("6_4ndid")]
+position = Vector2(344, 968)
+
+[node name="Warper" parent="." instance=ExtResource("7_b80rr")]
+position = Vector2(1816, -584)
+destination = "res://scenes/levels/1/4_tunnel_of_death.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+position = Vector2(8, -40)
+shape = SubResource("RectangleShape2D_wtljo")
+
+[node name="far_bg" type="CanvasLayer" parent="."]
+layer = -30
+follow_viewport_enabled = true
+follow_viewport_scale = 0.7
+
+[node name="Polygon2D" type="Polygon2D" parent="far_bg"]
+texture_repeat = 2
+position = Vector2(84.2857, 88.5714)
+color = Color(0.560742, 0.631237, 0.622418, 1)
+texture = ExtResource("8_3p6gi")
+texture_scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-2788.57, -3954.29, 5714.29, -3885.71, 6258.57, 2368.57, -3787.14, 2894.29)
+
+[connection signal="body_entered" from="Liquid/Area2D" to="Liquid/Hazard" method="_on_touched"]
+[connection signal="body_entered" from="Liquid2/Area2D" to="Liquid2/Hazard" method="_on_touched"]

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cnb6g22piwx2h"
+path="res://.godot/imported/airy ambience marcelofg55.wav-47ee36a25d8ccfe59b7721ac55465c6b.sample"
+
+[deps]
+
+source_file="res://assets/audio/airy ambience marcelofg55.wav"
+dest_files=["res://.godot/imported/airy ambience marcelofg55.wav-47ee36a25d8ccfe59b7721ac55465c6b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=-2
+compress/mode=2

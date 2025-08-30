@@ -2,9 +2,10 @@
 extends Node
 class_name FitCollider
 
-@export_tool_button("Create") var hello_action = hello
+@export_tool_button("Create") var hello_action = fit
+@export var override_existing : bool = true;
 
-func hello():
+func fit():
 	var parent = get_parent() as Polygon2D
 	
 	if !parent:
@@ -18,7 +19,7 @@ func match_all(node: Node, points: PackedVector2Array) -> void:
 		var collision := child as CollisionPolygon2D;
 		
 		if collision:
-			if collision.polygon == null || collision.polygon.size() == 0:
+			if collision.polygon == null || collision.polygon.size() == 0 || override_existing:
 				collision.polygon = points.duplicate()
 			
 		else:

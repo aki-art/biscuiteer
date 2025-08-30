@@ -1,4 +1,4 @@
-class_name  ToolBotton
+class_name  ToolButton
 extends Button
 
 @export var tool:String;

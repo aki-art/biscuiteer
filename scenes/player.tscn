@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://cstxbo85ymbf4"]
+[gd_scene load_steps=62 format=3 uid="uid://cstxbo85ymbf4"]
 
 [ext_resource type="Script" uid="uid://c02377ero2ku7" path="res://scripts/player.gd" id="1_g2els"]
 [ext_resource type="Texture2D" uid="uid://b3r6myaip0d0a" path="res://assets/player_placeholder.png" id="2_qhqgy"]
@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://bi8lip4dwtn1q" path="res://scripts/crumb_wallet.gd" id="4_dqkch"]
 [ext_resource type="Script" uid="uid://dyjrqrt2jmfnx" path="res://scripts/varied_audio_stream_player_2d.gd" id="5_tuyoq"]
 [ext_resource type="AudioStream" uid="uid://cj7teuyfr2ohg" path="res://assets/audio/player_hurt.wav" id="6_fjrip"]
-[ext_resource type="AudioStream" uid="uid://dvdbd84ggykio" path="res://assets/audio/174633__altfuture__hitting-wood.wav" id="7_ke2ow"]
+[ext_resource type="AudioStream" uid="uid://cyl7kkul5a7ha" path="res://assets/audio/555620__fmaudio__ruffling-paper-and-tapping-desk-twice-like-newsreader.wav" id="7_dt7fs"]
 [ext_resource type="AudioStream" uid="uid://c8ha5kxsrkj5u" path="res://assets/audio/step2.wav" id="8_4ni07"]
 [ext_resource type="Texture2D" uid="uid://cpspy2wifjt3g" path="res://assets/animations/player/skirt_back_0.png" id="8_a38lo"]
 [ext_resource type="AudioStream" uid="uid://67mnq6208mvf" path="res://assets/audio/452621__kyles__finger-tap-table-counter-wood-various.wav" id="8_smehm"]
@@ -28,10 +28,11 @@
 [ext_resource type="Texture2D" uid="uid://cbijdm22o5j7a" path="res://assets/smoke_particle.png" id="24_l71n6"]
 [ext_resource type="Texture2D" uid="uid://dc7wfvuo2rpoj" path="res://assets/damage_crumb.png" id="26_ujl30"]
 [ext_resource type="AudioStream" uid="uid://ds73djls0juh2" path="res://assets/audio/350770__fisu__slaps_a.wav" id="28_pf23h"]
+[ext_resource type="Texture2D" uid="uid://bok33jquu8p71" path="res://assets/light.png" id="29_dt7fs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
-radius = 35.0
-height = 90.0
+radius = 17.0
+height = 82.79
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_dqkch"]
 radius = 52.0096
@@ -14888,7 +14889,6 @@ tracks/198/use_blend = true
 
 [sub_resource type="Animation" id="Animation_88tbc"]
 length = 0.495
-loop_mode = 1
 step = 0.01
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -17307,16 +17307,13 @@ animation = &"scml/jump"
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_l71n6"]
 animation = &"scml/hit"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ke2ow"]
-animation = &"scml/die"
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ujl30"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_31cv2"]
 animation = &"scml/jump"
 
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_pf23h"]
-animation = &"scml/die"
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wnwbv"]
+animation = &"scml/slap"
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hax0n"]
 animation = &"scml/idle"
@@ -17366,7 +17363,7 @@ input_3/name = "hurt"
 input_3/auto_advance = false
 input_3/break_loop_at_end = false
 input_3/reset = true
-input_4/name = "state_5"
+input_4/name = "slap"
 input_4/auto_advance = false
 input_4/break_loop_at_end = false
 input_4/reset = true
@@ -17380,7 +17377,7 @@ input_6/break_loop_at_end = false
 input_6/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_t4otl"]
-graph_offset = Vector2(-649.899, 89.8248)
+graph_offset = Vector2(-747.458, 362.674)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_hax0n")
 nodes/Animation/position = Vector2(-260, -80)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_a38lo")
@@ -17389,14 +17386,12 @@ nodes/Animation/position = Vector2(-260, -80)
 "nodes/Animation 3/position" = Vector2(-660, 180)
 "nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_l71n6")
 "nodes/Animation 4/position" = Vector2(-1360, 240)
-"nodes/Animation 5/node" = SubResource("AnimationNodeAnimation_ke2ow")
-"nodes/Animation 5/position" = Vector2(-720, 360)
 "nodes/Animation 6/node" = SubResource("AnimationNodeAnimation_ujl30")
 "nodes/Animation 6/position" = Vector2(-1400, 420)
 "nodes/Animation 7/node" = SubResource("AnimationNodeAnimation_31cv2")
 "nodes/Animation 7/position" = Vector2(-180, 480)
-"nodes/Animation 8/node" = SubResource("AnimationNodeAnimation_pf23h")
-"nodes/Animation 8/position" = Vector2(-1060, 580)
+"nodes/Animation 9/node" = SubResource("AnimationNodeAnimation_wnwbv")
+"nodes/Animation 9/position" = Vector2(-700, 500)
 nodes/OneShot/node = SubResource("AnimationNodeOneShot_4ni07")
 nodes/OneShot/position = Vector2(-1100, 280)
 nodes/StateMachine/node = SubResource("AnimationNodeStateMachine_md1ol")
@@ -17404,11 +17399,15 @@ nodes/StateMachine/position = Vector2(-833.654, 698.772)
 nodes/output/position = Vector2(640, 120)
 nodes/state/node = SubResource("AnimationNodeTransition_l71n6")
 nodes/state/position = Vector2(220, 140)
-node_connections = [&"OneShot", 0, &"Animation 4", &"OneShot", 1, &"Animation 6", &"output", 0, &"state", &"state", 0, &"Animation", &"state", 1, &"Animation 2", &"state", 2, &"Animation 3", &"state", 3, &"OneShot", &"state", 4, &"Animation 5", &"state", 5, &"StateMachine", &"state", 6, &"Animation 7"]
+node_connections = [&"OneShot", 0, &"Animation 4", &"OneShot", 1, &"Animation 6", &"output", 0, &"state", &"state", 0, &"Animation", &"state", 1, &"Animation 2", &"state", 2, &"Animation 3", &"state", 3, &"OneShot", &"state", 5, &"StateMachine", &"state", 6, &"Animation 7"]
 
 [sub_resource type="Curve" id="Curve_31cv2"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_dt7fs"]
+blend_mode = 1
+light_mode = 1
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 2
@@ -17416,6 +17415,7 @@ collision_mask = 5
 floor_snap_length = 5.0
 script = ExtResource("1_g2els")
 force_damping = 0.95
+max_falling_speed = 900.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -17426,8 +17426,7 @@ scale = Vector2(0.4, 0.4)
 texture = ExtResource("2_qhqgy")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
-position = Vector2(0, -48)
+position = Vector2(0, -42)
 shape = SubResource("CapsuleShape2D_3vyb7")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
@@ -17436,8 +17435,8 @@ one_shot = true
 
 [node name="Health" type="Node" parent="." node_paths=PackedStringArray("iframes_timer")]
 script = ExtResource("3_qhqgy")
-max_hp = 10
-current_hp = 10
+max_hp = 12
+current_hp = 5
 iframes_timer = NodePath("../IFramesTimer")
 metadata/_custom_type_script = "uid://bex2gjmkty1q1"
 
@@ -17447,7 +17446,6 @@ one_shot = true
 
 [node name="CrumbWallet" type="Node" parent="."]
 script = ExtResource("4_dqkch")
-crumbs = 999
 metadata/_custom_type_script = "uid://bi8lip4dwtn1q"
 
 [node name="ZoneChecker" type="Area2D" parent="."]
@@ -17465,9 +17463,10 @@ streams = Array[AudioStream]([ExtResource("6_fjrip")])
 metadata/_custom_type_script = "uid://dyjrqrt2jmfnx"
 
 [node name="LandAudio" type="AudioStreamPlayer2D" parent="."]
-stream = ExtResource("7_ke2ow")
+stream = ExtResource("7_dt7fs")
 
 [node name="FootStepsAudio" type="AudioStreamPlayer2D" parent="."]
+z_index = 1
 pitch_scale = 1.3
 
 [node name="entity_000" type="Node2D" parent="."]
@@ -17635,12 +17634,12 @@ rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="bone_001" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
 position = Vector2(30.1266, 0)
-rotation = -0.31235
+rotation = -0.307553
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="bone_002" type="Bone2D" parent="entity_000/Skeleton/bone_000/bone_001"]
 position = Vector2(29.9752, -0.244293)
-rotation = 0.17279
+rotation = 0.162909
 scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
@@ -17658,7 +17657,7 @@ flip_v = true
 
 [node name="bone_003" type="Bone2D" parent="entity_000/Skeleton/bone_000/bone_001"]
 position = Vector2(18.6413, 16.3505)
-rotation = 1.29139
+rotation = 1.28402
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17692,8 +17691,9 @@ offset = Vector2(-11, -14)
 flip_v = true
 
 [node name="bone_004" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(20.2532, 10.7282)
-rotation = 2.99199
+position = Vector2(20.2532, 10.5888)
+rotation = 2.98178
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17709,8 +17709,8 @@ offset = Vector2(-25, -27)
 flip_v = true
 
 [node name="bone_005" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(16.962, -10.1483)
-rotation = -2.98922
+position = Vector2(16.962, -10.0164)
+rotation = -2.98573
 scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
@@ -17727,7 +17727,7 @@ offset = Vector2(-10, -29)
 flip_v = true
 
 [node name="bone_006" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-7.59494, 5.50907)
+position = Vector2(-7.59494, 5.43749)
 rotation = 3.03593
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
@@ -17758,8 +17758,8 @@ offset = Vector2(-11, -32)
 flip_v = true
 
 [node name="bone_008" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-7.59494, -6.66886)
-rotation = -2.98155
+position = Vector2(-7.59494, -6.58221)
+rotation = -2.97896
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="bone_009" type="Bone2D" parent="entity_000/Skeleton/bone_000/bone_008"]
@@ -17789,8 +17789,8 @@ offset = Vector2(-11, -32)
 flip_v = true
 
 [node name="bone_010" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-4.3038, 12.1779)
-rotation = 1.05413
+position = Vector2(-4.3038, 12.0197)
+rotation = 1.04438
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17805,7 +17805,7 @@ offset = Vector2(-83, -26)
 flip_v = true
 
 [node name="bone_011" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-2.27848, -0.289951)
+position = Vector2(-2.27848, -0.286184)
 rotation = 3.12894
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
@@ -17949,7 +17949,24 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 6
 text = "test"
 
+[node name="SlapCooldownTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
+[node name="HoneyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[node name="Light" type="Sprite2D" parent="."]
+modulate = Color(0.339243, 0.372796, 0.428369, 1)
+z_index = -5
+material = SubResource("CanvasItemMaterial_dt7fs")
+position = Vector2(4, -58)
+scale = Vector2(3.28906, 3.10156)
+texture = ExtResource("29_dt7fs")
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="on_hurt" from="Health" to="." method="_on_health_on_hurt"]
 [connection signal="area_entered" from="ZoneChecker" to="." method="_on_zone_checker_area_entered"]
 [connection signal="animation_finished" from="AnimationTree" to="." method="_on_animation_tree_animation_finished"]
+[connection signal="timeout" from="HoneyTimer" to="." method="_on_honey_timer_timeout"]

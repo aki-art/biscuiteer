@@ -12,6 +12,7 @@ signal on_hurt(amount: float, fatal: bool, source: StringName, position: Vector2
 @export var current_hp: int;
 @export var is_dead : bool;
 @export var iframes_timer: Timer;
+@export var invulnerable: bool;
 
 func is_full_health() -> bool: 
 	return current_hp >= max_hp;
@@ -46,6 +47,9 @@ func set_hp(hp:int, trigger_event:bool = true) -> int:
 
 func damage(amount: int, source: StringName, position:Vector2) -> void:
 	
+	if invulnerable:
+		return;
+		
 	if iframes_timer && !iframes_timer.is_stopped():
 		return;
 		

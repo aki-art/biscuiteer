@@ -1,0 +1,162 @@
+[gd_scene load_steps=15 format=3 uid="uid://uj5ddc5gyjju"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_4layw"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_j6gk5"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="3_lglk7"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="3_llxhj"]
+[ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="4_8qwwq"]
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="5_t1j2o"]
+[ext_resource type="PackedScene" uid="uid://dscchu0ycqsd5" path="res://scenes/bee.tscn" id="6_j1ojc"]
+[ext_resource type="Script" uid="uid://bxls3ek7lpvw" path="res://scripts/liquid.gd" id="7_j1ojc"]
+[ext_resource type="Script" uid="uid://fwjpl32k4dgr" path="res://scripts/hazard.gd" id="7_j6gk5"]
+[ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="7_lglk7"]
+[ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="8_llxhj"]
+[ext_resource type="PackedScene" uid="uid://cvttvxfmut0tg" path="res://scenes/honey_drop.tscn" id="10_8qwwq"]
+[ext_resource type="PackedScene" uid="uid://5pqlyngu6ej2" path="res://scenes/honey_drip.tscn" id="11_t1j2o"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjmoc"]
+size = Vector2(125, 205)
+
+[node name="3" type="Node" groups=["level"]]
+script = ExtResource("1_4layw")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+metadata/_edit_horizontal_guides_ = [-432.0]
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_j6gk5")]
+position = Vector2(96, -32)
+
+[node name="Warper" parent="." instance=ExtResource("3_lglk7")]
+position = Vector2(656, -336)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+position = Vector2(32, 16)
+shape = SubResource("RectangleShape2D_cjmoc")
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(2416, 1840)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-496, -240)
+
+[node name="Void" parent="." instance=ExtResource("3_llxhj")]
+position = Vector2(320, 8928)
+
+[node name="HeartPickup" parent="." instance=ExtResource("4_8qwwq")]
+position = Vector2(2016, -16)
+
+[node name="PlatformPolygon3" type="Polygon2D" parent="."]
+position = Vector2(132.659, 552.612)
+scale = Vector2(3.2, 2.88)
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(24.4211, -190.372, 24.4211, 40.136, 59.5088, 74.0343, 59.5088, 155.39, 171.789, 175.729, 185.825, 148.611, 319.158, 141.831, 319.158, 175.729, 410.386, 175.729, 410.386, 141.831, 529.684, 114.712, 529.684, -47.9996, 480.561, -109.017, 480.561, -373.423, 410.386, -427.661, 410.386, -671.728, 10.386, -678.508, 17.4035, -780.203, 634.947, -814.101, 634.947, -658.169, 627.93, 318.102, -256.281, 311.323, -263.298, -190.372)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlatformPolygon3"]
+collision_layer = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformPolygon3/StaticBody2D"]
+polygon = PackedVector2Array(24.4211, -190.372, 24.4211, 40.136, 59.5088, 74.0343, 59.5088, 155.39, 171.789, 175.729, 185.825, 148.611, 319.158, 141.831, 319.158, 175.729, 410.386, 175.729, 410.386, 141.831, 529.684, 114.712, 529.684, -47.9996, 480.561, -109.017, 480.561, -373.423, 410.386, -427.661, 410.386, -671.728, 10.386, -678.508, 17.4035, -780.203, 634.947, -814.101, 634.947, -658.169, 627.93, 318.102, -256.281, 311.323, -263.298, -190.372)
+
+[node name="FitCollider" type="Node" parent="PlatformPolygon3"]
+script = ExtResource("5_t1j2o")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="PlatformPolygon" type="Polygon2D" parent="."]
+position = Vector2(132.659, 552.612)
+scale = Vector2(3.2, 2.88)
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(-101.895, -176.813, -101.895, -339.525, 108.632, -319.186, 108.632, -176.813, 94.5965, -142.915, 94.5965, -34.4402, 164.772, 19.797, 171.789, 60.475, 248.982, 60.475, 248.982, 33.3564, 312.14, 26.5767, 326.175, 60.475, 431.439, -0.541946, 417.404, -68.3386, 382.316, -75.1182, 382.316, -251.389, 340.211, -271.728, 305.123, -271.728, 305.123, -251.389, 340.211, -251.389, 340.211, -68.3386, 319.158, -20.8809, 157.754, -54.7792, 157.754, -95.4572, 136.702, -115.796, 140.951, -251.264, 234.947, -251.389, 234.947, -271.728, 141.578, -271.27, 143.719, -339.525, 185.825, -380.203, 185.825, -739.525, -319.439, -746.305, -326.456, -163.254)
+
+[node name="FitCollider2" type="Node" parent="PlatformPolygon"]
+script = ExtResource("5_t1j2o")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlatformPolygon"]
+collision_layer = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformPolygon/StaticBody2D"]
+polygon = PackedVector2Array(-101.895, -176.813, -101.895, -339.525, 108.632, -319.186, 108.632, -176.813, 94.5965, -142.915, 94.5965, -34.4402, 164.772, 19.797, 171.789, 60.475, 248.982, 60.475, 248.982, 33.3564, 312.14, 26.5767, 326.175, 60.475, 431.439, -0.541946, 417.404, -68.3386, 382.316, -75.1182, 382.316, -251.389, 340.211, -271.728, 305.123, -271.728, 305.123, -251.389, 340.211, -251.389, 340.211, -68.3386, 319.158, -20.8809, 157.754, -54.7792, 157.754, -95.4572, 136.702, -115.796, 140.951, -251.264, 234.947, -251.389, 234.947, -271.728, 141.578, -271.27, 143.719, -339.525, 185.825, -380.203, 185.825, -739.525, -319.439, -746.305, -326.456, -163.254)
+
+[node name="HeartPickup2" parent="." instance=ExtResource("4_8qwwq")]
+position = Vector2(896, 432)
+
+[node name="CrumbsBag" parent="." instance=ExtResource("7_lglk7")]
+position = Vector2(1408, 336)
+
+[node name="Liquid" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(384, 992)
+scale = Vector2(1.40351, 1.22034)
+color = Color(1, 0.636, 0.16, 1)
+polygon = PackedVector2Array(-48, 0, 272, 0, 208, 64, -48, 32)
+script = ExtResource("7_j1ojc")
+
+[node name="Hazard" type="Node2D" parent="Liquid"]
+script = ExtResource("7_j6gk5")
+metadata/_custom_type_script = "uid://fwjpl32k4dgr"
+
+[node name="Area2D" type="Area2D" parent="Liquid"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Liquid/Area2D"]
+polygon = PackedVector2Array(-48, 0, 272, 0, 208, 64, -48, 32)
+
+[node name="FitCollider" parent="Liquid" instance=ExtResource("8_llxhj")]
+override_existing = null
+
+[node name="Liquid2" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(1152, 992)
+scale = Vector2(1.40351, 1.22034)
+color = Color(1, 0.636, 0.16, 1)
+polygon = PackedVector2Array(-48, 0, 272, 0, 208, 64, -32, 64)
+script = ExtResource("7_j1ojc")
+
+[node name="Hazard" type="Node2D" parent="Liquid2"]
+script = ExtResource("7_j6gk5")
+metadata/_custom_type_script = "uid://fwjpl32k4dgr"
+
+[node name="Area2D" type="Area2D" parent="Liquid2"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Liquid2/Area2D"]
+polygon = PackedVector2Array(-48, 0, 272, 0, 208, 64, -32, 64)
+
+[node name="FitCollider" parent="Liquid2" instance=ExtResource("8_llxhj")]
+override_existing = null
+
+[node name="Bee3" parent="." instance=ExtResource("6_j1ojc")]
+position = Vector2(992, -16)
+
+[node name="HoneyDrop" parent="." instance=ExtResource("10_8qwwq")]
+position = Vector2(-64, -208)
+
+[node name="HoneyDrip" parent="." instance=ExtResource("11_t1j2o")]
+z_index = -1
+position = Vector2(576, 544)
+rotation = 0.465023
+
+[node name="HoneyDrip3" parent="." instance=ExtResource("11_t1j2o")]
+z_index = -1
+position = Vector2(1717, 299)
+rotation = 0.678859
+drop_activation = 0.2
+
+[node name="HoneyDrip4" parent="." instance=ExtResource("11_t1j2o")]
+z_index = -1
+position = Vector2(1584, -576)
+rotation = 0.678859
+
+[node name="HoneyDrip2" parent="." instance=ExtResource("11_t1j2o")]
+z_index = -1
+position = Vector2(1296, 656)
+rotation = -0.29386
+
+[connection signal="body_entered" from="Liquid/Area2D" to="Liquid/Hazard" method="_on_touched"]
+[connection signal="body_entered" from="Liquid2/Area2D" to="Liquid2/Hazard" method="_on_touched"]

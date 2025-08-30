@@ -1,0 +1,135 @@
+[gd_scene load_steps=10 format=3 uid="uid://csiv0h8i4qrh8"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_1ou1w"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_i6khb"]
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="3_0agjf"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="4_cv04v"]
+[ext_resource type="PackedScene" uid="uid://bkd6kvsr43i6h" path="res://scenes/spikes.tscn" id="5_xvwep"]
+[ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="6_dbx6w"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="7_i6khb"]
+[ext_resource type="Texture2D" uid="uid://d1d3ufgfltkdu" path="res://assets/terrain_sets/candy/candy_bg_blur.png" id="8_0agjf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0agjf"]
+size = Vector2(621, 213)
+
+[node name="3" type="Node" groups=["level"]]
+script = ExtResource("1_1ou1w")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_i6khb")]
+position = Vector2(96, -32)
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(2864, 8352)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-1664, -688)
+
+[node name="PlatformPolygon" type="Polygon2D" parent="."]
+position = Vector2(120.32, 449.279)
+scale = Vector2(2.28, 2.36)
+color = Color(0.466667, 0.376471, 0.286275, 1)
+polygon = PackedVector2Array(-55.4035, -191.644, 288.895, -196.728, 284.07, 3348.61, 522.667, 3348.61, 529.684, -190.372, 599.86, -190.372, 606.877, -366.644, 431.439, -414.101, -52.7719, -420.881, -45.7544, -312.406, -249.263, -319.186, -228.211, -122.576, -740.491, -156.474, -677.333, -759.864, 1441.96, -746.305, 1470.04, 3457.09, 333.193, 3836.75, -754.526, 3477.42, -740.491, -190.372)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="PlatformPolygon"]
+collision_layer = 4
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformPolygon/StaticBody2D"]
+polygon = PackedVector2Array(-55.4035, -191.644, 288.895, -196.728, 284.07, 3348.61, 522.667, 3348.61, 529.684, -190.372, 599.86, -190.372, 606.877, -366.644, 431.439, -414.101, -52.7719, -420.881, -45.7544, -312.406, -249.263, -319.186, -228.211, -122.576, -740.491, -156.474, -677.333, -759.864, 1441.96, -746.305, 1470.04, 3457.09, 333.193, 3836.75, -754.526, 3477.42, -740.491, -190.372)
+
+[node name="FitCollider" type="Node" parent="PlatformPolygon"]
+script = ExtResource("3_0agjf")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="Void" parent="." instance=ExtResource("4_cv04v")]
+position = Vector2(320, 8928)
+
+[node name="SpikeIsland" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland2" type="Polygon2D" parent="."]
+position = Vector2(176, -720)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland2" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland3" type="Polygon2D" parent="."]
+position = Vector2(-160, -1136)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland3" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland4" type="Polygon2D" parent="."]
+position = Vector2(176, 848)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland4" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland5" type="Polygon2D" parent="."]
+position = Vector2(-160, 1824)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland5" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland6" type="Polygon2D" parent="."]
+position = Vector2(-32, 2896)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland6" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland7" type="Polygon2D" parent="."]
+position = Vector2(160, 3840)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland7" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland8" type="Polygon2D" parent="."]
+position = Vector2(-192, 4816)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland8" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="SpikeIsland10" type="Polygon2D" parent="."]
+position = Vector2(176, 4816)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland10" instance=ExtResource("5_xvwep")]
+position = Vector2(1040, 1680)
+
+[node name="HeartPickup" parent="." instance=ExtResource("6_dbx6w")]
+position = Vector2(1408, -16)
+
+[node name="Warper" parent="." instance=ExtResource("7_i6khb")]
+position = Vector2(1024, 8224)
+destination = "res://scenes/levels/2/1_beentroduction.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+position = Vector2(25.5, 53.5)
+shape = SubResource("RectangleShape2D_0agjf")
+
+[node name="far_bg" type="CanvasLayer" parent="."]
+layer = -30
+follow_viewport_enabled = true
+follow_viewport_scale = 0.7
+
+[node name="Polygon2D" type="Polygon2D" parent="far_bg"]
+texture_repeat = 2
+position = Vector2(-457.143, 1668.57)
+color = Color(0.560742, 0.631237, 0.622418, 1)
+texture = ExtResource("8_0agjf")
+texture_scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-2788.57, -3954.29, 5714.29, -3885.71, 5760, 9714.29, -3474.29, 9074.29)

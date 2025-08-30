@@ -13,6 +13,7 @@ func start_level(player: Player) -> void:
 		printerr("multiple start markers!");
 	
 	player.position = start_markers[-1].position;
+	player.set_flip(start_markers[-1].facing_left);
 	
 	
 	var camera := get_viewport().get_camera_2d();

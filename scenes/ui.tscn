@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://dkgjh0su8kto5"]
+[gd_scene load_steps=46 format=3 uid="uid://dkgjh0su8kto5"]
 
 [ext_resource type="Theme" uid="uid://bjbx742eqigem" path="res://assets/ui_theme/cookie_theme.tres" id="1_41akx"]
 [ext_resource type="PackedScene" uid="uid://d1jgcouix3q5x" path="res://scenes/tool_button.tscn" id="1_nt7q6"]
@@ -8,7 +8,6 @@
 [ext_resource type="Texture2D" uid="uid://bojdaimxhndun" path="res://assets/tool_button_bg_c.png" id="5_7dvkv"]
 [ext_resource type="Script" uid="uid://b1404v11r8lvd" path="res://scripts/hearts.gd" id="5_8dubc"]
 [ext_resource type="Texture2D" uid="uid://cixuj1uiwix3" path="res://assets/health_bg.png" id="5_ktti3"]
-[ext_resource type="Texture2D" uid="uid://b8cenxs6py166" path="res://assets/heart.png" id="5_wm3ai"]
 [ext_resource type="Script" uid="uid://cjtg2datmv8m3" path="res://scripts/tool_button.gd" id="6_vdcm2"]
 [ext_resource type="Script" uid="uid://2xwxcq5qpj6k" path="res://scripts/platform.gd" id="7_catpy"]
 [ext_resource type="Texture2D" uid="uid://dg7xafwc4j0y5" path="res://assets/biscuit_middle.png" id="8_41akx"]
@@ -263,6 +262,7 @@ scale = Vector2(0.66, 0.66)
 texture = ExtResource("8_gglip")
 
 [node name="GumDropButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
+visible = false
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
 offset_left = 185.0
@@ -308,6 +308,7 @@ theme_override_font_sizes/normal_font_size = 14
 text = "x 12"
 
 [node name="CrumblyButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
+visible = false
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
 offset_left = 103.0
@@ -343,14 +344,14 @@ offset_bottom = 119.0
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("8_gglip")
 
-[node name="CrumblyButton2" type="Button" parent="BottomLeftHUD/ToolButtons"]
+[node name="RemoveButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
+process_mode = 3
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 0
-offset_left = 268.0
-offset_top = 571.0
-offset_right = 364.0
-offset_bottom = 667.0
-scale = Vector2(0.66, 0.66)
+offset_left = 103.0
+offset_top = 510.0
+offset_right = 199.0
+offset_bottom = 606.0
 tooltip_text = "Build a basic platform.
 Costs 1 crumb per segment."
 focus_mode = 0
@@ -358,11 +359,10 @@ icon = ExtResource("18_ukrhx")
 flat = true
 expand_icon = true
 script = ExtResource("6_vdcm2")
-tool = "SpawnerTool"
-data = SubResource("Resource_mgb8n")
+tool = "RemoverTool"
 metadata/_custom_type_script = "uid://cjtg2datmv8m3"
 
-[node name="TextureRect" type="TextureRect" parent="BottomLeftHUD/ToolButtons/CrumblyButton2"]
+[node name="TextureRect" type="TextureRect" parent="BottomLeftHUD/ToolButtons/RemoveButton"]
 layout_mode = 0
 offset_left = 12.0
 offset_top = 6.0
@@ -371,7 +371,7 @@ offset_bottom = 82.0
 texture = ExtResource("22_0tsab")
 expand_mode = 1
 
-[node name="TextureRect2" type="TextureRect" parent="BottomLeftHUD/ToolButtons/CrumblyButton2"]
+[node name="TextureRect2" type="TextureRect" parent="BottomLeftHUD/ToolButtons/RemoveButton"]
 visible = false
 layout_mode = 0
 offset_left = 32.0
@@ -424,65 +424,14 @@ offset_bottom = 100.0
 texture = ExtResource("5_ktti3")
 expand_mode = 1
 
-[node name="Hearts" type="HBoxContainer" parent="TopLeftHUD"]
+[node name="Hearts" type="HFlowContainer" parent="TopLeftHUD"]
 layout_mode = 0
 offset_left = 32.0
 offset_top = 14.0
-offset_right = 424.0
-offset_bottom = 78.0
+offset_right = 269.0
+offset_bottom = 232.0
+last_wrap_alignment = 1
 script = ExtResource("5_8dubc")
-
-[node name="Control" type="Control" parent="TopLeftHUD/Hearts"]
-custom_minimum_size = Vector2(52, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control"]
-clip_contents = true
-layout_mode = 2
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("5_wm3ai")
-
-[node name="Control2" type="Control" parent="TopLeftHUD/Hearts"]
-custom_minimum_size = Vector2(52, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control2"]
-clip_contents = true
-layout_mode = 2
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("5_wm3ai")
-
-[node name="Control3" type="Control" parent="TopLeftHUD/Hearts"]
-custom_minimum_size = Vector2(52, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control3"]
-clip_contents = true
-layout_mode = 2
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("5_wm3ai")
-
-[node name="Control4" type="Control" parent="TopLeftHUD/Hearts"]
-custom_minimum_size = Vector2(52, 0)
-layout_mode = 2
-
-[node name="TextureRect" type="TextureRect" parent="TopLeftHUD/Hearts/Control4"]
-clip_contents = true
-layout_mode = 2
-offset_right = 128.0
-offset_bottom = 128.0
-scale = Vector2(0.4, 0.4)
-size_flags_stretch_ratio = 0.0
-texture = ExtResource("5_wm3ai")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 visible = false
@@ -497,4 +446,18 @@ texture = ExtResource("8_cgfq5")
 expand_mode = 2
 metadata/_edit_lock_ = true
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(120, 0)
+layout_mode = 0
+offset_left = 1023.0
+offset_top = 583.0
+offset_right = 1143.0
+offset_bottom = 769.0
+theme_override_font_sizes/normal_font_size = 10
+text = "R - restart
+Shift + H -> get hurt
+Shift + B -> get 1000 monies"
+fit_content = true
+
 [connection signal="pressed" from="BottomLeftHUD/ToolButtons/BiscuitButton" to="BottomLeftHUD/ToolButtons/BiscuitButton" method="_on_pressed"]
+[connection signal="pressed" from="BottomLeftHUD/ToolButtons/RemoveButton" to="BottomLeftHUD/ToolButtons/RemoveButton" method="_on_pressed"]

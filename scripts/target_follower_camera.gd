@@ -8,10 +8,29 @@ extends Camera2D
 @export var zoom_factor:float = 0.1
 @onready var tween:Tween;
 @export var allow_user_zoom := false;
+@export var shake_curve: Curve;
+@export var shake_duration := 0.3;
+@export var noise: FastNoiseLite;
+
+var shake_elapsed := 0.0;
+var is_shaking := false;
+var shake_power := 1.0;
 
 func target_zoom_level(zoom: float) -> void:
 	_zoom_level = zoom;
 
+func _ready() -> void:
+	Events.on_player_hurt.connect(_on_player_hurt);
+
+func _on_player_hurt(amage: int, fatal:bool, source: StringName):
+	shake(50.0);
+	
+func shake(power: float = 1.0) -> void:
+	shake_elapsed = 0;
+	is_shaking = true;
+	shake_power = power;
+	noise.seed = randi()
+	
 var _zoom_level : float :
 	get:
 		return _zoom
@@ -28,9 +47,23 @@ var _zoom_level : float :
 		
 func _process(delta: float) -> void:
 	var target_position = Vector2(target.position.x, target.position.y);
-	var unscaled_delta:= delta * (1.0 / Engine.time_scale);
 	
-	position = lerp(position, target_position, speed* delta); # * unscaled_delta);
+	if is_shaking:
+	
+		var t := shake_curve.sample(shake_elapsed);
+		shake_elapsed += delta;
+		
+		if shake_elapsed > shake_duration:
+			is_shaking = false;
+			
+		var target_offset = Vector2(noise.get_noise_2d(0, shake_elapsed), noise.get_noise_2d(shake_elapsed, 0)) * 300;
+		offset = lerp(offset, target_offset, 90.0 * t * delta);
+	else:
+		offset = lerp(offset, Vector2.ZERO, delta);
+		
+	var unscaled_delta = 0.02 if Engine.time_scale <= 0 else delta * (1.0 / Engine.time_scale);
+	position = lerp(position, target_position, speed * unscaled_delta); # * unscaled_delta);
+	
 	
 func _unhandled_input(event):
 	if allow_user_zoom:

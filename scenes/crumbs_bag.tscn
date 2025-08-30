@@ -16,6 +16,7 @@ collision_layer = 16
 collision_mask = 4
 physics_material_override = SubResource("PhysicsMaterial_d4syx")
 script = ExtResource("1_2qgm5")
+crumb_count = 50
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(4, -28)

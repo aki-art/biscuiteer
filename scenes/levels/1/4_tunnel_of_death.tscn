@@ -1,0 +1,294 @@
+[gd_scene load_steps=15 format=3 uid="uid://d3rbyun4c77qv"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_jst17"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_n1t7l"]
+[ext_resource type="PackedScene" uid="uid://bkd6kvsr43i6h" path="res://scenes/spikes.tscn" id="4_pygfq"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="5_kmkmt"]
+[ext_resource type="Script" uid="uid://fwjpl32k4dgr" path="res://scripts/hazard.gd" id="6_30jdk"]
+[ext_resource type="Texture2D" uid="uid://l6lt46lorp3" path="res://assets/terrain_sets/candy/fill.png" id="6_603xc"]
+[ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="7_603xc"]
+[ext_resource type="Script" uid="uid://b16c1cdeyogbb" path="res://scripts/terrain_polygon.gd" id="7_rjvlg"]
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="8_o81d8"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="8_rjvlg"]
+[ext_resource type="Texture2D" uid="uid://bkt4xn0otwhob" path="res://assets/terrain_sets/candy/side.png" id="9_16lv0"]
+[ext_resource type="Texture2D" uid="uid://d1d3ufgfltkdu" path="res://assets/terrain_sets/candy/candy_bg_blur.png" id="9_n1t7l"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_o81d8"]
+size = Vector2(176, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jst17"]
+size = Vector2(592, 20)
+
+[node name="3" type="Node" groups=["level"]]
+script = ExtResource("1_jst17")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_n1t7l")]
+position = Vector2(-96, -400)
+facing_left = true
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(480, 3088)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-4272, -1568)
+
+[node name="BasinPolygon2" type="Polygon2D" parent="."]
+z_index = 120
+position = Vector2(120.32, 545.279)
+texture = ExtResource("6_603xc")
+texture_offset = Vector2(120.32, 33.279)
+polygon = PackedVector2Array(488.23, -385.279, 488.23, -2225.28, -4364.26, -2241.28, -4463.63, -1137.28, -3238.09, -1153.28, -3055.91, -1297.28, -1300.4, -1233.28, -1217.59, -1265.28, -869.805, -1377.28, 206.686, -1393.28, 239.809, -1281.28, 256.371, -1121.28, 206.686, -945.279, -985.735, -945.279, -985.735, -1.27899, -2890.3, 1406.72, -3254.65, 1406.72, -3254.65, -913.279, -3966.79, -913.279, -3983.35, 2494.72, 504.792, 2462.72)
+script = ExtResource("7_rjvlg")
+
+[node name="FitCollider" type="Node" parent="BasinPolygon2"]
+script = ExtResource("8_o81d8")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="BasinPolygon2"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BasinPolygon2/StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(488.23, -385.279, 488.23, -2225.28, -4364.26, -2241.28, -4463.63, -1137.28, -3238.09, -1153.28, -3055.91, -1297.28, -1300.4, -1233.28, -1217.59, -1265.28, -869.805, -1377.28, 206.686, -1393.28, 239.809, -1281.28, 256.371, -1121.28, 206.686, -945.279, -985.735, -945.279, -985.735, -1.27899, -2890.3, 1406.72, -3254.65, 1406.72, -3254.65, -913.279, -3966.79, -913.279, -3983.35, 2494.72, 504.792, 2462.72)
+
+[node name="Sideline" type="Line2D" parent="BasinPolygon2"]
+z_index = 100
+y_sort_enabled = true
+points = PackedVector2Array(488.23, -385.279, 488.23, -2225.28, -4364.26, -2241.28, -4463.63, -1137.28, -3238.09, -1153.28, -3055.91, -1297.28, -1300.4, -1233.28, -1217.59, -1265.28, -869.805, -1377.28, 206.686, -1393.28, 239.809, -1281.28, 256.371, -1121.28, 206.686, -945.279, -985.735, -945.279, -985.735, -1.27899, -2890.3, 1406.72, -3254.65, 1406.72, -3254.65, -913.279, -3966.79, -913.279, -3983.35, 2494.72, 504.792, 2462.72)
+closed = true
+width = 64.0
+texture = ExtResource("9_16lv0")
+texture_mode = 1
+
+[node name="Spikes" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-1296, -336)
+
+[node name="Spikes2" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-1248, -288)
+rotation = 0.794097
+
+[node name="Spikes3" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-1232, -224)
+rotation = 1.66294
+
+[node name="Spikes4" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-1632, -336)
+
+[node name="Spikes5" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-1728, -320)
+
+[node name="Spikes6" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-1808, -320)
+
+[node name="Spikes7" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-2032, -320)
+
+[node name="Spikes8" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-2128, -320)
+
+[node name="Spikes9" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-2224, -320)
+
+[node name="Spikes10" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-2512, -320)
+
+[node name="Spikes11" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-2608, -320)
+
+[node name="Spikes12" parent="." instance=ExtResource("4_pygfq")]
+position = Vector2(-2656, -288)
+rotation = -1.12088
+
+[node name="CeilingSpikes" type="Node2D" parent="."]
+position = Vector2(0, 144)
+
+[node name="Spikes13" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2432, -880)
+rotation = -3.14159
+
+[node name="Spikes14" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2336, -880)
+rotation = -3.14159
+
+[node name="Spikes15" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2240, -880)
+rotation = -3.14159
+
+[node name="Spikes16" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2144, -880)
+rotation = -3.14159
+
+[node name="Spikes17" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2048, -880)
+rotation = -3.14159
+
+[node name="Spikes18" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1952, -880)
+rotation = -3.14159
+
+[node name="Spikes19" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1856, -880)
+rotation = -3.14159
+
+[node name="Spikes20" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1760, -880)
+rotation = -3.14159
+
+[node name="Spikes21" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1664, -880)
+rotation = -3.14159
+
+[node name="Spikes22" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1568, -880)
+rotation = -3.14159
+
+[node name="Spikes23" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1472, -880)
+rotation = -3.14159
+
+[node name="Spikes24" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1376, -880)
+rotation = -3.14159
+
+[node name="Spikes25" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1280, -880)
+rotation = -3.14159
+
+[node name="Spikes26" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1184, -880)
+rotation = -3.14159
+
+[node name="Spikes27" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-1120, -896)
+rotation = -3.61541
+
+[node name="Spikes28" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2720, -880)
+rotation = -3.14159
+
+[node name="Spikes29" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2624, -880)
+rotation = -3.14159
+
+[node name="Spikes30" parent="CeilingSpikes" instance=ExtResource("4_pygfq")]
+position = Vector2(-2528, -880)
+rotation = -3.14159
+
+[node name="Void" parent="." instance=ExtResource("5_kmkmt")]
+position = Vector2(320, 3040)
+
+[node name="IslandPolygon" type="Polygon2D" parent="."]
+z_index = 120
+texture = ExtResource("6_603xc")
+polygon = PackedVector2Array(-2672, -256, -2656, -160, -2656, 912, -2384, 1136, -1296, 304, -1184, -96, -1264, -336, -2640, -336)
+script = ExtResource("7_rjvlg")
+
+[node name="FitCollider" type="Node" parent="IslandPolygon"]
+script = ExtResource("8_o81d8")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="IslandPolygon"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="IslandPolygon/StaticBody2D"]
+polygon = PackedVector2Array(-2672, -256, -2656, -160, -2656, 912, -2384, 1136, -1296, 304, -1184, -96, -1264, -336, -2640, -336)
+
+[node name="Sideline" type="Line2D" parent="IslandPolygon"]
+z_index = 5
+points = PackedVector2Array(-2672, -256, -2656, -160, -2656, 912, -2384, 1136, -1296, 304, -1184, -96, -1264, -336, -2640, -336)
+closed = true
+width = 64.0
+texture = ExtResource("9_16lv0")
+texture_mode = 1
+
+[node name="Liquid" type="Polygon2D" parent="."]
+position = Vector2(-3072, 1872)
+polygon = PackedVector2Array(-48, 0, 496, 0, 496, 144, -48, 144)
+
+[node name="Hazard" type="Node2D" parent="Liquid"]
+script = ExtResource("6_30jdk")
+metadata/_custom_type_script = "uid://fwjpl32k4dgr"
+
+[node name="Area2D" type="Area2D" parent="Liquid"]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Liquid/Area2D"]
+polygon = PackedVector2Array(-48, 0, 496, 0, 496, 144, -48, 144)
+
+[node name="FitCollider" parent="Liquid" instance=ExtResource("7_603xc")]
+override_existing = null
+
+[node name="Warper" parent="." instance=ExtResource("8_rjvlg")]
+position = Vector2(-3520, -448)
+destination = "res://scenes/levels/1/5_glass_bowl.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+position = Vector2(8, -40)
+shape = SubResource("RectangleShape2D_o81d8")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+color = Color(0.364414, 0.248535, 0.163091, 1)
+polygon = PackedVector2Array(-3152, -224, -2656, -224, -2672, -192, -3152, -192)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D"]
+position = Vector2(-2928, -208)
+collision_layer = 4
+collision_mask = 146
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Polygon2D/StaticBody2D"]
+position = Vector2(16, -6)
+shape = SubResource("RectangleShape2D_jst17")
+one_way_collision = true
+
+[node name="Polygon2D" type="Polygon2D" parent="Polygon2D"]
+position = Vector2(2, 18)
+rotation = 0.000423348
+color = Color(1, 1, 1, 0.231373)
+polygon = PackedVector2Array(-2923.07, -170.763, -2924.1, -233.762, -2942.1, -235.755, -2912.11, -263.767, -2893.1, -233.775, -2908.1, -235.769, -2913.07, -171.767)
+
+[node name="far_bg" type="CanvasLayer" parent="."]
+layer = -30
+follow_viewport_enabled = true
+follow_viewport_scale = 0.7
+
+[node name="Polygon2D" type="Polygon2D" parent="far_bg"]
+texture_repeat = 2
+position = Vector2(-3382.86, 1357.14)
+color = Color(0.560742, 0.631237, 0.622418, 1)
+texture = ExtResource("9_n1t7l")
+texture_scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-2788.57, -3954.29, 5714.29, -3885.71, 5645.71, 1782.86, -3177.14, 1622.86)
+
+[node name="EndCap" type="Polygon2D" parent="."]
+z_index = 200
+position = Vector2(-3824, -496)
+texture = ExtResource("6_603xc")
+texture_offset = Vector2(272, 16)
+polygon = PackedVector2Array(-384, -160, -32, 432, 112, 160, -32, -144)
+script = ExtResource("7_rjvlg")
+
+[node name="FitCollider" type="Node" parent="EndCap"]
+script = ExtResource("8_o81d8")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="EndCap"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="EndCap/StaticBody2D"]
+visible = false
+polygon = PackedVector2Array(-77.193, -101.695, -63.158, 183.051, 14.035, 183.051, 63.158, 74.5763, -14.035, -115.254)
+
+[node name="Sideline" type="Line2D" parent="EndCap"]
+z_index = 100
+points = PackedVector2Array(-384, -160, -32, 432, 112, 160, -32, -144)
+closed = true
+width = 64.0
+texture = ExtResource("9_16lv0")
+texture_mode = 1
+
+[connection signal="body_entered" from="Liquid/Area2D" to="Liquid/Hazard" method="_on_touched"]

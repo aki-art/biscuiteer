@@ -40,6 +40,7 @@ func _ready() -> void:
 
 func _on_game_mode_changed(mode:StringName):
 	freeze = mode == "building";
+	pass
 	
 
 func _process(delta: float) -> void:

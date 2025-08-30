@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://bsvpx45hwfhwq"]
+
+[ext_resource type="Texture2D" uid="uid://b8cenxs6py166" path="res://assets/heart.png" id="1_weh6f"]
+
+[node name="HeartDisplay" type="Control"]
+custom_minimum_size = Vector2(52, 40)
+layout_mode = 3
+anchors_preset = 0
+
+[node name="TextureRect" type="TextureRect" parent="."]
+clip_contents = true
+layout_mode = 2
+offset_right = 128.0
+offset_bottom = 128.0
+scale = Vector2(0.4, 0.4)
+size_flags_stretch_ratio = 0.0
+texture = ExtResource("1_weh6f")

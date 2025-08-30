@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://5pqlyngu6ej2"]
+
+[ext_resource type="Script" uid="uid://dmt82f0a1ljfw" path="res://scripts/honey_drip.gd" id="1_357ik"]
+[ext_resource type="Texture2D" uid="uid://cjn1ldp60xocs" path="res://assets/honey_drop.png" id="1_uxyee"]
+[ext_resource type="PackedScene" uid="uid://cvttvxfmut0tg" path="res://scenes/honey_drop.tscn" id="2_e13so"]
+
+[node name="HoneyDrip" type="Node2D" groups=["liquid_absorbable"]]
+script = ExtResource("1_357ik")
+drop_prefab = ExtResource("2_e13so")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, 1)
+scale = Vector2(1, 0.7)
+texture = ExtResource("1_uxyee")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 2.0
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

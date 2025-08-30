@@ -16,6 +16,7 @@ extends StaticBody2D
 @export var snap_length:float = -1.0;
 @export var min_length = 0.0;
 @export var cost_per_unit := 1;
+@export var honeyed: bool;
 
 var previous_segment_count := -1;
 var cost: int;
@@ -119,3 +120,20 @@ func _play_impact_animation()-> void:
 	animation_player.play("jumped_on")
 	varied_audio_stream_player_2d.pitch_scale = randf_range(0.9, 1.1)
 	varied_audio_stream_player_2d.play_any();
+
+func destroy() -> void:
+	Global.game.remove_targets.erase(self);
+	queue_free();
+	
+	
+
+func _on_mouse_entered() -> void:
+	if Global.game.active_tool is RemoverTool && !Global.game.remove_targets.has(self):
+		modulate *= Color(1.15, 1.15, 1.15, 1.0);
+		Global.game.remove_targets.append(self);
+
+
+func _on_mouse_exited() -> void:
+	if Global.game.active_tool is RemoverTool && Global.game.remove_targets.has(self):
+		modulate /= Color(1.15, 1.15, 1.15, 1.0);
+		Global.game.remove_targets.erase(self);

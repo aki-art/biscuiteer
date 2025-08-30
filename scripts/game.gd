@@ -10,9 +10,11 @@ extends Node2D
 
 @export var last_building_tool : StringName;
 @export var last_tool_data : ToolConfig;
-
+@export var time_slow := 0.025;
+@export var remove_targets : Array[Node2D] = [];
 
 var _current_level: Level;
+var _is_resetting_level: bool;
 
 var active_tool:ToolBase;
 
@@ -23,8 +25,7 @@ func set_mode(mode: StringName) -> void:
 	_mode = mode;
 	Events.on_game_mode_changed.emit(mode);
 	
-	# TODO:pause
-	# Engine.time_scale = 1.0 if _mode != "building" else 0.03;
+	# Engine.time_scale = 1.0 if _mode != "building" else time_slow;
 	
 	if mode == "platforming":
 		build_camera_tracker.is_active = false;
@@ -47,13 +48,18 @@ func _ready() -> void:
 	SceneFlow.load_level(start_level);
 	
 	
+	
 func set_current_level() -> void:
 	_current_level = get_tree().get_first_node_in_group("level")
 	_current_level.call_deferred("start_level", player);
+	remove_targets.clear();
+	
+	Events.on_level_loaded.emit(_current_level, _is_resetting_level)
+	_is_resetting_level = false;
 	
 func get_current_level() -> Level:
 	if !_current_level:
-		set_current_level();
+		_current_level = get_tree().get_first_node_in_group("level")
 	
 	return _current_level;
 	
@@ -84,14 +90,13 @@ func _input(event: InputEvent) -> void:
 	elif(Input.is_action_just_pressed("cancel")):
 		if(active_tool != null):
 			active_tool.deactivate();
+			active_tool = null;
 			if _mode == "building":
-				Events.on_toggle_build_mode.emit(false);
 				Global.game.set_mode("platforming")
 			get_viewport().set_input_as_handled();
 		
 	elif(Input.is_action_just_pressed("quick_build")):
 		if _mode == "building":
-			Events.on_toggle_build_mode.emit(false);
 			Global.game.set_mode("platforming")
 			if active_tool:
 				active_tool.deactivate()
@@ -103,9 +108,21 @@ func _input(event: InputEvent) -> void:
 		var currentMode = DisplayServer.window_get_mode();
 		var targetMode = DisplayServer.WINDOW_MODE_FULLSCREEN if currentMode == DisplayServer.WINDOW_MODE_WINDOWED else DisplayServer.WINDOW_MODE_WINDOWED; 
 		DisplayServer.window_set_mode(targetMode);
-	
+	elif(Input.is_action_just_pressed("debug_add_crumbs")):
+		player.crumb_wallet.add(1000);
+	elif(Input.is_action_just_pressed("debug_infinite_health")):
+		player.health.invulnerable = !player.health.invulnerable ;
 	elif(Input.is_action_just_pressed("reset")):
-		player.reset_position();
+		Events.on_level_reset.emit()
+		$ResetTimer.start();
 		
 func _process(delta: float) -> void:
 	pass
+
+# ugly workaround for resets not fully working
+func _on_reset_timer_timeout() -> void:
+	if player.health.is_dead:
+		SceneFlow.load_level(start_level);
+	else:
+		_is_resetting_level = true;
+		SceneFlow.call_deferred("reload_current")

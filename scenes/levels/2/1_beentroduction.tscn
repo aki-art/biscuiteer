@@ -1,0 +1,208 @@
+[gd_scene load_steps=10 format=3 uid="uid://dth4o8u30mnum"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_q33ir"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_275aa"]
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="3_u745i"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="4_px525"]
+[ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="6_5wvup"]
+[ext_resource type="PackedScene" uid="uid://dscchu0ycqsd5" path="res://scenes/bee.tscn" id="6_cj6df"]
+[ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="7_ease8"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="8_ease8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ancp1"]
+size = Vector2(106, 202)
+
+[node name="3" type="Node" groups=["level"]]
+script = ExtResource("1_q33ir")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_275aa")]
+position = Vector2(96, -32)
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(3600, 2096)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-496, -304)
+
+[node name="Void" parent="." instance=ExtResource("4_px525")]
+position = Vector2(320, 8928)
+
+[node name="HeartPickup" parent="." instance=ExtResource("6_5wvup")]
+position = Vector2(2016, -16)
+
+[node name="LeftWall" type="Polygon2D" parent="."]
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(-768, 0, 368, 0, 368, 464, 64, 640, 64, 976, 368, 976, 368, 1936, -768, 1936)
+
+[node name="FitCollider" type="Node" parent="LeftWall"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="LeftWall"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeftWall/StaticBody2D"]
+polygon = PackedVector2Array(-768, 0, 368, 0, 368, 464, 64, 640, 64, 976, 368, 976, 368, 1936, -768, 1936)
+
+[node name="Ceiling" type="Polygon2D" parent="."]
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(448, -368, 512, -304, 832, -304, 928, -432, 1344, -432, 1408, -336, 1856, -336, 1904, -416, 2176, -416, 2240, -512, 2512, -512, 2656, -288, 2928, -288, 3104, 32, 3600, 48, 3568, -1088, 160, -1120, 192, -496)
+
+[node name="FitCollider" type="Node" parent="Ceiling"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ceiling"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ceiling/StaticBody2D"]
+polygon = PackedVector2Array(448, -368, 512, -304, 832, -304, 928, -432, 1344, -432, 1408, -336, 1856, -336, 1904, -416, 2176, -416, 2240, -512, 2512, -512, 2656, -288, 2928, -288, 3104, 32, 3600, 48, 3568, -1088, 160, -1120, 192, -496)
+
+[node name="Ceiling2" type="Polygon2D" parent="."]
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(-80, -1120, -144, -464, -320, -192, -400, 80, -768, 64, -784, -1152)
+
+[node name="FitCollider" type="Node" parent="Ceiling2"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ceiling2"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ceiling2/StaticBody2D"]
+polygon = PackedVector2Array(-80, -1120, -144, -464, -320, -192, -400, 80, -768, 64, -784, -1152)
+
+[node name="SmallPlatform" type="Polygon2D" parent="."]
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="FitCollider" type="Node" parent="SmallPlatform"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform/StaticBody2D"]
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="SmallPlatform2" type="Polygon2D" parent="."]
+position = Vector2(384, 0)
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="FitCollider" type="Node" parent="SmallPlatform2"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform2"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform2/StaticBody2D"]
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="SmallPlatform3" type="Polygon2D" parent="."]
+position = Vector2(784, 0)
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="FitCollider" type="Node" parent="SmallPlatform3"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform3"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform3/StaticBody2D"]
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="SmallPlatform4" type="Polygon2D" parent="."]
+position = Vector2(1248, 0)
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="FitCollider" type="Node" parent="SmallPlatform4"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform4"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform4/StaticBody2D"]
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="SmallPlatform5" type="Polygon2D" parent="."]
+position = Vector2(-176, 800)
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="FitCollider" type="Node" parent="SmallPlatform5"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform5"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform5/StaticBody2D"]
+polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+
+[node name="RightWall" type="Polygon2D" parent="."]
+position = Vector2(1584, 0)
+color = Color(1, 0.792, 0.52, 1)
+polygon = PackedVector2Array(848, 0, 848, 432, 544, 752, 448, 752, 320, 896, 160, 896, 48, 992, -384, 992, -528, 1136, -1376, 1136, -1376, 1808, 1680, 1792, 1664, 0)
+
+[node name="FitCollider" type="Node" parent="RightWall"]
+script = ExtResource("3_u745i")
+override_existing = null
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RightWall"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightWall/StaticBody2D"]
+polygon = PackedVector2Array(848, 0, 848, 432, 544, 752, 448, 752, 320, 896, 160, 896, 48, 992, -384, 992, -528, 1136, -1376, 1136, -1376, 1808, 1680, 1792, 1664, 0)
+
+[node name="Bee" parent="." instance=ExtResource("6_cj6df")]
+position = Vector2(1168, -48)
+
+[node name="Bee2" parent="." instance=ExtResource("6_cj6df")]
+position = Vector2(320, 736)
+
+[node name="CrumbsBag" parent="." instance=ExtResource("7_ease8")]
+position = Vector2(160, 960)
+
+[node name="InivisibleWallCeiling" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InivisibleWallCeiling"]
+polygon = PackedVector2Array(-128, -1120, 240, -1120, 224, -1072, -160, -1072)
+
+[node name="Warper" parent="." instance=ExtResource("8_ease8")]
+position = Vector2(2800, -96)
+destination = "res://scenes/levels/2/2_round_bees.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+position = Vector2(32, 0)
+shape = SubResource("RectangleShape2D_ancp1")

@@ -7,4 +7,12 @@ collision_layer = 0
 collision_mask = 2
 script = ExtResource("1_46hcy")
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(100, 0)
+offset_right = 40.0
+offset_bottom = 40.0
+text = "NEXT
+LEVEL"
+fit_content = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
