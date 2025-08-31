@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxjasd2h00akd"]
+
+[ext_resource type="Texture2D" uid="uid://b3r6myaip0d0a" path="res://assets/player_placeholder.png" id="1_3ljmt"]
+[ext_resource type="Script" uid="uid://c46m0iytdsxos" path="res://scripts/hazard_respawn_marker.gd" id="1_sx585"]
+
+[node name="HazardRespawnMarker" type="Area2D"]
+collision_mask = 2
+script = ExtResource("1_sx585")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0.929301, 0.438183, 0.848065, 0.415686)
+position = Vector2(-24, -69)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("1_3ljmt")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

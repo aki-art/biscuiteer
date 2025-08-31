@@ -1,0 +1,21 @@
+[gd_resource type="ParticleProcessMaterial" load_steps=3 format=3 uid="uid://cuhrh101g2crg"]
+
+[sub_resource type="Gradient" id="Gradient_u5530"]
+colors = PackedColorArray(0.74978, 0.74978, 0.74978, 1, 0.462745, 0.462745, 0.462745, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_507ja"]
+gradient = SubResource("Gradient_u5530")
+
+[resource]
+resource_local_to_scene = true
+lifetime_randomness = 0.7
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(20, 1, 1)
+angle_min = -180.0
+angle_max = 180.0
+spread = 180.0
+initial_velocity_min = 28.74
+initial_velocity_max = 28.74
+gravity = Vector3(0, 98, 0)
+color_ramp = SubResource("GradientTexture1D_507ja")

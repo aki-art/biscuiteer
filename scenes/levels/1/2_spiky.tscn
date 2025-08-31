@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://cikny7p3hfbpt"]
+[gd_scene load_steps=25 format=3 uid="uid://cikny7p3hfbpt"]
 
 [ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_wsqcc"]
 [ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="2_2kxbl"]
@@ -11,17 +11,36 @@
 [ext_resource type="Texture2D" uid="uid://dk5clsoij3oc" path="res://assets/terrain_sets/candy/bottom.png" id="5_tvhpj"]
 [ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="6_tvhpj"]
 [ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="7_81wbg"]
+[ext_resource type="Texture2D" uid="uid://byt5hx6vfallq" path="res://assets/signb.png" id="12_81wbg"]
+[ext_resource type="Theme" uid="uid://bjbx742eqigem" path="res://assets/ui_theme/cookie_theme.tres" id="12_nswm5"]
 [ext_resource type="Texture2D" uid="uid://d1d3ufgfltkdu" path="res://assets/terrain_sets/candy/candy_bg_blur.png" id="12_tvhpj"]
+[ext_resource type="PackedScene" uid="uid://dxjasd2h00akd" path="res://scenes/hazard_respawn_marker.tscn" id="15_5tfui"]
+[ext_resource type="Texture2D" uid="uid://cdejfyj1amdb5" path="res://assets/particle_close.png" id="16_pfyvd"]
+[ext_resource type="Texture2D" uid="uid://bvhupw4fqj80i" path="res://assets/particle.png" id="17_ocwp3"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_nswm5"]
 blend_mode = 1
 
 [sub_resource type="Curve" id="Curve_tvhpj"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.142322, 1), -2.22777, -2.22777, 0, 0, Vector2(0.794008, 1), -0.866505, -0.0541565, 0, 0, Vector2(1, 0.512997), -5.14149, 0.0, 0, 0]
+_data = [Vector2(0, 0.463303), 0.0, 3.26605, 0, 0, Vector2(0.262172, 0.681957), 1.00409, 1.00409, 0, 0, Vector2(0.794008, 1), -0.0478141, -0.0478141, 0, 0, Vector2(1, 0.512997), -5.14149, 0.0, 0, 0]
 point_count = 4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8n4ih"]
 size = Vector2(160, 256)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pfyvd"]
+size = Vector2(108, 494)
+
+[sub_resource type="Gradient" id="Gradient_ocwp3"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_6vyqu"]
+colors = PackedColorArray(1, 1, 1, 0.780392, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_jl0hp"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
 
 [node name="2" type="Node" groups=["level"]]
 script = ExtResource("1_wsqcc")
@@ -67,7 +86,7 @@ polygon = PackedVector2Array(-544, 0, 368, 0, 318.809, 311.545, 272, 608, -560, 
 position = Vector2(6, 262)
 rotation = -0.44855
 skew = 0.42586
-points = PackedVector2Array(322.68, 230.993, 389.283, -78.2037, -451.552, -445.934)
+points = PackedVector2Array(335.903, 234.728, 403.904, -85.8655, -448.957, -460.813)
 width = 64.0
 texture = ExtResource("5_nswm5")
 texture_mode = 1
@@ -81,9 +100,10 @@ scale = Vector2(8.71412, 4.20992)
 texture = ExtResource("3_81wbg")
 
 [node name="LeftCeiling" type="Polygon2D" parent="."]
+z_index = 2
 texture_repeat = 2
 texture = ExtResource("4_nswm5")
-polygon = PackedVector2Array(-416, 0, -160, -192, 80, -304, 416, -432, 992, -496, 1488, -448, 1664, -640, 1696, -1040, 1408, -1040, 1453, -1221, 1463, -1313, 1544, -1345, 1728, -1400, 2049, -1444, 2188, -1353, 2357, -1407, 3561, -1162, 3589, -2001, -864, -1984, -1222, 1)
+polygon = PackedVector2Array(-1430, 757, -160, -192, 80, -304, 416, -432, 992, -496, 1488, -448, 1664, -640, 1696, -1040, 1408, -1040, 1453, -1221, 1463, -1313, 1544, -1345, 1728, -1400, 2049, -1444, 2188, -1353, 2357, -1407, 5306, -1220, 5653, -2954, -1698, -3406, -2164, 60)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="LeftCeiling"]
 collision_layer = 4
@@ -98,7 +118,7 @@ z_index = 100
 position = Vector2(6, 262)
 rotation = -0.44855
 skew = 0.42586
-points = PackedVector2Array(1687.48, -24.2152, 1712.53, -49.3592, 1758.26, -58.5295, 1782.01, -76.2342, 1816.89, -95.1136, 1836.35, -118.681, 1837.62, -169.143, 1856.8, -313.862, 1863.76, -369.859, 1883.14, -434.47, 1880.72, -470.529, 1866.5, -478.698, 1830.35, -497.381, 1749.01, -528.661, 1652.51, -574.524, 1571.37, -613.72, 1579.42, -669.24, 1599.76, -727.438, 1616.52, -776.181, 1630.66, -853.067, 1633.21, -865.967)
+points = PackedVector2Array(1691.65, -13.4047, 1723.38, -39.6494, 1760.43, -56.587, 1784.13, -72.3127, 1821.16, -88.2608, 1845.81, -97.5737, 1850.82, -164.417, 1867.8, -310.089, 1878.21, -370.594, 1878.01, -406.69, 1885.29, -431.538, 1887.71, -483.502, 1855.87, -497.312, 1818.55, -513.502, 1739.48, -546.799, 1646.19, -588.264, 1573.86, -624.64, 1588.16, -663.451, 1608.54, -723.628, 1621.99, -772.81, 1639.4, -847.278, 1643.29, -869.596)
 width = 64.0
 texture = ExtResource("5_nswm5")
 texture_mode = 1
@@ -118,7 +138,7 @@ texture_mode = 1
 
 [node name="bottom" type="Line2D" parent="LeftCeiling"]
 position = Vector2(1379, -966)
-points = PackedVector2Array(42, -313, 165, -326, 331, -377, 567, -406, 767, -413)
+points = PackedVector2Array(88, -324, 107, -325, 165, -326, 191, -329, 331, -377, 542, -405, 567, -406, 593, -411, 721, -426)
 width = 256.0
 width_curve = SubResource("Curve_tvhpj")
 texture = ExtResource("5_tvhpj")
@@ -137,7 +157,7 @@ texture_mode = 1
 position = Vector2(6, 262)
 rotation = -0.44855
 skew = 0.42586
-points = PackedVector2Array(-451.228, -458.797, -371.715, -487.323, -320.319, -501.039)
+points = PackedVector2Array(-451.228, -458.797, -367.448, -480.471, -306.123, -491.88)
 width = 64.0
 texture = ExtResource("5_nswm5")
 texture_mode = 1
@@ -145,11 +165,16 @@ texture_mode = 1
 [node name="RightWall" type="Polygon2D" parent="."]
 position = Vector2(-320, -16)
 texture = ExtResource("4_nswm5")
-polygon = PackedVector2Array(2416, -1408, 2415, -487, 2454, -506, 2584, -526, 2679, -324, 2654, -292, 2544, -304, 2505, 20, 1622, 16, 1773, 644, 2954, 656, 2928, 80, 2864, -1408)
+polygon = PackedVector2Array(2416, -1408, 2415, -487, 2454, -506, 2584, -526, 2679, -324, 2654, -292, 2556, -300, 2540, -283, 2505, 20, 1648.34, 16.1193, 1632, 52, 1755, 548, 1743, 1142, 5756, 1136, 5583, -1508)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="RightWall"]
 collision_layer = 4
 collision_mask = 18
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="RightWall/StaticBody2D"]
+visible = false
+position = Vector2(560, -128)
+polygon = PackedVector2Array(1070, 158, 1184, 736, 2432, 752, 2416, 144, 1084.14, 144)
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightWall/StaticBody2D"]
 visible = false
@@ -162,28 +187,36 @@ metadata/_custom_type_script = "uid://0rhyul8vxfsk"
 [node name="bottom" type="Line2D" parent="RightWall"]
 z_index = 1
 position = Vector2(1382, -961)
-points = PackedVector2Array(1034, 514, 1226, 481)
+points = PackedVector2Array(1035, 495, 1051, 494, 1136, 485, 1227, 475)
 width = 256.0
 width_curve = SubResource("Curve_tvhpj")
 texture = ExtResource("5_tvhpj")
 texture_mode = 1
 
 [node name="Sideline3" type="Line2D" parent="RightWall"]
+z_index = 1
 position = Vector2(454, 134)
 rotation = -0.44855
 skew = 0.42586
-points = PackedVector2Array(2242.74, 842.801, 2219.01, 859.516, 1385.84, 496.108, 1288.23, 449.77, 1312.19, 556.185, 1380.59, 880.931)
+points = PackedVector2Array(2251.3, 855.516, 2225.85, 852.479, 1388.35, 484.198, 1341.15, 463.722, 1308.22, 449.436, 1294.77, 454.606)
 width = 64.0
 texture = ExtResource("5_nswm5")
 texture_mode = 1
-joint_mode = 2
-round_precision = 4
+
+[node name="Sideline4" type="Line2D" parent="RightWall"]
+position = Vector2(454, 134)
+rotation = -0.44855
+skew = 0.42586
+points = PackedVector2Array(1292.55, 454.643, 1297.07, 495.612, 1319.02, 593.16, 1372.85, 835.564)
+width = 64.0
+texture = ExtResource("5_nswm5")
+texture_mode = 1
 
 [node name="Sideline" type="Line2D" parent="RightWall"]
 position = Vector2(6, 262)
 rotation = -0.44855
 skew = 0.42586
-points = PackedVector2Array(2686.91, -533.933, 2674.93, -146.031, 2675.83, 38.4088, 2653.96, 245.977, 2657.06, 387.357, 2678.16, 430.522)
+points = PackedVector2Array(2687.81, -525.541, 2676.07, -147.534, 2674.68, 39.9115, 2668.33, 248.209, 2664.44, 314.54, 2662.15, 405.569)
 width = 64.0
 texture = ExtResource("5_nswm5")
 texture_mode = 1
@@ -192,37 +225,23 @@ texture_mode = 1
 position = Vector2(6, 262)
 rotation = -0.44855
 skew = 0.42586
-points = PackedVector2Array(2873.7, 466.325, 2970.01, 740.163, 2835.03, 679.613, 2798.83, 662.909, 2788.72, 667.529, 2781.76, 679.513, 2736.17, 947.808)
+points = PackedVector2Array(2868.61, 492.125, 2950.15, 691.538, 2943.29, 699.564, 2928.62, 709.205, 2920.76, 712.798, 2907.64, 705.105, 2811.28, 653.305, 2789.65, 674.931, 2746.07, 951.104)
 width = 64.0
 texture = ExtResource("5_nswm5")
 texture_mode = 1
 
-[node name="Polygon2D2" type="Polygon2D" parent="."]
+[node name="SpikePiece" type="Polygon2D" parent="."]
 position = Vector2(128, -144)
 texture = ExtResource("4_nswm5")
 polygon = PackedVector2Array(672, 96, 768, 96, 768, 192, 672, 192)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Polygon2D2"]
+[node name="StaticBody2D" type="StaticBody2D" parent="SpikePiece"]
 collision_layer = 4
 collision_mask = 18
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Polygon2D2/StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SpikePiece/StaticBody2D"]
+visible = false
 polygon = PackedVector2Array(672, 96, 768, 96, 768, 192, 672, 192)
-
-[node name="RightPlatform" type="Polygon2D" parent="."]
-visible = false
-position = Vector2(240, -144)
-color = Color(1, 0.11, 0.11, 0.447059)
-texture = ExtResource("4_nswm5")
-polygon = PackedVector2Array(1072, 144, 1184, 736, 2432, 752, 2416, 144)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="RightPlatform"]
-collision_layer = 4
-collision_mask = 18
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RightPlatform/StaticBody2D"]
-visible = false
-polygon = PackedVector2Array(1072, 144, 1184, 736, 2432, 752, 2416, 144)
 
 [node name="PitFloor" type="Polygon2D" parent="."]
 position = Vector2(240, -144)
@@ -334,7 +353,7 @@ position = Vector2(0, -320)
 position = Vector2(2688, 912)
 
 [node name="top_left" type="Marker2D" parent="CameraExtents"]
-position = Vector2(-656, -1072)
+position = Vector2(-656, -1402)
 
 [node name="Warper" parent="." instance=ExtResource("7_81wbg")]
 position = Vector2(-144, -80)
@@ -347,6 +366,30 @@ shape = SubResource("RectangleShape2D_8n4ih")
 layer = -2
 follow_viewport_enabled = true
 follow_viewport_scale = 0.9
+
+[node name="MenuTutorial" type="RichTextLabel" parent="mid_bg2"]
+z_index = 6
+custom_minimum_size = Vector2(300, 0)
+offset_left = 1734.0
+offset_top = -1173.94
+offset_right = 2034.0
+offset_bottom = -1067.94
+rotation = -0.263422
+theme = ExtResource("12_nswm5")
+theme_override_colors/default_color = Color(0.694118, 0.698039, 0.737255, 1)
+theme_override_constants/line_separation = -20
+theme_override_font_sizes/normal_font_size = 32
+text = "WASD to peek
+while building"
+fit_content = true
+scroll_active = false
+horizontal_alignment = 1
+
+[node name="Signb" type="Sprite2D" parent="mid_bg2"]
+z_index = 4
+position = Vector2(1886.22, -1498.39)
+rotation = -3.14159
+texture = ExtResource("12_81wbg")
 
 [node name="Line2D3" type="Line2D" parent="mid_bg2"]
 position = Vector2(-371.111, 277.778)
@@ -394,7 +437,7 @@ position = Vector2(6, 262)
 rotation = -0.44855
 skew = 0.42586
 texture = ExtResource("4_nswm5")
-polygon = PackedVector2Array(594.327, -508.396, 644.706, -349.508, 697.416, 113.47, 534.027, 255.652, 383.11, 299.216, 379.32, 361.589, 370.763, 392.886, 2308.55, 1314.46, 2790.44, 1172.4, 2817.71, 442.038, 2655.31, 368.594, 2428.81, 196.327, 2213.24, 74.8123, 1890.26, -188.319, 1616.18, -498.256, 1357.3, -750.589)
+polygon = PackedVector2Array(594.327, -508.396, 644.706, -349.508, 707.404, 108.33, 615.447, 234.367, 534.027, 255.652, 383.11, 299.216, 379.32, 361.589, 370.763, 392.886, 2774.86, 1586.46, 3040.25, 1365.02, 3369.06, 750.984, 2655.31, 368.594, 2428.81, 196.327, 2213.24, 74.8123, 1890.26, -188.319, 1616.18, -498.256, 1357.3, -750.589)
 
 [node name="Sideline" type="Line2D" parent="mid_bg/back_wall"]
 position = Vector2(6, 262)
@@ -409,7 +452,7 @@ texture_mode = 1
 position = Vector2(6, 262)
 rotation = -0.44855
 skew = 0.42586
-points = PackedVector2Array(2671.45, 388.599, 2476.59, 238.058, 2362.64, 179.629, 2267.44, 126.327, 2135.6, 29.1294, 1910.65, -160.472, 1841.68, -242.399, 1638.06, -441.752, 1561.64, -535.918, 1326.53, -762.933)
+points = PackedVector2Array(2670.82, 377.499, 2470.89, 228.409, 2359.09, 157.552, 2270.5, 97.9435, 2139.44, 14.0272, 1916, -186.449, 1841.68, -242.399, 1642.17, -459.389, 1570.42, -565.822, 1336.18, -803.934)
 width = 128.0
 texture = ExtResource("5_nswm5")
 texture_mode = 1
@@ -427,8 +470,88 @@ follow_viewport_scale = 0.7
 
 [node name="Polygon2D" type="Polygon2D" parent="far_bg"]
 texture_repeat = 2
-position = Vector2(84.2857, 88.5714)
+position = Vector2(70, 95.7143)
 color = Color(0.560742, 0.631237, 0.622418, 1)
 texture = ExtResource("12_tvhpj")
 texture_scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-2788.57, -3954.29, 5714.29, -3885.71, 5645.71, 1782.86, -3177.14, 1622.86)
+
+[node name="Polygon2D2" type="Polygon2D" parent="far_bg"]
+texture_repeat = 2
+position = Vector2(70, 95.7143)
+color = Color(0.560742, 0.631237, 0.622418, 1)
+texture = ExtResource("12_tvhpj")
+texture_scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-2788.57, -3954.29, 5714.29, -3885.71, 5645.71, 1782.86, -3177.14, 1622.86)
+
+[node name="RespawnMarkers" type="Node2D" parent="."]
+
+[node name="HazardRespawnMarker" parent="RespawnMarkers" instance=ExtResource("15_5tfui")]
+position = Vector2(320, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_pfyvd")
+
+[node name="HazardRespawnMarker2" parent="RespawnMarkers" instance=ExtResource("15_5tfui")]
+position = Vector2(1370, 1)
+facing_left = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker2"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_pfyvd")
+
+[node name="HazardRespawnMarker3" parent="RespawnMarkers" instance=ExtResource("15_5tfui")]
+position = Vector2(1650, 16)
+facing_left = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker3"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_pfyvd")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.839952, 0.769118, 0.891034, 1)
+
+[node name="fg" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enabled = true
+follow_viewport_scale = 1.3
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="fg"]
+modulate = Color(1, 1, 1, 0.254902)
+z_index = 1000
+position = Vector2(874.615, -175.385)
+amount = 20
+texture = ExtResource("16_pfyvd")
+lifetime = 20.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 500)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.1
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_ocwp3")
+color_initial_ramp = SubResource("Gradient_6vyqu")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_as_relative = false
+position = Vector2(1069, -462)
+amount = 100
+texture = ExtResource("17_ocwp3")
+lifetime = 20.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_jl0hp")

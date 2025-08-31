@@ -1,0 +1,54 @@
+[gd_scene load_steps=6 format=3 uid="uid://dmbabyv0g0k6m"]
+
+[ext_resource type="PackedScene" uid="uid://bkd6kvsr43i6h" path="res://scenes/spikes.tscn" id="1_tkyie"]
+[ext_resource type="Texture2D" uid="uid://b0uwcgt6cbd8s" path="res://assets/biscuit_texture.png" id="2_du55m"]
+[ext_resource type="Script" uid="uid://b16c1cdeyogbb" path="res://scripts/terrain_polygon.gd" id="3_n7cpm"]
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="4_48iec"]
+[ext_resource type="Texture2D" uid="uid://bqftvwvlbkx15" path="res://assets/terrain_sets/biscuit/edge_rev.png" id="5_du55m"]
+
+[node name="SpikeIsland" type="Node2D"]
+
+[node name="SpikeIsland5" type="Polygon2D" parent="."]
+position = Vector2(-1040, -1680)
+polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
+
+[node name="Spikes" parent="SpikeIsland5" instance=ExtResource("1_tkyie")]
+position = Vector2(1040, 1680)
+
+[node name="TerrainPolygon" type="Polygon2D" parent="."]
+z_index = 120
+position = Vector2(-160, 64)
+texture = ExtResource("2_du55m")
+texture_offset = Vector2(96, 64)
+polygon = PackedVector2Array(112, -64, 208, -64, 192, -16, 128, -16, 124.65, -26.0494)
+script = ExtResource("3_n7cpm")
+reversed = true
+
+[node name="FitCollider" type="Node" parent="TerrainPolygon"]
+script = ExtResource("4_48iec")
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TerrainPolygon"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TerrainPolygon/StaticBody2D"]
+polygon = PackedVector2Array(112, -64, 208, -64, 192, -16, 128, -16)
+
+[node name="Sideline" type="Line2D" parent="TerrainPolygon"]
+z_index = 1
+y_sort_enabled = true
+points = PackedVector2Array(137, -18, 179.22, -16, 192, -16, 206, -29, 208, -42, 208, -64, 158, -68, 134, -67, 112, -64, 124, -62, 116.75, -49.7492, 125.519, -23.4424)
+closed = true
+width = 64.0
+texture = ExtResource("5_du55m")
+texture_mode = 1
+
+[node name="Sideline2" type="Line2D" parent="TerrainPolygon"]
+z_index = 1
+y_sort_enabled = true
+points = PackedVector2Array(137, -18, 179.22, -16, 192, -16, 206, -29, 208, -42, 208, -64, 158, -68, 134, -67, 112, -64, 124, -62, 116.75, -49.7492, 125.519, -23.4424)
+closed = true
+width = 64.0
+texture = ExtResource("5_du55m")
+texture_mode = 1

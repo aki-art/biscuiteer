@@ -28,6 +28,7 @@
 [ext_resource type="Texture2D" uid="uid://cbijdm22o5j7a" path="res://assets/smoke_particle.png" id="24_l71n6"]
 [ext_resource type="Texture2D" uid="uid://dc7wfvuo2rpoj" path="res://assets/damage_crumb.png" id="26_ujl30"]
 [ext_resource type="AudioStream" uid="uid://ds73djls0juh2" path="res://assets/audio/350770__fisu__slaps_a.wav" id="28_pf23h"]
+[ext_resource type="Gradient" uid="uid://cg1oby0uj1h1d" path="res://assets/gradients/particle_fade_in_out.tres" id="28_wqfne"]
 [ext_resource type="Texture2D" uid="uid://bok33jquu8p71" path="res://assets/light.png" id="29_dt7fs"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_3vyb7"]
@@ -39,18 +40,6 @@ radius = 52.0096
 
 [sub_resource type="Animation" id="Animation_l71n6"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../DeathParticles:emitting")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ke2ow"]
 _data = {
@@ -17294,10 +17283,6 @@ _data = {
 &"slap": SubResource("Animation_88tbc")
 }
 
-[sub_resource type="Gradient" id="Gradient_l71n6"]
-offsets = PackedFloat32Array(0, 0.702222, 1)
-colors = PackedColorArray(0.537011, 0.537011, 0.537011, 0.576471, 0.38, 0.38, 0.38, 0.486797, 0.38, 0.38, 0.38, 0)
-
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_a38lo"]
 animation = &"scml/run"
 
@@ -17377,7 +17362,6 @@ input_6/break_loop_at_end = false
 input_6/reset = true
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_t4otl"]
-graph_offset = Vector2(-747.458, 362.674)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_hax0n")
 nodes/Animation/position = Vector2(-260, -80)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_a38lo")
@@ -17634,13 +17618,13 @@ rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="bone_001" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
 position = Vector2(30.1266, 0)
-rotation = -0.307553
+rotation = -0.316265
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="bone_002" type="Bone2D" parent="entity_000/Skeleton/bone_000/bone_001"]
 position = Vector2(29.9752, -0.244293)
-rotation = 0.162909
-scale = Vector2(1, 1)
+rotation = 0.180854
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17657,7 +17641,8 @@ flip_v = true
 
 [node name="bone_003" type="Bone2D" parent="entity_000/Skeleton/bone_000/bone_001"]
 position = Vector2(18.6413, 16.3505)
-rotation = 1.28402
+rotation = 1.29739
+scale = Vector2(1, 1)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17691,9 +17676,9 @@ offset = Vector2(-11, -14)
 flip_v = true
 
 [node name="bone_004" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(20.2532, 10.5888)
-rotation = 2.98178
-scale = Vector2(1, 1)
+position = Vector2(20.2532, 10.8419)
+rotation = 3.00032
+scale = Vector2(0.999999, 0.999999)
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17709,9 +17694,8 @@ offset = Vector2(-25, -27)
 flip_v = true
 
 [node name="bone_005" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(16.962, -10.0164)
-rotation = -2.98573
-scale = Vector2(1, 1)
+position = Vector2(16.962, -10.2559)
+rotation = -2.99207
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17727,7 +17711,7 @@ offset = Vector2(-10, -29)
 flip_v = true
 
 [node name="bone_006" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-7.59494, 5.43749)
+position = Vector2(-7.59494, 5.56749)
 rotation = 3.03593
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
@@ -17758,8 +17742,8 @@ offset = Vector2(-11, -32)
 flip_v = true
 
 [node name="bone_008" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-7.59494, -6.58221)
-rotation = -2.97896
+position = Vector2(-7.59494, -6.73958)
+rotation = -2.98366
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 
 [node name="bone_009" type="Bone2D" parent="entity_000/Skeleton/bone_000/bone_008"]
@@ -17789,8 +17773,8 @@ offset = Vector2(-11, -32)
 flip_v = true
 
 [node name="bone_010" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-4.3038, 12.0197)
-rotation = 1.04438
+position = Vector2(-4.3038, 12.307)
+rotation = 1.06209
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
 length = 1.0
@@ -17805,7 +17789,7 @@ offset = Vector2(-83, -26)
 flip_v = true
 
 [node name="bone_011" type="Bone2D" parent="entity_000/Skeleton/bone_000"]
-position = Vector2(-2.27848, -0.286184)
+position = Vector2(-2.27848, -0.293026)
 rotation = 3.12894
 rest = Transform2D(1, 0, 0, 1, 0, 0)
 auto_calculate_length_and_angle = false
@@ -17869,21 +17853,20 @@ centered = false
 offset = Vector2(-46, -21)
 flip_v = true
 
-[node name="WalkDust" type="CPUParticles2D" parent="."]
-z_index = 1
+[node name="WalkDustParticles" type="CPUParticles2D" parent="."]
+modulate = Color(0.89, 0.89, 0.89, 0.784314)
+z_index = 110
 position = Vector2(0, -2)
-amount = 3
 texture = ExtResource("24_l71n6")
 direction = Vector2(-1.5, -1)
-spread = 12.0
+spread = 30.0
 gravity = Vector2(0, 100)
-initial_velocity_min = 22.39
-initial_velocity_max = 59.7
-angle_min = -170.0
-angle_max = 180.0
-scale_amount_min = 0.8
-scale_amount_max = 1.4
-color_ramp = SubResource("Gradient_l71n6")
+initial_velocity_min = 22.0
+initial_velocity_max = 60.0
+angle_min = -268.7
+angle_max = 505.1
+scale_amount_max = 1.5
+color_ramp = ExtResource("28_wqfne")
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 deterministic = false
@@ -17940,6 +17923,7 @@ scale_amount_curve = SubResource("Curve_31cv2")
 [node name="SlapSound" type="AudioStreamPlayer2D" parent="."]
 
 [node name="DebugLabel" type="Label" parent="."]
+visible = false
 z_index = 4096
 offset_left = -24.0
 offset_top = 5.0

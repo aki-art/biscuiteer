@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://d2uea123pdm8a"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_xhij3"]
+blend_mode = 1
+
+[node name="Mist" type="Polygon2D"]
+material = SubResource("CanvasItemMaterial_xhij3")
+scale = Vector2(10, 10)
+color = Color(0.0137451, 0.108742, 0.171838, 1)
+polygon = PackedVector2Array(-869.294, -751.765, 536, -662.118, 612.588, 265.412, -856.235, 192.588)

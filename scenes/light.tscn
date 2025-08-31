@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://ct48lmlb2nd6c"]
+
+[ext_resource type="Texture2D" uid="uid://bok33jquu8p71" path="res://assets/light.png" id="1_24oxn"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_q0mcw"]
+blend_mode = 1
+
+[node name="Light" type="Sprite2D"]
+modulate = Color(0.679504, 0.811208, 0.957995, 1)
+material = SubResource("CanvasItemMaterial_q0mcw")
+texture = ExtResource("1_24oxn")

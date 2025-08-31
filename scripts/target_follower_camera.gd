@@ -56,7 +56,7 @@ func _process(delta: float) -> void:
 		if shake_elapsed > shake_duration:
 			is_shaking = false;
 			
-		var target_offset = Vector2(noise.get_noise_2d(0, shake_elapsed), noise.get_noise_2d(shake_elapsed, 0)) * 300;
+		var target_offset = Vector2(noise.get_noise_2d(0, shake_elapsed), noise.get_noise_2d(shake_elapsed, 0)) * 400;
 		offset = lerp(offset, target_offset, 90.0 * t * delta);
 	else:
 		offset = lerp(offset, Vector2.ZERO, delta);
@@ -65,9 +65,9 @@ func _process(delta: float) -> void:
 	position = lerp(position, target_position, speed * unscaled_delta); # * unscaled_delta);
 	
 	
-func _unhandled_input(event):
-	if allow_user_zoom:
-		if event.is_action_pressed("zoom_in"):
-			_zoom_level += zoom_factor
-		if event.is_action_pressed("zoom_out"):
-			_zoom_level -= zoom_factor
+#func _unhandled_input(event):
+	#if allow_user_zoom:
+		#if event.is_action_pressed("zoom_in"):
+			#_zoom_level += zoom_factor
+		#if event.is_action_pressed("zoom_out"):
+			#_zoom_level -= zoom_factor

@@ -1,16 +1,35 @@
-[gd_scene load_steps=10 format=3 uid="uid://dth4o8u30mnum"]
+[gd_scene load_steps=21 format=3 uid="uid://dth4o8u30mnum"]
 
 [ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_q33ir"]
 [ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_275aa"]
 [ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="3_u745i"]
 [ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="4_px525"]
+[ext_resource type="PackedScene" uid="uid://uy4fvyrtlx7l" path="res://scenes/hive_terrain_polygon.tscn" id="5_knnlr"]
 [ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="6_5wvup"]
 [ext_resource type="PackedScene" uid="uid://dscchu0ycqsd5" path="res://scenes/bee.tscn" id="6_cj6df"]
 [ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="7_ease8"]
 [ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="8_ease8"]
+[ext_resource type="Texture2D" uid="uid://fbbxl8j05iuf" path="res://assets/arrow.png" id="9_jx4ue"]
+[ext_resource type="Texture2D" uid="uid://clh5xrwyhpbqe" path="res://assets/terrain_sets/pith/honeycomb.png" id="11_1xqhw"]
+[ext_resource type="PackedScene" uid="uid://d2uea123pdm8a" path="res://scenes/mist.tscn" id="12_1xqhw"]
+[ext_resource type="PackedScene" uid="uid://by1aopxlav8kn" path="res://scenes/small_hive_platform.tscn" id="12_yvjwr"]
+[ext_resource type="PackedScene" uid="uid://b2hiq2tyyu17a" path="res://scenes/hive_hexagon_bg.tscn" id="13_1xqhw"]
+[ext_resource type="Texture2D" uid="uid://cdejfyj1amdb5" path="res://assets/particle_close.png" id="15_xjqda"]
+[ext_resource type="Texture2D" uid="uid://bvhupw4fqj80i" path="res://assets/particle.png" id="16_kfp7s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ancp1"]
 size = Vector2(106, 202)
+
+[sub_resource type="Gradient" id="Gradient_vryqf"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_pojiw"]
+colors = PackedColorArray(1, 1, 1, 0.780392, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_77v83"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
 
 [node name="3" type="Node" groups=["level"]]
 script = ExtResource("1_q33ir")
@@ -34,146 +53,57 @@ position = Vector2(320, 8928)
 [node name="HeartPickup" parent="." instance=ExtResource("6_5wvup")]
 position = Vector2(2016, -16)
 
-[node name="LeftWall" type="Polygon2D" parent="."]
-color = Color(1, 0.792, 0.52, 1)
+[node name="HiveTerrainPolygon" parent="." instance=ExtResource("5_knnlr")]
+position = Vector2(1552, 0)
+texture_offset = Vector2(16, 0)
+polygon = PackedVector2Array(848, 0, 848, 432, 544, 752, 448, 752, 320, 896, 160, 896, 48, 992, -384, 992, -528, 1136, -1376, 1136, -1792, 2576, 3584, 2080, 3568, -16)
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon/StaticBody2D" index="0"]
+polygon = PackedVector2Array(848, 0, 848, 432, 544, 752, 448, 752, 320, 896, 160, 896, 48, 992, -384, 992, -528, 1136, -1376, 1136, -1792, 2576, 3584, 2080, 3568, -16)
+
+[node name="Sideline" parent="HiveTerrainPolygon" index="2"]
+points = PackedVector2Array(848, 0, 848, 19.124, 848, 418.457, 848, 432, 839.55, 440.895, 552.441, 743.115, 544, 752, 522.105, 752, 458.15, 752, 448, 752, 448, 752, 331.638, 882.907, 320, 896, 302.298, 896, 176, 896, 160, 896, 150.987, 903.726, 59.507, 982.137, 48, 992, 19.7793, 992, -370.611, 992, -384, 992, -394.164, 1002.16, -516.938, 1124.94, -528, 1136, -544, 1136, -1154.67, 1136, -1376, 1136, -1376, 1136, -1381.82, 1156.13, -1792, 2576, 3584, 2080, 3568, -16)
+
+[node name="LeftWall" parent="." instance=ExtResource("5_knnlr")]
+position = Vector2(16, -32)
+texture_offset = Vector2(16, 480)
+polygon = PackedVector2Array(-768, 0, 368, 0, 368, 464, 64, 640, 64, 976, 368, 976, 368, 1936, -768, 1936)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="LeftWall/StaticBody2D" index="0"]
 polygon = PackedVector2Array(-768, 0, 368, 0, 368, 464, 64, 640, 64, 976, 368, 976, 368, 1936, -768, 1936)
 
-[node name="FitCollider" type="Node" parent="LeftWall"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+[node name="Sideline" parent="LeftWall" index="2"]
+points = PackedVector2Array(-768, 1936, 368, 1936, 368, 1908.54, 368, 1005.18, 368, 976, 368, 976, 64, 976, 64, 960, 64, 655.78, 64, 640, 75.9148, 633.102, 353.52, 472.383, 368, 464, 368, 12.1406, 368, 0, 368, 0, 351.547, 0, -752.54, 0, -768, 0, -768, 16, -768, 16)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="LeftWall"]
-collision_layer = 4
-collision_mask = 0
+[node name="Ceiling Left" parent="." instance=ExtResource("5_knnlr")]
+z_index = 118
+polygon = PackedVector2Array(176, -1056, -86.761, -1050.7, -144, -464, -320, -192, -400, 80, -768, 64, -784, -1152, 176, -1136)
+reversed = true
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="LeftWall/StaticBody2D"]
-polygon = PackedVector2Array(-768, 0, 368, 0, 368, 464, 64, 640, 64, 976, 368, 976, 368, 1936, -768, 1936)
+[node name="CollisionPolygon2D" parent="Ceiling Left/StaticBody2D" index="0"]
+polygon = PackedVector2Array(176, -1056, -86.761, -1050.7, -144, -464, -320, -192, -400, 80, -768, 64, -784, -1152, 176, -1136)
 
-[node name="Ceiling" type="Polygon2D" parent="."]
-color = Color(1, 0.792, 0.52, 1)
+[node name="Sideline" parent="Ceiling Left" index="2"]
+points = PackedVector2Array(176, -1136, -784, -1152, -768.246, 45.3244, -768, 64, -744.52, 65.0209, -425.976, 78.8706, -400, 80, -392.698, 55.1741, -325.608, -172.933, -320, -192, -308.902, -209.151, -155.219, -446.661, -144, -464, -141.722, -487.354, -89.336, -1024.31, -86.761, -1050.7, -58.2343, -1051.27, 158.115, -1055.64, 176, -1056)
+
+[node name="Ceiling Right" parent="." instance=ExtResource("5_knnlr")]
 polygon = PackedVector2Array(448, -368, 512, -304, 832, -304, 928, -432, 1344, -432, 1408, -336, 1856, -336, 1904, -416, 2176, -416, 2240, -512, 2512, -512, 2656, -288, 2928, -288, 3104, 32, 3600, 48, 3568, -1088, 160, -1120, 192, -496)
 
-[node name="FitCollider" type="Node" parent="Ceiling"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Ceiling"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ceiling/StaticBody2D"]
+[node name="CollisionPolygon2D" parent="Ceiling Right/StaticBody2D" index="0"]
 polygon = PackedVector2Array(448, -368, 512, -304, 832, -304, 928, -432, 1344, -432, 1408, -336, 1856, -336, 1904, -416, 2176, -416, 2240, -512, 2512, -512, 2656, -288, 2928, -288, 3104, 32, 3600, 48, 3568, -1088, 160, -1120, 192, -496)
 
-[node name="Ceiling2" type="Polygon2D" parent="."]
-color = Color(1, 0.792, 0.52, 1)
-polygon = PackedVector2Array(-80, -1120, -144, -464, -320, -192, -400, 80, -768, 64, -784, -1152)
-
-[node name="FitCollider" type="Node" parent="Ceiling2"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Ceiling2"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Ceiling2/StaticBody2D"]
-polygon = PackedVector2Array(-80, -1120, -144, -464, -320, -192, -400, 80, -768, 64, -784, -1152)
-
-[node name="SmallPlatform" type="Polygon2D" parent="."]
-color = Color(1, 0.792, 0.52, 1)
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="FitCollider" type="Node" parent="SmallPlatform"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform/StaticBody2D"]
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="SmallPlatform2" type="Polygon2D" parent="."]
-position = Vector2(384, 0)
-color = Color(1, 0.792, 0.52, 1)
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="FitCollider" type="Node" parent="SmallPlatform2"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform2"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform2/StaticBody2D"]
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="SmallPlatform3" type="Polygon2D" parent="."]
-position = Vector2(784, 0)
-color = Color(1, 0.792, 0.52, 1)
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="FitCollider" type="Node" parent="SmallPlatform3"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform3"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform3/StaticBody2D"]
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="SmallPlatform4" type="Polygon2D" parent="."]
-position = Vector2(1248, 0)
-color = Color(1, 0.792, 0.52, 1)
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="FitCollider" type="Node" parent="SmallPlatform4"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform4"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform4/StaticBody2D"]
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="SmallPlatform5" type="Polygon2D" parent="."]
-position = Vector2(-176, 800)
-color = Color(1, 0.792, 0.52, 1)
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
-
-[node name="FitCollider" type="Node" parent="SmallPlatform5"]
-script = ExtResource("3_u745i")
-override_existing = null
-metadata/_custom_type_script = "uid://0rhyul8vxfsk"
-
-[node name="StaticBody2D" type="StaticBody2D" parent="SmallPlatform5"]
-collision_layer = 4
-collision_mask = 0
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SmallPlatform5/StaticBody2D"]
-polygon = PackedVector2Array(720, 0, 816, 0, 816, 64, 768, 96, 720, 64)
+[node name="Sideline" parent="Ceiling Right" index="2"]
+points = PackedVector2Array(448, -368, 512, -304, 832, -304, 928, -432, 1344, -432, 1408, -336, 1842.82, -336, 1856, -336, 1856, -336, 1898.56, -406.927, 1904, -416, 2169.28, -416, 2176, -416, 2176, -416, 2236.26, -506.384, 2240, -512, 2249.32, -512, 2503.35, -512, 2512, -512, 2518.98, -501.139, 2656, -288, 2656, -288, 2665.2, -288, 2919.42, -288, 2928, -288, 2934.79, -275.664, 3104, 32, 3104, 32, 3117.18, 32.4251, 3588.65, 47.6337, 3600, 48, 3599.63, 34.7774, 3568, -1088, 160, -1120, 161.383, -1093.04, 190.66, -522.139, 192, -496, 192, -496)
 
 [node name="RightWall" type="Polygon2D" parent="."]
+visible = false
 position = Vector2(1584, 0)
 color = Color(1, 0.792, 0.52, 1)
 polygon = PackedVector2Array(848, 0, 848, 432, 544, 752, 448, 752, 320, 896, 160, 896, 48, 992, -384, 992, -528, 1136, -1376, 1136, -1376, 1808, 1680, 1792, 1664, 0)
 
 [node name="FitCollider" type="Node" parent="RightWall"]
 script = ExtResource("3_u745i")
-override_existing = null
 metadata/_custom_type_script = "uid://0rhyul8vxfsk"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="RightWall"]
@@ -197,7 +127,18 @@ collision_layer = 4
 collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="InivisibleWallCeiling"]
+position = Vector2(0, 9240.63)
+scale = Vector2(1, 9.14583)
 polygon = PackedVector2Array(-128, -1120, 240, -1120, 224, -1072, -160, -1072)
+
+[node name="Mist" parent="." instance=ExtResource("12_1xqhw")]
+position = Vector2(2464, 3008)
+color = Color(0.161013, 0.112735, 0.0402997, 1)
+
+[node name="Arrow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(416, -160)
+texture = ExtResource("9_jx4ue")
 
 [node name="Warper" parent="." instance=ExtResource("8_ease8")]
 position = Vector2(2800, -96)
@@ -206,3 +147,107 @@ destination = "res://scenes/levels/2/2_round_bees.tscn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
 position = Vector2(32, 0)
 shape = SubResource("RectangleShape2D_ancp1")
+
+[node name="far_bg" type="CanvasLayer" parent="."]
+layer = -30
+follow_viewport_enabled = true
+follow_viewport_scale = 0.7
+
+[node name="Polygon2D2" type="Polygon2D" parent="far_bg"]
+texture_repeat = 2
+position = Vector2(274.286, 1851.43)
+color = Color(0.91264, 0.899503, 0.99463, 1)
+texture = ExtResource("11_1xqhw")
+texture_scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-2788.57, -3954.29, 5714.29, -3885.71, 5645.71, 1782.86, -3177.14, 1622.86)
+
+[node name="SmallHivePlatform" parent="." instance=ExtResource("12_yvjwr")]
+position = Vector2(1152, 0)
+texture_scale = Vector2(2, 2)
+
+[node name="SmallHivePlatform2" parent="." instance=ExtResource("12_yvjwr")]
+position = Vector2(768, 0)
+texture_offset = Vector2(100, 0)
+texture_scale = Vector2(2, 2)
+
+[node name="SmallHivePlatform3" parent="." instance=ExtResource("12_yvjwr")]
+position = Vector2(1552, 0)
+texture_offset = Vector2(0, 100)
+texture_scale = Vector2(2, 2)
+
+[node name="SmallHivePlatform4" parent="." instance=ExtResource("12_yvjwr")]
+position = Vector2(2016, 0)
+texture_scale = Vector2(2, 2)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -2
+follow_viewport_enabled = true
+follow_viewport_scale = 0.85
+
+[node name="HiveHexagonBg" parent="CanvasLayer" instance=ExtResource("13_1xqhw")]
+position = Vector2(560, -384)
+
+[node name="HiveHexagonBg2" parent="CanvasLayer" instance=ExtResource("13_1xqhw")]
+position = Vector2(1167.06, 527.059)
+
+[node name="HiveHexagonBg3" parent="CanvasLayer" instance=ExtResource("13_1xqhw")]
+position = Vector2(1694.12, -395.294)
+
+[node name="HiveHexagonBg4" parent="CanvasLayer" instance=ExtResource("13_1xqhw")]
+position = Vector2(2785.88, -414.118)
+
+[node name="HiveHexagonBg5" parent="CanvasLayer" instance=ExtResource("13_1xqhw")]
+position = Vector2(2785.88, -414.118)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.91, 0.81172, 0.6916, 1)
+
+[node name="fg" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enabled = true
+follow_viewport_scale = 1.3
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="fg"]
+modulate = Color(1, 0.668667, 0.29, 0.623529)
+z_index = 1000
+position = Vector2(824.615, 36.9229)
+amount = 20
+texture = ExtResource("15_xjqda")
+lifetime = 20.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 2000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.1
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_vryqf")
+color_initial_ramp = SubResource("Gradient_pojiw")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1, 0.8005, 0.43, 1)
+z_as_relative = false
+position = Vector2(1136, 448)
+amount = 200
+texture = ExtResource("16_kfp7s")
+lifetime = 20.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_77v83")
+
+[editable path="HiveTerrainPolygon"]
+[editable path="LeftWall"]
+[editable path="Ceiling Left"]
+[editable path="Ceiling Right"]

@@ -6,7 +6,7 @@ func can_activate(data:ToolConfig) -> bool:
 	if !player:
 		return false;
 		
-	return player.is_on_floor();
+	return player.is_on_floor() && super.can_activate(data);
 	
 func activate(data: ToolConfig) -> void:
 	super(data);

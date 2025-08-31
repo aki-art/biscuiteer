@@ -1,0 +1,31 @@
+[gd_scene load_steps=6 format=3 uid="uid://b2hiq2tyyu17a"]
+
+[ext_resource type="Texture2D" uid="uid://dhf22bmf8lylw" path="res://assets/terrain_sets/pith/bg.png" id="1_g6rs5"]
+[ext_resource type="Script" uid="uid://b16c1cdeyogbb" path="res://scripts/terrain_polygon.gd" id="2_oxn7m"]
+[ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="3_3qvcx"]
+[ext_resource type="Texture2D" uid="uid://doifr2m68l3rd" path="res://assets/terrain_sets/pith/edge.png" id="4_1ibwj"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_86vc8"]
+
+[node name="HiveHexagonBg" type="Polygon2D"]
+modulate = Color(0.768627, 0.623529, 0.537255, 1)
+color = Color(0.65098, 0.65098, 0.65098, 1)
+texture = ExtResource("1_g6rs5")
+texture_offset = Vector2(496, 288)
+texture_scale = Vector2(2, 2)
+polygon = PackedVector2Array(0, -320, 496, 0, 496, 448, 0, 784, -464, 448, -464, 0)
+script = ExtResource("2_oxn7m")
+reversed = true
+
+[node name="FitCollider" type="Node" parent="."]
+script = ExtResource("3_3qvcx")
+metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="Sideline" type="Line2D" parent="."]
+modulate = Color(0.65098, 0.65098, 0.65098, 1)
+material = SubResource("CanvasItemMaterial_86vc8")
+points = PackedVector2Array(-464, 0, -464, 448, 0, 784, 496, 448, 496, 0, 0, -320)
+closed = true
+width = 64.0
+texture = ExtResource("4_1ibwj")
+texture_mode = 1

@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://by1aopxlav8kn"]
+
+[ext_resource type="PackedScene" uid="uid://uy4fvyrtlx7l" path="res://scenes/hive_terrain_polygon.tscn" id="1_lfxd7"]
+
+[node name="SmallHivePlatform" instance=ExtResource("1_lfxd7")]
+polygon = PackedVector2Array(-48, 0, 48, 0, 48, 64, 0, 96, -48, 64)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="StaticBody2D" index="0"]
+polygon = PackedVector2Array(-48, 0, 48, 0, 48, 64, 0, 96, -48, 64)
+
+[node name="Sideline" parent="." index="2"]
+points = PackedVector2Array(-48, 64, -48, 64, 0, 96, 0, 96, 39.5015, 69.6656, 48, 64, 48, 64, 48, 0, 48, 0, 32, 0, -36.2728, 0, -48, 0, -48, 0, -48, 48)

@@ -1,0 +1,672 @@
+[gd_scene load_steps=30 format=3 uid="uid://km0hi8hn7gmp"]
+
+[ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_afpt4"]
+[ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_qffi6"]
+[ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="3_5nah5"]
+[ext_resource type="Texture2D" uid="uid://clh5xrwyhpbqe" path="res://assets/terrain_sets/pith/honeycomb.png" id="3_8tsjf"]
+[ext_resource type="PackedScene" uid="uid://bolndxsgq846l" path="res://scenes/crumbs_bag.tscn" id="4_cjn5p"]
+[ext_resource type="PackedScene" uid="uid://b2hiq2tyyu17a" path="res://scenes/hive_hexagon_bg.tscn" id="4_xdnbx"]
+[ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="5_1rtl8"]
+[ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="6_rbrul"]
+[ext_resource type="PackedScene" uid="uid://d2uea123pdm8a" path="res://scenes/mist.tscn" id="7_aen40"]
+[ext_resource type="PackedScene" uid="uid://uy4fvyrtlx7l" path="res://scenes/hive_terrain_polygon.tscn" id="8_2o3mg"]
+[ext_resource type="PackedScene" uid="uid://5pqlyngu6ej2" path="res://scenes/honey_drip.tscn" id="9_gyti2"]
+[ext_resource type="Texture2D" uid="uid://bok33jquu8p71" path="res://assets/light.png" id="10_8tsjf"]
+[ext_resource type="PackedScene" uid="uid://c0msx5qed76ww" path="res://scenes/moving_spike.tscn" id="11_xdnbx"]
+[ext_resource type="PackedScene" uid="uid://bkd6kvsr43i6h" path="res://scenes/spikes.tscn" id="12_crevp"]
+[ext_resource type="PackedScene" uid="uid://dscchu0ycqsd5" path="res://scenes/bee.tscn" id="13_skeru"]
+[ext_resource type="PackedScene" uid="uid://cdmduf0wmgm2u" path="res://scenes/honey.tscn" id="14_sjfvd"]
+[ext_resource type="PackedScene" uid="uid://dxjasd2h00akd" path="res://scenes/hazard_respawn_marker.tscn" id="15_qffi6"]
+[ext_resource type="PackedScene" uid="uid://chobe4rfr88dx" path="res://scenes/mimic.tscn" id="16_5nah5"]
+[ext_resource type="Texture2D" uid="uid://b0uwcgt6cbd8s" path="res://assets/biscuit_texture.png" id="17_1rtl8"]
+[ext_resource type="Texture2D" uid="uid://d0mdh2chrwf8g" path="res://assets/terrain_sets/biscuit/edge.png" id="18_rbrul"]
+[ext_resource type="PackedScene" uid="uid://detx0ol2vgc17" path="res://scenes/cake.tscn" id="19_rbrul"]
+[ext_resource type="Texture2D" uid="uid://cdejfyj1amdb5" path="res://assets/particle_close.png" id="20_2o3mg"]
+[ext_resource type="Texture2D" uid="uid://bvhupw4fqj80i" path="res://assets/particle.png" id="21_gyti2"]
+[ext_resource type="Theme" uid="uid://bjbx742eqigem" path="res://assets/ui_theme/cookie_theme.tres" id="22_xdnbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cjmoc"]
+size = Vector2(125, 205)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5nah5"]
+size = Vector2(108, 494)
+
+[sub_resource type="Gradient" id="Gradient_8tsjf"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_xdnbx"]
+colors = PackedColorArray(1, 1, 1, 0.780392, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_crevp"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
+
+[node name="3" type="Node" groups=["level"]]
+script = ExtResource("1_afpt4")
+metadata/_custom_type_script = "uid://v7nfrwkqo145"
+metadata/_edit_horizontal_guides_ = [-432.0]
+
+[node name="PlayerStartMarker" parent="." instance=ExtResource("2_qffi6")]
+position = Vector2(-560, 0)
+
+[node name="far_bg" type="CanvasLayer" parent="PlayerStartMarker"]
+layer = -30
+follow_viewport_enabled = true
+follow_viewport_scale = 0.7
+
+[node name="Polygon2D2" type="Polygon2D" parent="PlayerStartMarker/far_bg"]
+texture_repeat = 2
+position = Vector2(274.286, 1851.43)
+color = Color(0.91264, 0.899503, 0.99463, 1)
+texture = ExtResource("3_8tsjf")
+texture_scale = Vector2(0.5, 0.5)
+polygon = PackedVector2Array(-2788.57, -3954.29, 11588.6, -3680, 11085.7, 7451.43, -4754.29, 7314.28)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="PlayerStartMarker/far_bg"]
+layer = -2
+follow_viewport_enabled = true
+follow_viewport_scale = 0.85
+
+[node name="HiveHexagonBg" parent="PlayerStartMarker/far_bg/CanvasLayer" instance=ExtResource("4_xdnbx")]
+position = Vector2(560, -384)
+
+[node name="HiveHexagonBg2" parent="PlayerStartMarker/far_bg/CanvasLayer" instance=ExtResource("4_xdnbx")]
+position = Vector2(1167.06, 527.059)
+
+[node name="HiveHexagonBg3" parent="PlayerStartMarker/far_bg/CanvasLayer" instance=ExtResource("4_xdnbx")]
+position = Vector2(1242.35, -1204.71)
+
+[node name="HiveHexagonBg4" parent="PlayerStartMarker/far_bg/CanvasLayer" instance=ExtResource("4_xdnbx")]
+position = Vector2(2785.88, -414.118)
+
+[node name="Warper" parent="." instance=ExtResource("3_5nah5")]
+position = Vector2(656, -336)
+
+[node name="RichTextLabel" parent="Warper" index="0"]
+custom_minimum_size = Vector2(200, 0)
+offset_left = 27.0
+offset_top = -132.0
+offset_right = 227.0
+offset_bottom = -17.0
+text = "For now, this is the end, thank you for playing! :D
+
+Feedback is appreciated!!!"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Warper"]
+position = Vector2(32, 16)
+shape = SubResource("RectangleShape2D_cjmoc")
+disabled = true
+
+[node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
+position = Vector2(0, -320)
+
+[node name="bottom_right" type="Marker2D" parent="CameraExtents"]
+position = Vector2(8000, 7024)
+
+[node name="top_left" type="Marker2D" parent="CameraExtents"]
+position = Vector2(-1456, -416)
+
+[node name="Void" parent="." instance=ExtResource("5_1rtl8")]
+position = Vector2(320, 8928)
+
+[node name="HeartPickup" parent="." instance=ExtResource("6_rbrul")]
+position = Vector2(2016, -16)
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+position = Vector2(8012.8, 9207.04)
+scale = Vector2(32, 28.8)
+color = Color(0.91, 0.81172, 0.6916, 1)
+
+[node name="Mist" parent="." instance=ExtResource("7_aen40")]
+position = Vector2(8012.8, 9207.04)
+scale = Vector2(32, 28.8)
+color = Color(0.161013, 0.112735, 0.0402997, 1)
+
+[node name="LeftBottomWall" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(128, 544)
+texture_offset = Vector2(128, 32)
+polygon = PackedVector2Array(880, -544, 1040, -384, 1040, 144, 800, 384, 800, 816, 1328, 1280, 1328, 1725.27, 1520, 1936, 1328, 2944, -1504, 2960, -1504, -544)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="LeftBottomWall/StaticBody2D" index="0"]
+visible = true
+polygon = PackedVector2Array(880, -544, 1040, -384, 1040, 144, 800, 384, 800, 816, 1328, 1280, 1328, 1725.27, 1520, 1936, 1328, 2944, -1504, 2960, -1504, -544)
+
+[node name="Sideline" parent="LeftBottomWall" index="2"]
+points = PackedVector2Array(-1504, -544, -1504, 2960, 1328, 2944, 1520, 1936, 1328, 1725.27, 1328, 1280, 800, 816, 800, 384, 1040, 144, 1040, -384, 880, -544)
+
+[node name="HoneyDrip" parent="." instance=ExtResource("9_gyti2")]
+visible = false
+z_index = -1
+position = Vector2(576, 544)
+rotation = 0.465023
+
+[node name="Light" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(0.850254, 0.803714, 0.66886, 1)
+position = Vector2(112, -416)
+scale = Vector2(3.75, 3.3125)
+texture = ExtResource("10_8tsjf")
+
+[node name="HiveTerrainPolygon" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(2176, 1248)
+texture_offset = Vector2(128, 224)
+polygon = PackedVector2Array(-2240, -1456, -1008, -1456, -688, -1088, -688, -576, -432, -320, -432, 112, -576, 272, -32, 704, 1072, 704, 1344, 400, 1872, 400, 3440, 2208, 8784, 2192, 8784, -2000, 2625.71, -1993.37, -2592, -1984, -3584, -2064, -3568, -1536, -3568, -1632, -2864, -1568, -2576, -1456)
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon/StaticBody2D" index="0"]
+visible = true
+polygon = PackedVector2Array(-2240, -1456, -1008, -1456, -688, -1088, -688, -576, -432, -320, -432, 112, -576, 272, -32, 704, 1072, 704, 1344, 400, 1872, 400, 3440, 2208, 8784, 2192, 8784, -2000, 2625.71, -1993.37, -2592, -1984, -3584, -2064, -3568, -1536, -3568, -1632, -2864, -1568, -2576, -1456)
+
+[node name="Sideline" parent="HiveTerrainPolygon" index="2"]
+points = PackedVector2Array(-2240, -1456, -1008, -1456, -688, -1088, -688, -576, -432, -320, -432, 112, -576, 272, -32, 704, 1072, 704, 1344, 400, 1872, 400, 3440, 2208, 8784, 2192, 8784, -2000, 2625.71, -1993.37, -2592, -1984, -3584, -2064, -3568, -1536, -3568, -1632, -2864, -1568, -2576, -1456)
+
+[node name="HiveTerrainPolygon2" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(2976, 3472)
+texture_offset = Vector2(416, 400)
+polygon = PackedVector2Array(-1600, -1056, 416, -1056, 464, -1312, 560, -1408, 1008, -1408, 2432, 272, 2576, 304, 3632, 304, 3680, 400, 3680, 1808, 1952, 1808, -4768, 1808, -4800, -160)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon2/StaticBody2D" index="0"]
+visible = true
+polygon = PackedVector2Array(-1600, -1056, 416, -1056, 464, -1312, 560, -1408, 1008, -1408, 2432, 272, 2576, 304, 3632, 304, 3680, 400, 3680, 1808, 1952, 1808, -4768, 1808, -4800, -160)
+
+[node name="Sideline" parent="HiveTerrainPolygon2" index="2"]
+points = PackedVector2Array(-4800, -160, -4768, 1808, 1952, 1808, 3680, 1808, 3680, 400, 3632, 304, 2576, 304, 2432, 272, 1008, -1408, 560, -1408, 464, -1312, 416, -1056, -1600, -1056)
+
+[node name="MovingSpike" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(96, 16)
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.0
+
+[node name="MovingSpike7" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(1040, 48)
+rotation = 0.67138
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.0
+
+[node name="MovingSpike8" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(1088, 112)
+rotation = 1.02669
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.0
+
+[node name="MovingSpike2" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(192, -208)
+rotation = -3.14159
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.6
+
+[node name="MovingSpike3" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(288, 16)
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.0
+
+[node name="MovingSpike4" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(384, -208)
+rotation = -3.14159
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.6
+
+[node name="MovingSpike5" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(480, 16)
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.0
+
+[node name="MovingSpike6" parent="." instance=ExtResource("11_xdnbx")]
+position = Vector2(576, -208)
+rotation = -3.14159
+extended_time = 0.3
+retracted_time = 1.6
+timer_offset = 0.6
+
+[node name="HoneyDrip2" parent="." instance=ExtResource("9_gyti2")]
+position = Vector2(992, -208)
+
+[node name="HoneyDrip3" parent="." instance=ExtResource("9_gyti2")]
+position = Vector2(1395, 48.0001)
+rotation = 0.771331
+drop_activation = 0.2
+
+[node name="HiveTerrainPolygon3" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(1484, 1091)
+texture_offset = Vector2(460, 67)
+polygon = PackedVector2Array(-220, -723, -92, -723, -92, -643, -156, -611, -220, -643)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon3/StaticBody2D" index="0"]
+visible = true
+polygon = PackedVector2Array(-220, -723, -92, -723, -92, -643, -156, -611, -220, -643)
+
+[node name="Sideline" parent="HiveTerrainPolygon3" index="2"]
+points = PackedVector2Array(-220, -643, -156, -611, -92, -643, -92, -723, -220, -723)
+
+[node name="Spikes" parent="HiveTerrainPolygon3" instance=ExtResource("12_crevp")]
+position = Vector2(-158, -711)
+
+[node name="HiveTerrainPolygon5" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(1898, 2695)
+texture_offset = Vector2(362, 135)
+polygon = PackedVector2Array(-220, -723, -92, -723, -92, -643, -156, -611, -220, -643)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon5/StaticBody2D" index="0"]
+visible = true
+polygon = PackedVector2Array(-220, -723, -92, -723, -92, -643, -156, -611, -220, -643)
+
+[node name="Sideline" parent="HiveTerrainPolygon5" index="2"]
+points = PackedVector2Array(-220, -643, -156, -611, -92, -643, -92, -723, -220, -723)
+
+[node name="Spikes" parent="HiveTerrainPolygon5" instance=ExtResource("12_crevp")]
+position = Vector2(-158, -711)
+
+[node name="Spikes2" parent="." instance=ExtResource("12_crevp")]
+position = Vector2(1149, 670)
+rotation = 1.90881
+
+[node name="Spikes3" parent="." instance=ExtResource("12_crevp")]
+position = Vector2(1507, 667)
+rotation = -1.90939
+
+[node name="Spikes4" parent="." instance=ExtResource("12_crevp")]
+position = Vector2(1647, 1493)
+rotation = -1.0055
+
+[node name="Spikes5" parent="." instance=ExtResource("12_crevp")]
+position = Vector2(1717, 1413)
+rotation = -1.22735
+
+[node name="HiveTerrainPolygon4" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(1401, 1120)
+texture_offset = Vector2(377, 96)
+polygon = PackedVector2Array(-353, -108, 223, -108, 223, -60, 159, -44, 143, 164, 87, 176, 55, -32, -67, -51, -185, -32, -201, 176, -273, 164, -289, -44, -353, -60)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon4/StaticBody2D" index="0"]
+visible = true
+polygon = PackedVector2Array(-353, -108, 223, -108, 223, -60, 159, -44, 143, 164, 87, 176, 55, -32, -67, -51, -185, -32, -201, 176, -273, 164, -289, -44, -353, -60)
+
+[node name="Sideline" parent="HiveTerrainPolygon4" index="2"]
+points = PackedVector2Array(-353, -60, -289, -44, -273, 164, -201, 176, -185, -32, -67, -51, 55, -32, 87, 176, 143, 164, 159, -44, 223, -60, 223, -108, -353, -108)
+
+[node name="Bee" parent="." instance=ExtResource("13_skeru")]
+position = Vector2(1341, 1196)
+
+[node name="HeartPickup2" parent="." instance=ExtResource("6_rbrul")]
+position = Vector2(1330, 1001)
+
+[node name="Milk3" parent="." instance=ExtResource("14_sjfvd")]
+position = Vector2(2217, 2290)
+
+[node name="Polygon2D" type="Polygon2D" parent="Milk3"]
+polygon = PackedVector2Array(-672, 107, 1223, 110, 1191, 142, -633, 142)
+
+[node name="HoneyDrip" parent="Milk3" instance=ExtResource("9_gyti2")]
+position = Vector2(-9, -338)
+drop_timer = 1.4
+
+[node name="HoneyDrip2" parent="Milk3" instance=ExtResource("9_gyti2")]
+position = Vector2(279, -338)
+drop_timer = 1.4
+
+[node name="HoneyDrip3" parent="Milk3" instance=ExtResource("9_gyti2")]
+position = Vector2(583, -338)
+drop_timer = 1.4
+
+[node name="HoneyDrip4" parent="Milk3" instance=ExtResource("9_gyti2")]
+position = Vector2(903, -338)
+drop_timer = 1.4
+
+[node name="Bee" parent="Milk3" instance=ExtResource("13_skeru")]
+position = Vector2(183, -114)
+
+[node name="SpikesTunnelLower" type="Node2D" parent="."]
+position = Vector2(5968, 3760)
+
+[node name="Spikes" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(-416, 32)
+
+[node name="Spikes6" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(-320, 32)
+
+[node name="Spikes7" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(-224, 32)
+
+[node name="Spikes8" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(-128, 32)
+
+[node name="Spikes9" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(-32, 32)
+
+[node name="Spikes10" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(64, 32)
+
+[node name="Spikes11" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(160, 32)
+
+[node name="Spikes12" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(256, 32)
+
+[node name="Spikes13" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(336, 32)
+
+[node name="Spikes14" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(416, 32)
+
+[node name="Spikes15" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(496, 32)
+
+[node name="Spikes16" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(576, 32)
+
+[node name="Spikes17" parent="SpikesTunnelLower" instance=ExtResource("12_crevp")]
+position = Vector2(624, 64)
+rotation = 0.749498
+
+[node name="SpikesTunnelUpper" type="Node2D" parent="."]
+position = Vector2(6240, 3488)
+rotation = -3.13192
+
+[node name="Spikes" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(-416, 32)
+
+[node name="Spikes6" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(-320, 32)
+
+[node name="Spikes7" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(-224, 32)
+
+[node name="Spikes8" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(-128, 32)
+
+[node name="Spikes9" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(-32, 32)
+
+[node name="Spikes10" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(64, 32)
+
+[node name="Spikes11" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(160, 32)
+
+[node name="Spikes12" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(256, 32)
+
+[node name="Spikes13" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(336, 32)
+
+[node name="Spikes14" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(416, 32)
+
+[node name="Spikes15" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(496, 32)
+
+[node name="Spikes16" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(576, 32)
+
+[node name="Spikes17" parent="SpikesTunnelUpper" instance=ExtResource("12_crevp")]
+position = Vector2(624, 64)
+rotation = 0.749498
+
+[node name="RespawnMarkers" type="Node2D" parent="."]
+position = Vector2(384, 0)
+
+[node name="HazardRespawnMarker" parent="RespawnMarkers" instance=ExtResource("15_qffi6")]
+position = Vector2(320, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_5nah5")
+
+[node name="HazardRespawnMarker3" parent="RespawnMarkers" instance=ExtResource("15_qffi6")]
+position = Vector2(3536, 2064)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker3"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_5nah5")
+
+[node name="HazardRespawnMarker2" parent="RespawnMarkers" instance=ExtResource("15_qffi6")]
+position = Vector2(576, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker2"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_5nah5")
+
+[node name="Mimic" parent="." instance=ExtResource("16_5nah5")]
+position = Vector2(3744, 2048)
+
+[node name="HiveTerrainPolygon6" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(7104, 4512)
+texture_offset = Vector2(448, 416)
+polygon = PackedVector2Array(-448, 752, -816, 1184, -960, 1760, 448, 1760, 422.944, 2885.61, -2560, 2976, -2480, 720, -1776, 480, -1280, 336, -912, 464, -752, 544)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon6/StaticBody2D" index="0"]
+polygon = PackedVector2Array(-448, 752, -816, 1184, -960, 1760, 448, 1760, 422.944, 2885.61, -2560, 2976, -2480, 720, -1776, 480, -1280, 336, -912, 464, -752, 544)
+
+[node name="Sideline" parent="HiveTerrainPolygon6" index="2"]
+points = PackedVector2Array(-752, 544, -912, 464, -1280, 336, -1776, 480, -2480, 720, -2560, 2976, 422.944, 2885.61, 448, 1760, -960, 1760, -816, 1184, -448, 752)
+
+[node name="HiveTerrainPolygon7" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(7104, 4512)
+texture_offset = Vector2(448, 416)
+polygon = PackedVector2Array(336, 1760, 192, 1200, -176, 752, -176, -1088, 2192, -1056, 2192, 2832, 67, 3019)
+reversed = true
+
+[node name="CollisionPolygon2D" parent="HiveTerrainPolygon7/StaticBody2D" index="0"]
+polygon = PackedVector2Array(336, 1760, 192, 1200, -176, 752, -176, -1088, 1952, -1104, 2192, 2832, 67, 3019)
+
+[node name="Sideline" parent="HiveTerrainPolygon7" index="2"]
+points = PackedVector2Array(67, 3019, 2192, 2832, 1952, -1104, -176, -1088, -176, 752, 192, 1200, 336, 1760)
+
+[node name="BiscuitPlatformBig" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(6032, 6160)
+texture = ExtResource("17_1rtl8")
+polygon = PackedVector2Array(592, 112, 608, -106, 912, -112, 944, 128)
+
+[node name="Obstacle1" type="StaticBody2D" parent="BiscuitPlatformBig"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Line2D5" type="Line2D" parent="BiscuitPlatformBig/Obstacle1"]
+position = Vector2(-544, 12)
+rotation = -0.00844117
+points = PackedVector2Array(1141.02, 120.636, 1153.62, -85.5987, 1154.83, -93.2559, 1168.87, -107.461, 1436.52, -111.404, 1454.87, -96.7227, 1463.72, -79.6475, 1482.02, 122.514)
+width = 64.0
+texture = ExtResource("18_rbrul")
+texture_mode = 1
+joint_mode = 2
+sharp_limit = 0.0
+round_precision = 11
+antialiased = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BiscuitPlatformBig/Obstacle1"]
+polygon = PackedVector2Array(588, 114, 606, -106, 915, -117, 951, 115)
+
+[node name="BiscuitPlatformBig2" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(5664, 6256)
+texture = ExtResource("17_1rtl8")
+polygon = PackedVector2Array(640, 112, 649, -98, 868, -113, 885, 110)
+
+[node name="Obstacle1" type="StaticBody2D" parent="BiscuitPlatformBig2"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Line2D5" type="Line2D" parent="BiscuitPlatformBig2/Obstacle1"]
+position = Vector2(-544, 12)
+rotation = -0.00844117
+points = PackedVector2Array(1184, 116, 1194, -64, 1199, -84, 1209, -96, 1221, -96, 1391, -102, 1407, -97, 1413, -82, 1429, 115)
+width = 64.0
+texture = ExtResource("18_rbrul")
+texture_mode = 1
+joint_mode = 2
+sharp_limit = 0.0
+round_precision = 11
+antialiased = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BiscuitPlatformBig2/Obstacle1"]
+visible = false
+polygon = PackedVector2Array(637, 106, 648, -101, 874, -116, 892, 111)
+
+[node name="BiscuitPlatformBig3" type="Polygon2D" parent="."]
+z_index = -1
+position = Vector2(6416, 6256)
+texture = ExtResource("17_1rtl8")
+polygon = PackedVector2Array(640, 112, 649, -98, 868, -113, 885, 110)
+
+[node name="Obstacle1" type="StaticBody2D" parent="BiscuitPlatformBig3"]
+collision_layer = 4
+collision_mask = 2
+
+[node name="Line2D5" type="Line2D" parent="BiscuitPlatformBig3/Obstacle1"]
+position = Vector2(-544, 12)
+rotation = -0.00844117
+points = PackedVector2Array(1184, 116, 1194, -64, 1199, -84, 1209, -96, 1221, -96, 1391, -102, 1407, -97, 1413, -82, 1429, 115)
+width = 64.0
+texture = ExtResource("18_rbrul")
+texture_mode = 1
+joint_mode = 2
+sharp_limit = 0.0
+round_precision = 11
+antialiased = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="BiscuitPlatformBig3/Obstacle1"]
+visible = false
+polygon = PackedVector2Array(637, 106, 648, -101, 874, -116, 892, 111)
+
+[node name="Cake" parent="." instance=ExtResource("19_rbrul")]
+position = Vector2(6793, 5969)
+scale = Vector2(0.82, 0.82)
+
+[node name="CrumbsBag" parent="." instance=ExtResource("4_cjn5p")]
+position = Vector2(6420, 6161)
+crumb_count = 9999
+
+[node name="Sprite2D" parent="CrumbsBag" index="0"]
+position = Vector2(12, -65)
+scale = Vector2(1.2, 1.2)
+
+[node name="CollisionShape2D" parent="CrumbsBag" index="1"]
+position = Vector2(-4, -28)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CrumbsBag"]
+custom_minimum_size = Vector2(500, 0)
+offset_left = 147.0
+offset_top = -463.0
+offset_right = 647.0
+offset_bottom = -293.0
+theme = ExtResource("22_xdnbx")
+theme_override_font_sizes/normal_font_size = 52
+text = "Thank you for playing!"
+fit_content = true
+
+[node name="fg" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enabled = true
+follow_viewport_scale = 1.3
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="fg"]
+modulate = Color(1, 0.668667, 0.29, 0.623529)
+z_index = 1000
+position = Vector2(824.615, 36.9229)
+amount = 20
+texture = ExtResource("20_2o3mg")
+lifetime = 20.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 2000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.1
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_8tsjf")
+color_initial_ramp = SubResource("Gradient_xdnbx")
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="fg"]
+modulate = Color(1, 0.668667, 0.29, 0.623529)
+z_index = 1000
+position = Vector2(4812.31, 2793.85)
+amount = 20
+texture = ExtResource("20_2o3mg")
+lifetime = 20.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 2000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.1
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_8tsjf")
+color_initial_ramp = SubResource("Gradient_xdnbx")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color(1, 0.8005, 0.43, 1)
+z_as_relative = false
+position = Vector2(1648, 1184)
+amount = 200
+texture = ExtResource("21_gyti2")
+lifetime = 20.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_crevp")
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="."]
+modulate = Color(1, 0.8005, 0.43, 1)
+z_as_relative = false
+position = Vector2(5904, 3568)
+amount = 200
+texture = ExtResource("21_gyti2")
+lifetime = 20.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_crevp")
+
+[node name="HiveTerrainPolygon8" parent="." instance=ExtResource("8_2o3mg")]
+position = Vector2(-1005, -197)
+texture_offset = Vector2(19, 315)
+polygon = PackedVector2Array(59, -257, 144, 356, -264, 749, -469, 356, -528, -453)
+reversed = true
+
+[editable path="Warper"]
+[editable path="LeftBottomWall"]
+[editable path="HiveTerrainPolygon"]
+[editable path="HiveTerrainPolygon2"]
+[editable path="HiveTerrainPolygon3"]
+[editable path="HiveTerrainPolygon5"]
+[editable path="HiveTerrainPolygon4"]
+[editable path="HiveTerrainPolygon6"]
+[editable path="HiveTerrainPolygon7"]
+[editable path="CrumbsBag"]

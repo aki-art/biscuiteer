@@ -7,23 +7,23 @@
 
 [node name="TerrainPolygon" type="Polygon2D"]
 z_index = 120
-scale = Vector2(2.28, 2.36)
 texture = ExtResource("1_yi3jj")
 polygon = PackedVector2Array(0, -402, -432, -400, -432, 0, -691.369, 202.848, -1238.74, 596.068, -1421.19, 596.068, -1424, -400, -1744, -400, -1751.02, 1097.76, 3.36828, 1097.76)
 script = ExtResource("1_xp3ow")
 
 [node name="FitCollider" type="Node" parent="."]
 script = ExtResource("2_yi3jj")
-override_existing = null
 metadata/_custom_type_script = "uid://0rhyul8vxfsk"
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_layer = 4
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]
 polygon = PackedVector2Array(0, -402, -432, -400, -432, 0, -691.369, 202.848, -1238.74, 596.068, -1421.19, 596.068, -1424, -400, -1744, -400, -1751.02, 1097.76, 3.36828, 1097.76)
 
 [node name="Sideline" type="Line2D" parent="."]
-z_index = 100
+z_index = 1
 y_sort_enabled = true
 points = PackedVector2Array(0, -402, -432, -400, -432, 0, -691.369, 202.848, -1238.74, 596.068, -1421.19, 596.068, -1424, -400, -1744, -400, -1751.02, 1097.76, 3.36828, 1097.76)
 closed = true

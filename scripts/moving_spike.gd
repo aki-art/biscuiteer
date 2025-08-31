@@ -36,27 +36,32 @@ func _on_game_mode_changed(mode: StringName):
 	if is_paused:
 		animation_player.pause()
 	else:
-		animation_player.play(animation_player.assigned_animation)
+		if animation_player.assigned_animation:
+			animation_player.play(animation_player.assigned_animation)
 	
 
+func extend() -> void:
+	animation_player.play("extend")
+	extend_timer.start()
+	is_extended = true;
+
+func retract() -> void:
+	animation_player.play("retract")
+	retract_timer.start()
+	is_extended = false;
+	
 func set_active(active:bool) -> void:
 	if is_active == active:
 		return;
 		
 func _on_retract_timer_timeout() -> void:
-	animation_player.play("extend")
-	extend_timer.start()
+	extend()
 
 func _on_spawn_wait_time_timeout() -> void:
-	if is_extended:
-		extend_timer.start();
-	else:
-		retract_timer.start();
+	start_cycle()
 
 func start_cycle() -> void:
-	animation_player.play("extend")
-	retract_timer.start()
+	extend()
 	
 func _on_extend_timer_timeout() -> void:
-	animation_player.play("retract")
-	retract_timer.start()
+	retract()

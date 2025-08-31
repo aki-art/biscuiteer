@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://detx0ol2vgc17"]
+
+[ext_resource type="Texture2D" uid="uid://bwwor0i4m7vm2" path="res://assets/cake.png" id="1_r3iun"]
+
+[node name="Cake" type="StaticBody2D"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="Cake" type="Sprite2D" parent="."]
+texture = ExtResource("1_r3iun")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+visible = false
+polygon = PackedVector2Array(-135, -31, -97, -40, -87, -109, 84, -109, 93, -45, 142, -30, 139, 93, -140, 90)

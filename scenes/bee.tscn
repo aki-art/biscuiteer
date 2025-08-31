@@ -12,7 +12,7 @@
 [ext_resource type="Texture2D" uid="uid://dkkc0nk3wfag4" path="res://assets/animations/bee/body.png" id="10_h0c8m"]
 [ext_resource type="Texture2D" uid="uid://dychgxigi8iij" path="res://assets/animations/bee/right_antenna.png" id="11_yjwlj"]
 [ext_resource type="Texture2D" uid="uid://cwgbnti78cgmn" path="res://assets/animations/bee/leftantenna.png" id="12_d1rmj"]
-[ext_resource type="AudioStream" uid="uid://8ei0qwtvaubv" path="res://assets/audio/bee_flying.wav" id="13_28ix7"]
+[ext_resource type="AudioStream" uid="uid://chqfc5cy0mlqv" path="res://assets/audio/502994__smytheagain__bee_wasp.wav" id="13_28ix7"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_28ix7"]
 bounce = 79.0

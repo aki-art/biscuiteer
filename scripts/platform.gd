@@ -20,6 +20,7 @@ extends StaticBody2D
 
 var previous_segment_count := -1;
 var cost: int;
+var length : int;
 
 func _ready() -> void:
 	if is_active:
@@ -89,6 +90,7 @@ func set_ends(start:Vector2, end:Vector2, update_colliders:bool, play_audio:bool
 	if snap_length > 0.0:
 		len = snappedf(len, snap_length);
 	
+	length = len;
 	
 	var angle := start.angle_to_point(end);
 	

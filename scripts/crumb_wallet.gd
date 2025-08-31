@@ -25,7 +25,8 @@ func set_count(count: int) -> void:
 func add(count: int) -> void:
 	if Global.game._is_resetting_level:
 		return;
-		
+	
+	Events.on_crumbs_earnt.emit(count);
 	set_count(crumbs + count);
 
 func can_afford(cost: int) -> bool: return crumbs >= cost;

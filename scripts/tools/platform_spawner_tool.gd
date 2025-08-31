@@ -8,12 +8,13 @@ var _target_dropped:bool = false;
 var _start_location:Vector2;
 var _has_start_location := false;
 
+
 func can_activate(data:ToolConfig) -> bool:
 	var player := Global.game.player;
 	if !player:
 		return false;
 		
-	return player.is_on_floor();
+	return player.is_on_floor() && super.can_activate(data);
 
 func activate(data: ToolConfig) -> void:
 	super(data);
@@ -62,6 +63,7 @@ func on_click() -> bool:
 					target.activate(true);
 					target.set_ends(_start_location, get_global_mouse_position(), true, true, false)
 					finished = true;
+					Events.on_platform_built.emit(target.length / 16)
 					_target_dropped = true;
 			else:
 				_start_location = start_offset(); # TODO: hardcode
@@ -80,7 +82,7 @@ func on_click() -> bool:
 	
 
 func start_offset() -> Vector2:
-	return get_global_mouse_position() - Vector2(16 * 2.5, 0);
+	return get_global_mouse_position() - Vector2(16.0 * 0.5, 0) # Vector2(16 * 2.5, 0);
 	
 func _process(delta: float) -> void:
 	#if(!Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT)):

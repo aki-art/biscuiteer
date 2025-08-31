@@ -1,11 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://dtfi2bx1lva12"]
+[gd_scene load_steps=5 format=3 uid="uid://dtfi2bx1lva12"]
 
 [ext_resource type="Script" uid="uid://bxls3ek7lpvw" path="res://scripts/liquid.gd" id="1_4h0sl"]
 [ext_resource type="Script" uid="uid://fwjpl32k4dgr" path="res://scripts/hazard.gd" id="1_nr6sk"]
 [ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="2_4h0sl"]
+[ext_resource type="Texture2D" uid="uid://cxv0dn44ooyto" path="res://assets/milk.png" id="4_kjjao"]
 
-[node name="Liquid" type="Polygon2D"]
-polygon = PackedVector2Array(-48, 0, 48, 0, 48, 32, -48, 32)
+[node name="Liquid" type="Node2D"]
 script = ExtResource("1_4h0sl")
 
 [node name="Hazard" type="Node2D" parent="."]
@@ -20,6 +20,10 @@ collision_mask = 130
 polygon = PackedVector2Array(-48, 0, 48, 0, 48, 32, -48, 32)
 
 [node name="FitCollider" parent="." instance=ExtResource("2_4h0sl")]
+
+[node name="MilkTop" type="Polygon2D" parent="."]
+texture = ExtResource("4_kjjao")
+polygon = PackedVector2Array(-110.524, 2.80663, 282.297, 2.37137, 282.052, 53.9573, -112.567, 57.0362)
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Area2D" to="Hazard" method="_on_touched"]

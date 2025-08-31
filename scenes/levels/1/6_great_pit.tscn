@@ -1,23 +1,54 @@
-[gd_scene load_steps=10 format=3 uid="uid://csiv0h8i4qrh8"]
+[gd_scene load_steps=26 format=3 uid="uid://csiv0h8i4qrh8"]
 
 [ext_resource type="Script" uid="uid://v7nfrwkqo145" path="res://scripts/level.gd" id="1_1ou1w"]
 [ext_resource type="PackedScene" uid="uid://b15jmf2bic5md" path="res://scenes/player_start_marker.tscn" id="2_i6khb"]
 [ext_resource type="Script" uid="uid://0rhyul8vxfsk" path="res://scenes/fit_collider.gd" id="3_0agjf"]
+[ext_resource type="Texture2D" uid="uid://l6lt46lorp3" path="res://assets/terrain_sets/candy/fill.png" id="3_dbx6w"]
 [ext_resource type="PackedScene" uid="uid://bldrg8lgu0dlc" path="res://scenes/void.tscn" id="4_cv04v"]
-[ext_resource type="PackedScene" uid="uid://bkd6kvsr43i6h" path="res://scenes/spikes.tscn" id="5_xvwep"]
+[ext_resource type="Script" uid="uid://b16c1cdeyogbb" path="res://scripts/terrain_polygon.gd" id="4_sk0lh"]
 [ext_resource type="PackedScene" uid="uid://be4noytnjou3c" path="res://scenes/heart_pickup.tscn" id="6_dbx6w"]
+[ext_resource type="Texture2D" uid="uid://bkt4xn0otwhob" path="res://assets/terrain_sets/candy/side.png" id="6_pu8er"]
 [ext_resource type="PackedScene" uid="uid://dmperxwoth085" path="res://scenes/warper.tscn" id="7_i6khb"]
 [ext_resource type="Texture2D" uid="uid://d1d3ufgfltkdu" path="res://assets/terrain_sets/candy/candy_bg_blur.png" id="8_0agjf"]
+[ext_resource type="PackedScene" uid="uid://dmbabyv0g0k6m" path="res://scenes/spike_island.tscn" id="8_cv04v"]
+[ext_resource type="Texture2D" uid="uid://fbbxl8j05iuf" path="res://assets/arrow.png" id="12_sk0lh"]
+[ext_resource type="Material" uid="uid://cgjghb772wub5" path="res://assets/materials/glowy.tres" id="13_1rk7l"]
+[ext_resource type="PackedScene" uid="uid://d2uea123pdm8a" path="res://scenes/mist.tscn" id="13_pu8er"]
+[ext_resource type="PackedScene" uid="uid://ct48lmlb2nd6c" path="res://scenes/light.tscn" id="14_ti5gc"]
+[ext_resource type="PackedScene" uid="uid://dxjasd2h00akd" path="res://scenes/hazard_respawn_marker.tscn" id="16_5wmff"]
+[ext_resource type="Texture2D" uid="uid://cdejfyj1amdb5" path="res://assets/particle_close.png" id="17_fe6om"]
+[ext_resource type="Texture2D" uid="uid://bvhupw4fqj80i" path="res://assets/particle.png" id="18_j5qac"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0agjf"]
 size = Vector2(621, 213)
+
+[sub_resource type="Gradient" id="Gradient_pu8er"]
+colors = PackedColorArray(0, 0, 0, 1, 0.693979, 0.407668, 3.85046e-07, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1rk7l"]
+gradient = SubResource("Gradient_pu8er")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fe6om"]
+size = Vector2(108, 494)
+
+[sub_resource type="Gradient" id="Gradient_j5qac"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
+
+[sub_resource type="Gradient" id="Gradient_dkq65"]
+colors = PackedColorArray(1, 1, 1, 0.780392, 1, 1, 1, 1)
+
+[sub_resource type="Gradient" id="Gradient_a8luf"]
+offsets = PackedFloat32Array(0, 0.0577778, 0.964444, 0.991111)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 0.615686, 1, 1, 1, 0.615686, 1, 1, 1, 0)
 
 [node name="3" type="Node" groups=["level"]]
 script = ExtResource("1_1ou1w")
 metadata/_custom_type_script = "uid://v7nfrwkqo145"
 
 [node name="PlayerStartMarker" parent="." instance=ExtResource("2_i6khb")]
-position = Vector2(96, -32)
+position = Vector2(-240, 0)
 
 [node name="CameraExtents" type="Node2D" parent="." groups=["camera_extents"]]
 position = Vector2(0, -320)
@@ -28,87 +59,37 @@ position = Vector2(2864, 8352)
 [node name="top_left" type="Marker2D" parent="CameraExtents"]
 position = Vector2(-1664, -688)
 
-[node name="PlatformPolygon" type="Polygon2D" parent="."]
-position = Vector2(120.32, 449.279)
-scale = Vector2(2.28, 2.36)
-color = Color(0.466667, 0.376471, 0.286275, 1)
-polygon = PackedVector2Array(-55.4035, -191.644, 288.895, -196.728, 284.07, 3348.61, 522.667, 3348.61, 529.684, -190.372, 599.86, -190.372, 606.877, -366.644, 431.439, -414.101, -52.7719, -420.881, -45.7544, -312.406, -249.263, -319.186, -228.211, -122.576, -740.491, -156.474, -677.333, -759.864, 1441.96, -746.305, 1470.04, 3457.09, 333.193, 3836.75, -754.526, 3477.42, -740.491, -190.372)
+[node name="TerrainPolygon" type="Polygon2D" parent="."]
+z_index = 120
+position = Vector2(160, 416)
+texture = ExtResource("3_dbx6w")
+texture_offset = Vector2(160, 416)
+polygon = PackedVector2Array(608, -416, 608, 7936, 1152, 7936, 1168, -416, 1328, -416, 1344, -832, 960, -944, -160, -960, -160, -752, -608, -752, -640, -80, -1936, 240, -1936, -1584, 3280, -1680, 3488, 9536, -1856, 9536, -1936, -416)
+script = ExtResource("4_sk0lh")
+reversed = true
 
-[node name="StaticBody2D" type="StaticBody2D" parent="PlatformPolygon"]
-collision_layer = 4
-
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformPolygon/StaticBody2D"]
-polygon = PackedVector2Array(-55.4035, -191.644, 288.895, -196.728, 284.07, 3348.61, 522.667, 3348.61, 529.684, -190.372, 599.86, -190.372, 606.877, -366.644, 431.439, -414.101, -52.7719, -420.881, -45.7544, -312.406, -249.263, -319.186, -228.211, -122.576, -740.491, -156.474, -677.333, -759.864, 1441.96, -746.305, 1470.04, 3457.09, 333.193, 3836.75, -754.526, 3477.42, -740.491, -190.372)
-
-[node name="FitCollider" type="Node" parent="PlatformPolygon"]
+[node name="FitCollider" type="Node" parent="TerrainPolygon"]
 script = ExtResource("3_0agjf")
-override_existing = null
 metadata/_custom_type_script = "uid://0rhyul8vxfsk"
+
+[node name="StaticBody2D" type="StaticBody2D" parent="TerrainPolygon"]
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="TerrainPolygon/StaticBody2D"]
+polygon = PackedVector2Array(608, -416, 608, 7936, 1152, 7936, 1168, -416, 1328, -416, 1344, -832, 960, -944, -160, -960, -160, -752, -608, -752, -656, -448, -1936, -432, -1936, -1584, 3280, -1680, 3488, 9536, -1856, 9536, -1936, -416)
+
+[node name="Sideline" type="Line2D" parent="TerrainPolygon"]
+z_index = 1
+y_sort_enabled = true
+points = PackedVector2Array(-1936, -416, -1856, 9536, 3488, 9536, 3280, -1680, -1936, -1584, -1936, 240, -640, -80, -608, -752, -160, -752, -160, -960, 960, -944, 1344, -832, 1328, -416, 1168, -416, 1152, 7936, 608, 7936, 608, -416)
+closed = true
+width = 64.0
+texture = ExtResource("6_pu8er")
+texture_mode = 1
 
 [node name="Void" parent="." instance=ExtResource("4_cv04v")]
 position = Vector2(320, 8928)
-
-[node name="SpikeIsland" type="Polygon2D" parent="."]
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland2" type="Polygon2D" parent="."]
-position = Vector2(176, -720)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland2" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland3" type="Polygon2D" parent="."]
-position = Vector2(-160, -1136)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland3" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland4" type="Polygon2D" parent="."]
-position = Vector2(176, 848)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland4" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland5" type="Polygon2D" parent="."]
-position = Vector2(-160, 1824)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland5" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland6" type="Polygon2D" parent="."]
-position = Vector2(-32, 2896)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland6" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland7" type="Polygon2D" parent="."]
-position = Vector2(160, 3840)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland7" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland8" type="Polygon2D" parent="."]
-position = Vector2(-192, 4816)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland8" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
-
-[node name="SpikeIsland10" type="Polygon2D" parent="."]
-position = Vector2(176, 4816)
-polygon = PackedVector2Array(992, 1680, 1088, 1680, 1072, 1728, 1008, 1728)
-
-[node name="Spikes" parent="SpikeIsland10" instance=ExtResource("5_xvwep")]
-position = Vector2(1040, 1680)
 
 [node name="HeartPickup" parent="." instance=ExtResource("6_dbx6w")]
 position = Vector2(1408, -16)
@@ -133,3 +114,177 @@ color = Color(0.560742, 0.631237, 0.622418, 1)
 texture = ExtResource("8_0agjf")
 texture_scale = Vector2(0.5, 0.5)
 polygon = PackedVector2Array(-2788.57, -3954.29, 5714.29, -3885.71, 5760, 9714.29, -3474.29, 9074.29)
+
+[node name="SpikeIsland9" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(880, 544)
+
+[node name="SpikeIsland11" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(1216, 960)
+
+[node name="SpikeIsland12" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(1216, 2528)
+
+[node name="SpikeIsland13" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(880, 3504)
+
+[node name="SpikeIsland14" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(1008, 4576)
+
+[node name="SpikeIsland15" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(1200, 5520)
+
+[node name="SpikeIsland16" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(880, 6496)
+
+[node name="SpikeIsland17" parent="." instance=ExtResource("8_cv04v")]
+position = Vector2(1200, 6496)
+
+[node name="BunchaArrows" type="Node2D" parent="."]
+
+[node name="Arrow" type="Sprite2D" parent="BunchaArrows"]
+position = Vector2(832, -224)
+rotation = 0.889797
+texture = ExtResource("12_sk0lh")
+
+[node name="Arrow2" type="Sprite2D" parent="BunchaArrows"]
+position = Vector2(1216, -192)
+rotation = 1.94506
+scale = Vector2(1.94406, 1.63958)
+texture = ExtResource("12_sk0lh")
+
+[node name="Arrow3" type="Sprite2D" parent="BunchaArrows"]
+position = Vector2(976, -288)
+rotation = 1.39631
+scale = Vector2(1.33928, 0.777607)
+texture = ExtResource("12_sk0lh")
+
+[node name="Arrow4" type="Sprite2D" parent="BunchaArrows"]
+position = Vector2(848, -32.0001)
+rotation = 0.95833
+scale = Vector2(0.784649, 0.746252)
+texture = ExtResource("12_sk0lh")
+
+[node name="Gradient" type="Sprite2D" parent="."]
+z_index = 3
+texture_repeat = 1
+material = ExtResource("13_1rk7l")
+position = Vector2(1264, 8048)
+scale = Vector2(-35.1158, 25.1025)
+texture = SubResource("GradientTexture2D_1rk7l")
+
+[node name="Gradient2" type="Sprite2D" parent="."]
+z_index = 3
+texture_repeat = 1
+material = ExtResource("13_1rk7l")
+position = Vector2(1372.66, 7430.56)
+scale = Vector2(-22.0517, 26.8297)
+texture = SubResource("GradientTexture2D_1rk7l")
+offset = Vector2(0, 10)
+
+[node name="midbg" type="CanvasLayer" parent="."]
+layer = -2
+follow_viewport_enabled = true
+follow_viewport_scale = 0.8
+
+[node name="Light" parent="midbg" instance=ExtResource("14_ti5gc")]
+position = Vector2(864, -720)
+scale = Vector2(9.59375, 8.1875)
+
+[node name="BunchaArrows2" type="Node2D" parent="midbg"]
+z_index = -5
+position = Vector2(2620, -140)
+rotation = 2.97926
+scale = Vector2(1.52725, -1.42042)
+
+[node name="Arrow" type="Sprite2D" parent="midbg/BunchaArrows2"]
+position = Vector2(832, -224)
+rotation = 0.889797
+texture = ExtResource("12_sk0lh")
+
+[node name="Arrow2" type="Sprite2D" parent="midbg/BunchaArrows2"]
+position = Vector2(1216, -192)
+rotation = 1.94506
+scale = Vector2(1.94406, 1.63958)
+texture = ExtResource("12_sk0lh")
+
+[node name="Arrow3" type="Sprite2D" parent="midbg/BunchaArrows2"]
+position = Vector2(976, -288)
+rotation = 1.39631
+scale = Vector2(1.33928, 0.777607)
+texture = ExtResource("12_sk0lh")
+
+[node name="Arrow4" type="Sprite2D" parent="midbg/BunchaArrows2"]
+position = Vector2(848, -32.0001)
+rotation = 0.95833
+scale = Vector2(0.784649, 0.746252)
+texture = ExtResource("12_sk0lh")
+
+[node name="Mist" parent="." instance=ExtResource("13_pu8er")]
+z_index = -2
+texture_repeat = 1
+position = Vector2(624, 288)
+polygon = PackedVector2Array(-869.294, -751.765, 536, -662.118, 585.6, 1320, -832, 1353.6)
+
+[node name="RespawnMarkers" type="Node2D" parent="."]
+position = Vector2(384, 0)
+
+[node name="HazardRespawnMarker" parent="RespawnMarkers" instance=ExtResource("16_5wmff")]
+position = Vector2(320, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_fe6om")
+
+[node name="HazardRespawnMarker2" parent="RespawnMarkers" instance=ExtResource("16_5wmff")]
+position = Vector2(1024, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RespawnMarkers/HazardRespawnMarker2"]
+position = Vector2(0, -237)
+shape = SubResource("RectangleShape2D_fe6om")
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.839952, 0.769118, 0.891034, 1)
+
+[node name="fg" type="CanvasLayer" parent="."]
+layer = 0
+follow_viewport_enabled = true
+follow_viewport_scale = 1.3
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="fg"]
+modulate = Color(1, 1, 1, 0.254902)
+z_index = 1000
+position = Vector2(836.923, 3101.54)
+amount = 20
+texture = ExtResource("17_fe6om")
+lifetime = 20.0
+preprocess = 3.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 2000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.1
+scale_amount_max = 0.7
+color_ramp = SubResource("Gradient_j5qac")
+color_initial_ramp = SubResource("Gradient_dkq65")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+z_as_relative = false
+position = Vector2(1136, 448)
+amount = 200
+texture = ExtResource("18_j5qac")
+lifetime = 20.0
+emission_shape = 3
+emission_rect_extents = Vector2(1000, 1000)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_min = 4.0
+initial_velocity_max = 20.0
+angular_velocity_min = 10.75
+angular_velocity_max = 21.49
+scale_amount_min = 0.01
+scale_amount_max = 0.03
+color_ramp = SubResource("Gradient_a8luf")

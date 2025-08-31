@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdmduf0wmgm2u"]
+
+[ext_resource type="Script" uid="uid://bxls3ek7lpvw" path="res://scripts/liquid.gd" id="1_0lnee"]
+[ext_resource type="PackedScene" uid="uid://umvwac0bhqde" path="res://scenes/fit_collider.tscn" id="3_8bne2"]
+[ext_resource type="Texture2D" uid="uid://cxv0dn44ooyto" path="res://assets/milk.png" id="4_sclk7"]
+
+[node name="Milk3" type="Node2D"]
+modulate = Color(0.84, 0.54376, 0.0672, 1)
+script = ExtResource("1_0lnee")
+is_honey = true
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 130
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+polygon = PackedVector2Array(-48, 0, 48, 0, 48, 32, -48, 32)
+
+[node name="FitCollider" parent="." instance=ExtResource("3_8bne2")]
+
+[node name="MilkTop" type="Polygon2D" parent="."]
+z_index = 1
+position = Vector2(-178, 71)
+texture = ExtResource("4_sclk7")
+polygon = PackedVector2Array(-115, 4, 628, 3, 641, 63, -112.567, 57.0362)
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="body_exited" from="Area2D" to="." method="_on_area_2d_body_exited"]

@@ -8,7 +8,7 @@ var data: ToolConfig;
 const CURSOR_DEFAULT = preload("res://assets/cursors/cursor_default.png")
 const DEFAULT_OFFSET = Vector2(10.5, 4.25);
 func can_activate(data:ToolConfig) -> bool:
-	return true;
+	return Global.game.player.state != "dead";
 	
 func activate(data: ToolConfig) -> void:
 	self.data = data;

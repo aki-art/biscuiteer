@@ -14,6 +14,20 @@ signal on_hurt(amount: float, fatal: bool, source: StringName, position: Vector2
 @export var iframes_timer: Timer;
 @export var invulnerable: bool;
 
+var _previous_hp : int;
+
+func _ready() -> void:
+	Events.on_level_reset.connect(_on_level_reset);
+	Events.on_level_loaded.connect(_on_level_loaded);
+	
+func _on_level_reset() -> void:
+	call_deferred("set_hp", _previous_hp);
+
+func _on_level_loaded(_level: Level, is_reset: bool) -> void:
+	if !is_reset:
+		_previous_hp = current_hp;
+	
+	
 func is_full_health() -> bool: 
 	return current_hp >= max_hp;
 

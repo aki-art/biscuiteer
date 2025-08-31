@@ -1,6 +1,12 @@
 class_name Level
 extends Node
 
+func get_warper() -> Warper:
+	var warpers := get_tree().get_nodes_in_group("warper");
+	if warpers && warpers.size() > 0:
+		return warpers[-1];
+	
+	return null;
 
 func start_level(player: Player) -> void:
 	var start_markers := get_tree().get_nodes_in_group("map_start");
@@ -9,8 +15,8 @@ func start_level(player: Player) -> void:
 		printerr("No start marker on map!");
 		return;
 	
-	if start_markers.size() > 1:
-		printerr("multiple start markers!");
+	#if start_markers.size() > 1:
+		#printerr("multiple start markers!");
 	
 	player.position = start_markers[-1].position;
 	player.set_flip(start_markers[-1].facing_left);

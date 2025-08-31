@@ -11,6 +11,7 @@ var previous_velocity : Vector2;
 var flip_x: bool;
 var trying_to_move: bool;
 var is_honeyed: bool;
+var respawn_invulnerability := true;
 
 @export var state:StringName = "idle"
 @export var jump_count_max := 10
@@ -24,17 +25,20 @@ var is_honeyed: bool;
 @onready var health: Health = $Health
 @onready var crumb_wallet: CrumbWallet = $CrumbWallet
 @onready var animation_tree: AnimationTree = $AnimationTree
-@onready var walk_dust: CPUParticles2D = $WalkDust
 @onready var land_audio: AudioStreamPlayer2D = $LandAudio
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var damage_particles: CPUParticles2D = $DamageParticles
-@onready var debug_label: Label = $DebugLabel
+#@onready var debug_label: Label = $DebugLabel
 @onready var slap_cooldown_timer: Timer = $SlapCooldownTimer
 @onready var entity_000: Node2D = $entity_000
 @onready var honey_timer: Timer = $HoneyTimer
+@onready var walk_dust_particles: CPUParticles2D = $WalkDustParticles
 
 
 static var control_state : Array[StringName] = ["idle", "running", "jumping", "___slap", "falling"];
+var _hazard_respawn : bool;
+var last_respawn_point : HazardRespawnMarker;
+var lifetime := 0.0;
 
 func can_control() -> bool:
 	return control_state.has(state)
@@ -52,10 +56,12 @@ func set_state(new_state: StringName) -> void:
 	match new_state:
 		"slap":
 			slap_cooldown_timer.start()
-		#"dead":
-			#$DeathParticles.restart()
+		"dead":
+			Events.on_player_dead.emit();
+			health.invulnerable = true;
+			
 	
-	walk_dust.emitting = new_state == "running"
+	walk_dust_particles.emitting = new_state == "running" || new_state == "jumping"
 	animation_tree.set("parameters/state/transition_request", new_state);
 			
 	state = new_state;
@@ -64,15 +70,32 @@ func _ready() -> void:
 	health.on_hurt.connect(_on_hurt);
 	Events.on_game_mode_changed.connect(_on_game_mode_changed);
 	Events.on_level_reset.connect(_on_level_reset);
+	Events.on_new_game.connect(_on_new_game);
+	Events.on_level_loaded.connect(_on_level_loaded)
 	
 	health.set_hp(4);
 
+func _on_level_loaded(_level: Level, _is_reset: bool) -> void:
+	last_respawn_point = null;
+	
+func _on_new_game() -> void:
+	call_deferred("reset_character");
+
+func reset_character() -> void:
+	crumb_wallet.set_count(0);
+	health.set_hp(4);
+	set_state("idle")
+	lifetime = 0.0;
+	respawn_invulnerability = true;
+	
+
 func _on_level_reset() -> void:
-		if state == "dead":
-			health.set_hp(4)
-			
-		set_state("idle");
-		reset_position();
+	pass
+		#if state == "dead":
+			#health.set_hp(4)
+		#
+		#set_state("idle");
+		#reset_position();
 		
 func _on_game_mode_changed(mode: StringName) -> void:
 	honey_timer.paused = mode == "building";
@@ -82,22 +105,21 @@ func add_honey_effect() -> void:
 	is_honeyed = true;
 	Events.on_honeyed.emit();
 	
-func _process(d):
-	
-	debug_label.text = str(state);
-	#if Input.is_action_pressed("slap") && slap_cooldown_timer.is_stopped():
-		#set_state("slap")
 	
 func reset_position() -> void:
-	var start := get_tree().get_first_node_in_group("map_start")
-	if !start:
-		printerr("no map start found!");
-		
-	global_position = start.global_position;
+	if last_respawn_point:
+		global_position = last_respawn_point.global_position;
+		set_flip(last_respawn_point.facing_left);
+	else:
+		var start := get_tree().get_first_node_in_group("map_start")
+		if !start:
+			printerr("no map start found!");
+			
+		global_position = start.global_position;
 	
 func _on_hurt(amount:float, fatal: bool, source: StringName, position: Vector2) -> void:
 	if source == "hazard" && !fatal:
-		reset_position();
+		_hazard_respawn = true
 	 
 	Events.on_player_hurt.emit(amount, fatal, source)
 	set_state("dead" if fatal else "hurt")
@@ -127,6 +149,12 @@ func _jump() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("debug_hurt"):
 		health.damage(1, "debug", get_global_mouse_position());
+
+func _process(delta: float) -> void:
+	lifetime += delta;
+	if respawn_invulnerability && lifetime > 2.0:
+		respawn_invulnerability = false;
+		health.invulnerable = false;
 		
 func _physics_process(delta: float) -> void:
 	
@@ -217,6 +245,9 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 		"scml/hit":
 			if state != "dead":
 				set_state("idle");
+				if _hazard_respawn:
+					reset_position();
+					_hazard_respawn = false;
 		"scml/slap":
 			if state != "dead":
 				set_state("idle");

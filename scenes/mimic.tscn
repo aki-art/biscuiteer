@@ -1,0 +1,99 @@
+[gd_scene load_steps=10 format=3 uid="uid://chobe4rfr88dx"]
+
+[ext_resource type="Texture2D" uid="uid://b8cenxs6py166" path="res://assets/heart.png" id="1_1wjvg"]
+[ext_resource type="Script" uid="uid://dwtww05wcog51" path="res://scripts/mimic.gd" id="1_ls8ea"]
+[ext_resource type="AudioStream" uid="uid://dffahn0poh22d" path="res://assets/audio/797763__opriema__cookie_crunch.wav" id="2_ls8ea"]
+[ext_resource type="Texture2D" uid="uid://dc7wfvuo2rpoj" path="res://assets/damage_crumb.png" id="3_n14tr"]
+
+[sub_resource type="Animation" id="Animation_yk5un"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -37)]
+}
+
+[sub_resource type="Animation" id="Animation_m16xc"]
+resource_name = "bobble"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(0.5, 0.63728, 1),
+"update": 0,
+"values": [Vector2(0, -37), Vector2(0, -46), Vector2(0, -37)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_grbqr"]
+_data = {
+&"RESET": SubResource("Animation_yk5un"),
+&"bobble": SubResource("Animation_m16xc")
+}
+
+[sub_resource type="Curve" id="Curve_orxe4"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_1wjvg"]
+radius = 323.076
+
+[node name="Mimic" type="Node2D"]
+script = ExtResource("1_ls8ea")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -37)
+texture = ExtResource("1_1wjvg")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_grbqr")
+}
+autoplay = "bobble"
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ls8ea")
+
+[node name="DamageParticles" type="CPUParticles2D" parent="."]
+z_index = 300
+position = Vector2(-1, -44)
+emitting = false
+amount = 16
+texture = ExtResource("3_n14tr")
+lifetime = 1.7
+explosiveness = 0.8
+spread = 180.0
+gravity = Vector2(0, 100)
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+angle_min = -250.0
+angle_max = 740.0
+scale_amount_min = 0.1
+scale_amount_max = 0.4
+scale_amount_curve = SubResource("Curve_orxe4")
+
+[node name="PlayerDetectionRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerDetectionRange"]
+shape = SubResource("CircleShape2D_1wjvg")
+
+[node name="FreeTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
+[connection signal="body_entered" from="PlayerDetectionRange" to="." method="_on_player_detection_range_body_entered"]
+[connection signal="timeout" from="FreeTimer" to="." method="_on_free_timer_timeout"]

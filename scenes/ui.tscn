@@ -1,7 +1,6 @@
-[gd_scene load_steps=46 format=3 uid="uid://dkgjh0su8kto5"]
+[gd_scene load_steps=47 format=3 uid="uid://dkgjh0su8kto5"]
 
 [ext_resource type="Theme" uid="uid://bjbx742eqigem" path="res://assets/ui_theme/cookie_theme.tres" id="1_41akx"]
-[ext_resource type="PackedScene" uid="uid://d1jgcouix3q5x" path="res://scenes/tool_button.tscn" id="1_nt7q6"]
 [ext_resource type="Texture2D" uid="uid://nd1hyqppqevx" path="res://assets/biscuit.png" id="2_gdt2y"]
 [ext_resource type="PackedScene" uid="uid://depfltsstpn1g" path="res://scenes/platform.tscn" id="2_yev5y"]
 [ext_resource type="Script" uid="uid://c34y7immsx7l4" path="res://scripts/resource_defs/spawn_config.gd" id="3_gdt2y"]
@@ -11,7 +10,6 @@
 [ext_resource type="Script" uid="uid://cjtg2datmv8m3" path="res://scripts/tool_button.gd" id="6_vdcm2"]
 [ext_resource type="Script" uid="uid://2xwxcq5qpj6k" path="res://scripts/platform.gd" id="7_catpy"]
 [ext_resource type="Texture2D" uid="uid://dg7xafwc4j0y5" path="res://assets/biscuit_middle.png" id="8_41akx"]
-[ext_resource type="Texture2D" uid="uid://2x4vhu27r0yd" path="res://assets/temp/reference.png" id="8_cgfq5"]
 [ext_resource type="Texture2D" uid="uid://bp2f13hvaoshu" path="res://assets/crumb_small.png" id="8_gglip"]
 [ext_resource type="Texture2D" uid="uid://bl8jmvw2wyrm0" path="res://assets/biscuit_left.png" id="9_sesyt"]
 [ext_resource type="Texture2D" uid="uid://comx06162feiq" path="res://assets/biscuit_right.png" id="10_gglip"]
@@ -27,17 +25,10 @@
 [ext_resource type="Texture2D" uid="uid://bwdymw0lcc8a1" path="res://assets/crumb.png" id="21_sesyt"]
 [ext_resource type="Texture2D" uid="uid://bcnnx26qy0m1x" path="res://assets/remove.png" id="22_0tsab"]
 [ext_resource type="Script" uid="uid://bppkekfnsss6s" path="res://scripts/crumb_counter.gd" id="24_i5tog"]
-
-[sub_resource type="InputEventAction" id="InputEventAction_gdt2y"]
-action = &"action_build_biscuit"
-
-[sub_resource type="Shortcut" id="Shortcut_wm3ai"]
-events = [SubResource("InputEventAction_gdt2y")]
-
-[sub_resource type="Resource" id="Resource_wm3ai"]
-script = ExtResource("3_gdt2y")
-scene = ExtResource("2_yev5y")
-metadata/_custom_type_script = "uid://c34y7immsx7l4"
+[ext_resource type="Texture2D" uid="uid://cy5011e386rft" path="res://assets/reset.png" id="25_i5tog"]
+[ext_resource type="Script" uid="uid://dnwr2yp6x7avk" path="res://scenes/reset_button.gd" id="25_rleeb"]
+[ext_resource type="Texture2D" uid="uid://musy3rr23r06" path="res://assets/circle.png" id="25_wu1et"]
+[ext_resource type="AudioStream" uid="uid://c1888tggw376c" path="res://assets/audio/244832__jarredgibb__rev-cymb-25-reverb.wav" id="27_rleeb"]
 
 [sub_resource type="InputEventAction" id="InputEventAction_7dvkv"]
 action = &"action_build_biscuit"
@@ -179,6 +170,12 @@ script = ExtResource("3_gdt2y")
 scene = SubResource("PackedScene_6bb67")
 metadata/_custom_type_script = "uid://c34y7immsx7l4"
 
+[sub_resource type="InputEventAction" id="InputEventAction_i5tog"]
+action = &"reset"
+
+[sub_resource type="Shortcut" id="Shortcut_i5tog"]
+events = [SubResource("InputEventAction_i5tog")]
+
 [node name="UI" type="Control"]
 layout_mode = 3
 anchors_preset = 15
@@ -188,32 +185,17 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_41akx")
 
-[node name="ToolButtons" type="HBoxContainer" parent="."]
-custom_minimum_size = Vector2(700, 70)
-layout_mode = 0
-offset_left = 273.0
-offset_top = 509.0
-offset_right = 973.0
-offset_bottom = 637.0
-
-[node name="ToolButton" parent="ToolButtons" instance=ExtResource("1_nt7q6")]
-visible = false
-layout_mode = 2
-focus_mode = 0
-shortcut = SubResource("Shortcut_wm3ai")
-icon = ExtResource("2_gdt2y")
-tool = "PlatformSpawnerTool"
-data = SubResource("Resource_wm3ai")
-
 [node name="BottomLeftHUD" type="Control" parent="."]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="ToolButtons" type="Control" parent="BottomLeftHUD"]
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 1
 
 [node name="BiscuitButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
 custom_minimum_size = Vector2(96, 96)
@@ -260,6 +242,9 @@ offset_right = 82.0
 offset_bottom = 119.0
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("8_gglip")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BottomLeftHUD/ToolButtons/BiscuitButton"]
+stream = ExtResource("12_i5tog")
 
 [node name="GumDropButton" type="Button" parent="BottomLeftHUD/ToolButtons"]
 visible = false
@@ -352,8 +337,7 @@ offset_left = 103.0
 offset_top = 510.0
 offset_right = 199.0
 offset_bottom = 606.0
-tooltip_text = "Build a basic platform.
-Costs 1 crumb per segment."
+tooltip_text = "Removes a platform under the cursor"
 focus_mode = 0
 icon = ExtResource("18_ukrhx")
 flat = true
@@ -381,6 +365,9 @@ offset_bottom = 119.0
 scale = Vector2(0.66, 0.66)
 texture = ExtResource("8_gglip")
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BottomLeftHUD/ToolButtons/RemoveButton"]
+stream = ExtResource("12_i5tog")
+
 [node name="Panel" type="Panel" parent="BottomLeftHUD"]
 layout_mode = 0
 offset_left = 19.0
@@ -398,6 +385,96 @@ texture = ExtResource("21_sesyt")
 expand_mode = 3
 
 [node name="CrumbCounter" type="RichTextLabel" parent="BottomLeftHUD/Panel"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 0
+offset_left = 59.0
+offset_top = -7.0
+offset_right = 99.0
+offset_bottom = 33.0
+theme_override_font_sizes/bold_font_size = 22
+bbcode_enabled = true
+text = "[b]455[/b]"
+fit_content = true
+script = ExtResource("24_i5tog")
+
+[node name="BottomRIghtHUD" type="Control" parent="."]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 1
+
+[node name="Buttons" type="Control" parent="BottomRIghtHUD"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -34.0
+offset_top = -9.0
+offset_right = 6.0
+offset_bottom = 31.0
+grow_horizontal = 0
+grow_vertical = 2
+mouse_filter = 1
+
+[node name="ResetButton" type="Button" parent="BottomRIghtHUD/Buttons"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 0
+offset_left = 1038.0
+offset_top = 539.0
+offset_right = 1134.0
+offset_bottom = 635.0
+tooltip_text = "Build a basic platform.
+Costs 1 crumb per segment."
+focus_mode = 0
+shortcut = SubResource("Shortcut_i5tog")
+icon = ExtResource("5_7dvkv")
+flat = true
+expand_icon = true
+script = ExtResource("25_rleeb")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="BottomRIghtHUD/Buttons/ResetButton"]
+modulate = Color(1, 1, 1, 0.541176)
+z_index = -1
+layout_mode = 0
+offset_left = -2.0
+offset_top = -2.0
+offset_right = 126.0
+offset_bottom = 126.0
+scale = Vector2(0.8, 0.8)
+fill_mode = 4
+texture_progress = ExtResource("25_wu1et")
+
+[node name="TextureRect" type="TextureRect" parent="BottomRIghtHUD/Buttons/ResetButton"]
+layout_mode = 0
+offset_left = 11.0
+offset_top = 11.0
+offset_right = 87.0
+offset_bottom = 87.0
+texture = ExtResource("25_i5tog")
+expand_mode = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="BottomRIghtHUD/Buttons/ResetButton"]
+stream = ExtResource("27_rleeb")
+
+[node name="Panel" type="Panel" parent="BottomRIghtHUD"]
+layout_mode = 0
+offset_left = 19.0
+offset_top = 608.0
+offset_right = 129.0
+offset_bottom = 632.0
+
+[node name="CrumbIcon" type="TextureRect" parent="BottomRIghtHUD/Panel"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = -11.0
+offset_right = 53.697
+offset_bottom = 29.0
+texture = ExtResource("21_sesyt")
+expand_mode = 3
+
+[node name="CrumbCounter" type="RichTextLabel" parent="BottomRIghtHUD/Panel"]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 0
 offset_left = 59.0
@@ -433,31 +510,7 @@ offset_bottom = 232.0
 last_wrap_alignment = 1
 script = ExtResource("5_8dubc")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.247059)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-texture = ExtResource("8_cgfq5")
-expand_mode = 2
-metadata/_edit_lock_ = true
-
-[node name="RichTextLabel" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(120, 0)
-layout_mode = 0
-offset_left = 1023.0
-offset_top = 583.0
-offset_right = 1143.0
-offset_bottom = 769.0
-theme_override_font_sizes/normal_font_size = 10
-text = "R - restart
-Shift + H -> get hurt
-Shift + B -> get 1000 monies"
-fit_content = true
-
 [connection signal="pressed" from="BottomLeftHUD/ToolButtons/BiscuitButton" to="BottomLeftHUD/ToolButtons/BiscuitButton" method="_on_pressed"]
 [connection signal="pressed" from="BottomLeftHUD/ToolButtons/RemoveButton" to="BottomLeftHUD/ToolButtons/RemoveButton" method="_on_pressed"]
+[connection signal="button_down" from="BottomRIghtHUD/Buttons/ResetButton" to="BottomRIghtHUD/Buttons/ResetButton" method="_on_button_down"]
+[connection signal="button_up" from="BottomRIghtHUD/Buttons/ResetButton" to="BottomRIghtHUD/Buttons/ResetButton" method="_on_button_up"]
